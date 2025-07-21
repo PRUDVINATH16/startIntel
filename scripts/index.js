@@ -360,15 +360,10 @@ function showNotification(message, type = 'info') {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Startup Research Agent landing page loaded successfully!');
-    
-    // Add any additional initialization here
-    
-    // Example: Add click handlers for CTA buttons
     const ctaButtons = document.querySelectorAll('.btn-primary');
     ctaButtons.forEach(button => {
         button.addEventListener('click', function() {
-            showNotification('Feature coming soon! Stay tuned.', 'info');
+            console.log("ladsfjas")
         });
     });
 });

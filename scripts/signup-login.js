@@ -147,16 +147,6 @@ function calculatePasswordStrength(password) {
     return { percentage: Math.min(score, 100), text, feedback };
 }
 
-function resetPasswordStrength() {
-    const strengthFill = document.querySelector('.strength-fill');
-    const strengthText = document.querySelector('.strength-text');
-    
-    if (strengthFill && strengthText) {
-        strengthFill.style.width = '0%';
-        strengthText.textContent = 'Password strength';
-    }
-}
-
 // Form Validation
 function initFormValidation() {
     const forms = document.querySelectorAll('.auth-form');
@@ -192,7 +182,7 @@ function validateField(input) {
                 break;
                 
             case 'mobile':
-                if (!/^\+?[\d\s\-\(\)]{10,}$/.test(value)) {
+                if (!/^[6-9]\d{9}$/.test(value)) {
                     isValid = false;
                     errorMessage = 'Please enter a valid mobile number';
                 }
@@ -298,10 +288,7 @@ async function handleLogin(e) {
     // Show loading state
     setButtonLoading(submitBtn, true);
     
-    try {
-        // Simulate API call
-        await simulateApiCall();
-        
+    try {ko       
         const loginData = {
             mobile: formData.get('mobile'),
             password: formData.get('password'),
@@ -350,10 +337,7 @@ async function handleSignup(e) {
     // Show loading state
     setButtonLoading(submitBtn, true);
     
-    try {
-        // Simulate API call
-        await simulateApiCall();
-        
+    try {        
         const signupData = {
             name: formData.get('name'),
             mobile: formData.get('mobile'),
@@ -409,20 +393,6 @@ function setButtonLoading(button, loading) {
         btnLoading.style.display = 'none';
         button.disabled = false;
     }
-}
-
-// Simulate API call
-function simulateApiCall() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // Simulate 90% success rate
-            if (Math.random() > 0.1) {
-                resolve({ success: true });
-            } else {
-                reject(new Error('Network error'));
-            }
-        }, 1500 + Math.random() * 1000);
-    });
 }
 
 // Notification System
@@ -518,99 +488,6 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('input', function(e) {
     if (e.target.type === 'tel') {
         let value = e.target.value.replace(/\D/g, '');
-        
-        // Format as: +1 (234) 567-8900
-        if (value.length >= 10) {
-            if (value.startsWith('1')) {
-                value = value.substring(1);
-            }
-            value = `+1 (${value.substring(0, 3)}) ${value.substring(3, 6)}-${value.substring(6, 10)}`;
-        } else if (value.length >= 6) {
-            value = `(${value.substring(0, 3)}) ${value.substring(3, 6)}-${value.substring(6)}`;
-        } else if (value.length >= 3) {
-            value = `(${value.substring(0, 3)}) ${value.substring(3)}`;
-        }
-        
         e.target.value = value;
     }
 });
-
-// Performance Optimization
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Accessibility Improvements
-function announceToScreenReader(message) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.style.position = 'absolute';
-    announcement.style.left = '-10000px';
-    announcement.style.width = '1px';
-    announcement.style.height = '1px';
-    announcement.style.overflow = 'hidden';
-    announcement.textContent = message;
-    
-    document.body.appendChild(announcement);
-    
-    setTimeout(() => {
-        document.body.removeChild(announcement);
-    }, 1000);
-}
-
-// Form Auto-save (optional)
-function initAutoSave() {
-    const forms = document.querySelectorAll('.auth-form');
-    
-    forms.forEach(form => {
-        const inputs = form.querySelectorAll('.form-input');
-        
-        inputs.forEach(input => {
-            // Don't auto-save passwords
-            if (input.type !== 'password') {
-                input.addEventListener('input', debounce(() => {
-                    localStorage.setItem(`auth_${input.name}`, input.value);
-                }, 500));
-                
-                // Restore saved values
-                const savedValue = localStorage.getItem(`auth_${input.name}`);
-                if (savedValue) {
-                    input.value = savedValue;
-                }
-            }
-        });
-    });
-}
-
-// Initialize auto-save (uncomment if needed)
-// initAutoSave();
-
-// Analytics and Tracking (placeholder)
-function trackEvent(eventName, properties = {}) {
-    console.log('Track event:', eventName, properties);
-    // Integrate with your analytics service here
-    // Example: gtag('event', eventName, properties);
-}
-
-// Track form interactions
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('toggle-btn')) {
-        trackEvent('form_toggle', { form_type: e.target.dataset.form });
-    }
-    
-    if (e.target.classList.contains('submit-btn')) {
-        const formType = e.target.closest('form').id.replace('-form', '');
-        trackEvent('form_submit_attempt', { form_type: formType });
-    }
-});
-
-console.log('🚀 Startup Research Agent Auth System Ready!');
