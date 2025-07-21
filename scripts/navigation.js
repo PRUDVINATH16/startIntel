@@ -1,4 +1,75 @@
 $(document).ready(function () {
-    $(".nav-fixed").load("header.html");
-    $(".footer").load("footer.html");
+    // Load the header
+    // The second argument is a "callback" function that runs only after the header is successfully loaded.
+    $(".nav-fixed").load("header.html", function() {
+        // Now that the header is loaded, we can safely initialize the mobile menu
+        initMobileMenu();
+        
+        // We also need to render the Lucide icons that are inside the header
+        lucide.createIcons();
+    });
+
+    // Load the footer
+    $(".footer").load("footer.html", function() {
+        // Re-initialize icons for the footer content as well
+        lucide.createIcons();
+    });
 });
+
+// --- All your other functions remain the same ---
+
+// Mobile Menu Functionality
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileLinks = document.querySelectorAll('.nav-mobile-link');
+    
+    if (!mobileMenuBtn || !mobileMenu) {
+        console.error("Mobile menu elements not found. Make sure your header is loaded correctly.");
+        return;
+    }
+    
+    let isMenuOpen = false;
+    
+    // Toggle mobile menu
+    mobileMenuBtn.addEventListener('click', function() {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+            mobileMenu.classList.add('show');
+            menuIcon.style.display = 'none';
+            closeIcon.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        } else {
+            mobileMenu.classList.remove('show');
+            menuIcon.style.display = 'block';
+            closeIcon.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Close menu when clicking on mobile links
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (isMenuOpen) {
+                mobileMenuBtn.click(); // Simulate a click to close the menu
+            }
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (isMenuOpen && !mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenuBtn.click();
+        }
+    });
+    
+    // Close menu on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && isMenuOpen) {
+            mobileMenuBtn.click();
+        }
+    });
+}

@@ -1,125 +1,82 @@
-/* Custom Color Palette - Warm Brown/Beige Theme */
-:root {
-  --dark-brown: #2A1F1A;
-  --soft-brown: #8B6F5E;
-  --golden-beige: #CBAD8D;
-  --light-brown: #D1C7BD;
-  --sand: #EBE3DB;
-  --off-white: #F1EDE6;
-
-  /* Enhanced Text Colors for Better Visibility */
-  --text-primary: #1A1A1A;
-  --text-secondary: #2D2D2D;
-  --text-muted: #4A4A4A;
-  --text-light: #666666;
-
-  /* Gradients */
-  --gradient-3: linear-gradient(45deg, var(--soft-brown), var(--sand));
-  --gradient-4: linear-gradient(to bottom right, var(--light-brown), var(--off-white));
-  --gradient-5: radial-gradient(circle at center, var(--golden-beige), var(--soft-brown));
-  --gradient-7: linear-gradient(to right, var(--off-white), var(--golden-beige), var(--soft-brown));
-  --gradient-8: linear-gradient(160deg, var(--light-brown), var(--golden-beige), var(--dark-brown));
-  --gradient-9: radial-gradient(circle at top right, var(--soft-brown), var(--light-brown), var(--off-white));
-}
-
-/* Reset and Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
-  color: var(--text-primary);
-  background: var(--gradient-4);
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Background Elements */
-.background {
+/* Login Signup Container - Modal Popup */
+.login-signup-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none; /* Initially hidden */
+  transition: all 0.3s ease;
 }
 
-.bg-element {
+.login-signup-container.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Close Button */
+.popup-close-btn {
   position: absolute;
+  top: 1.8rem;
+  right: 1.8rem;
+  background: rgba(89, 89, 89, 0.705);
+  border: none;
   border-radius: 50%;
-  background: var(--golden-beige);
-  opacity: 0.1;
-  animation: float 8s ease-in-out infinite;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  z-index: 10001;
 }
 
-.bg-element-1 {
-  width: 200px;
-  height: 200px;
-  top: 5%;
-  left: 5%;
-  background: var(--soft-brown);
-  animation-delay: 0s;
+.popup-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
 }
 
-.bg-element-2 {
-  width: 150px;
-  height: 150px;
-  top: 60%;
-  right: 10%;
-  background: var(--golden-beige);
-  animation-delay: -2s;
-}
-
-.bg-element-3 {
-  width: 100px;
-  height: 100px;
-  bottom: 10%;
-  left: 15%;
-  background: var(--light-brown);
-  animation-delay: -4s;
-}
-
-.bg-element-4 {
-  width: 180px;
-  height: 180px;
-  top: 25%;
-  right: 35%;
-  background: var(--sand);
-  animation-delay: -6s;
+.popup-close-btn i {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 /* Main Container */
 .main-container {
-  height: 100vh;
+  height: auto;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
   position: relative;
-  z-index: 1;
+  z-index: 10000000;
 }
 
 /* Auth Container */
 .auth-container {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--sand);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 1.5rem;
   padding: 1.3rem;
-  max-width: 450px;
-  width: 90%;
-  max-height: calc(100vh - 1rem);
+  max-width: 550px;
+  width: 400%;
+  max-height: calc(100vh - 7rem);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 10000000;
 }
 
 .auth-container::before {
@@ -204,7 +161,8 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateX(30px);
   display: flex;
@@ -288,8 +246,8 @@ body {
 
 .password-toggle {
   position: absolute;
-  right: 3rem;
   top: 24px;
+  left: 25rem;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -305,7 +263,7 @@ body {
   background: rgba(203, 173, 141, 0.1);
 }
 
-.form-options{
+.form-options {
   height: 30px;
 }
 
@@ -318,7 +276,7 @@ body {
   margin-bottom: 10px;
 }
 
-.forgot-password:hover{
+.forgot-password:hover {
   color: var(--dark-brown);
   text-decoration: underline;
 }
@@ -401,79 +359,18 @@ body {
   color: var(--dark-brown);
 }
 
-/* Notification */
-.notification {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  max-width: 350px;
-  transform: translateX(100%);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.notification.show {
-  transform: translateX(0);
-}
-
-.notification.success {
-  border-left: 4px solid #10b981;
-}
-
-.notification.error {
-  border-left: 4px solid #ef4444;
-}
-
-.notification-content {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
-}
-
-.notification-icon {
-  width: 1rem;
-  height: 1rem;
-}
-
-.notification-text {
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 0.9rem;
-}
-
-.notification-close {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  transition: all 0.3s ease;
-}
-
-.notification-close:hover {
-  color: var(--text-primary);
-  background: rgba(0, 0, 0, 0.05);
-}
-
 /* Animations */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   33% {
     transform: translateY(-15px) rotate(1deg);
   }
+
   66% {
     transform: translateY(8px) rotate(-1deg);
   }
@@ -483,6 +380,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -493,6 +391,7 @@ body {
     opacity: 0;
     transform: translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -522,13 +421,6 @@ body {
 
   .brand-subtitle {
     font-size: 0.85rem;
-  }
-
-  .notification {
-    top: 0.75rem;
-    right: 0.75rem;
-    left: 0.75rem;
-    max-width: none;
   }
 }
 
@@ -599,9 +491,11 @@ body {
   }
 }
 
-.password-toggle {
-  padding: 0.2rem;
-  right: 2rem;
+.popup-close-btn {
+  width: 24px;
+  height: 24px;
+  right: 1.3rem;
+  padding: 3px;
 }
 
 /* High contrast mode support */
