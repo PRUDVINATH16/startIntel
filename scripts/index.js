@@ -247,11 +247,12 @@ document.addEventListener('click', function (event) {
 
     if (button) {
         popupContainer.style.display = 'flex';
+        document.body.style.overflowY = 'hidden';
     }
 });
 
 document.getElementById('popup-close-btn').addEventListener('click', function () {
     const popupContainer = document.querySelector('#login-signup-popup');
     popupContainer.style.display = 'none';
-    console.log('popup closed');
+    document.body.style.overflowY = 'auto';
 });

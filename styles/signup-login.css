@@ -11,7 +11,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none; /* Initially hidden */
+  display: none;
+  /* Initially hidden */
   transition: all 0.3s ease;
 }
 
@@ -23,8 +24,8 @@
 /* Close Button */
 .popup-close-btn {
   position: absolute;
-  top: 1.8rem;
-  right: 1.8rem;
+  top: 2rem;
+  right: 1rem;
   background: rgba(89, 89, 89, 0.705);
   border: none;
   border-radius: 50%;
@@ -494,7 +495,8 @@
 .popup-close-btn {
   width: 24px;
   height: 24px;
-  right: 1.3rem;
+  top: 2rem;
+  right: 2rem;
   padding: 3px;
 }
 
