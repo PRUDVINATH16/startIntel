@@ -1,16 +1,15 @@
 // Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize Lucide icons
     lucide.createIcons();
-    
+
     // Initialize all functionality
     initToggleNavigation();
     initPasswordToggle();
     initPasswordStrength();
     initFormValidation();
     initFormSubmission();
-    initNotifications();
-    
+
     console.log('Auth page loaded successfully!');
 });
 
@@ -22,11 +21,11 @@ function initToggleNavigation() {
     const signupForm = document.getElementById('signup-form');
     const toggleIndicator = document.querySelector('.toggle-indicator');
     const switchFormButtons = document.querySelectorAll('.switch-form');
-    
+
     // Handle tab clicks
     loginTab.addEventListener('click', () => switchToForm('login'));
     signupTab.addEventListener('click', () => switchToForm('signup'));
-    
+
     // Handle switch form button clicks
     switchFormButtons.forEach(button => {
         button.addEventListener('click', (e) => {
@@ -35,19 +34,19 @@ function initToggleNavigation() {
             switchToForm(target);
         });
     });
-    
+
     function switchToForm(formType) {
         // Update tabs
         loginTab.classList.toggle('active', formType === 'login');
         signupTab.classList.toggle('active', formType === 'signup');
-        
+
         // Update indicator
         toggleIndicator.classList.toggle('signup', formType === 'signup');
-        
+
         // Update forms
         loginForm.classList.toggle('active', formType === 'login');
         signupForm.classList.toggle('active', formType === 'signup');
-        
+
         // Reset forms
         if (formType === 'login') {
             signupForm.reset();
@@ -55,13 +54,13 @@ function initToggleNavigation() {
         } else {
             loginForm.reset();
         }
-        
+
         // Clear any validation errors
         clearValidationErrors();
-        
+
         // Focus first input
         setTimeout(() => {
-            const firstInput = formType === 'login' 
+            const firstInput = formType === 'login'
                 ? document.getElementById('login-mobile')
                 : document.getElementById('signup-name');
             if (firstInput) firstInput.focus();
@@ -72,14 +71,14 @@ function initToggleNavigation() {
 // Password Toggle Functionality
 function initPasswordToggle() {
     const passwordToggles = document.querySelectorAll('.password-toggle');
-    
+
     passwordToggles.forEach(toggle => {
-        toggle.addEventListener('click', function() {
+        toggle.addEventListener('click', function () {
             const targetId = this.getAttribute('data-target');
             const passwordInput = document.getElementById(targetId);
             const eyeOpen = this.querySelector('.eye-open');
             const eyeClosed = this.querySelector('.eye-closed');
-            
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 eyeOpen.style.display = 'none';
@@ -98,17 +97,17 @@ function initPasswordStrength() {
     const signupPassword = document.getElementById('signup-password');
     const strengthFill = document.querySelector('.strength-fill');
     const strengthText = document.querySelector('.strength-text');
-    
+
     if (!signupPassword || !strengthFill || !strengthText) return;
-    
-    signupPassword.addEventListener('input', function() {
+
+    signupPassword.addEventListener('input', function () {
         const password = this.value;
         const strength = calculatePasswordStrength(password);
-        
+
         // Update strength bar
         strengthFill.style.width = `${strength.percentage}%`;
         strengthText.textContent = strength.text;
-        
+
         // Update colors based on strength
         if (strength.percentage < 30) {
             strengthFill.style.background = '#ef4444';
@@ -123,37 +122,37 @@ function initPasswordStrength() {
 function calculatePasswordStrength(password) {
     let score = 0;
     let feedback = [];
-    
+
     if (password.length >= 8) score += 25;
     else feedback.push('at least 8 characters');
-    
+
     if (/[a-z]/.test(password)) score += 25;
     else feedback.push('lowercase letter');
-    
+
     if (/[A-Z]/.test(password)) score += 25;
     else feedback.push('uppercase letter');
-    
+
     if (/[0-9]/.test(password)) score += 25;
     else feedback.push('number');
-    
+
     if (/[^A-Za-z0-9]/.test(password)) score += 10;
-    
+
     let text = '';
     if (score < 30) text = 'Weak password';
     else if (score < 70) text = 'Medium strength';
     else if (score < 90) text = 'Strong password';
     else text = 'Very strong password';
-    
+
     return { percentage: Math.min(score, 100), text, feedback };
 }
 
 // Form Validation
 function initFormValidation() {
     const forms = document.querySelectorAll('.auth-form');
-    
+
     forms.forEach(form => {
         const inputs = form.querySelectorAll('.form-input');
-        
+
         inputs.forEach(input => {
             input.addEventListener('blur', () => validateField(input));
             input.addEventListener('input', () => clearFieldError(input));
@@ -166,7 +165,7 @@ function validateField(input) {
     const fieldName = input.name;
     let isValid = true;
     let errorMessage = '';
-    
+
     // Required field validation
     if (!value) {
         isValid = false;
@@ -180,14 +179,14 @@ function validateField(input) {
                     errorMessage = 'Name must be at least 2 characters';
                 }
                 break;
-                
+
             case 'mobile':
                 if (!/^[6-9]\d{9}$/.test(value)) {
                     isValid = false;
                     errorMessage = 'Please enter a valid mobile number';
                 }
                 break;
-                
+
             case 'password':
                 if (input.id === 'signup-password') {
                     const strength = calculatePasswordStrength(value);
@@ -202,22 +201,22 @@ function validateField(input) {
                 break;
         }
     }
-    
+
     if (!isValid) {
         showFieldError(input, errorMessage);
     } else {
         clearFieldError(input);
     }
-    
+
     return isValid;
 }
 
 function showFieldError(input, message) {
     clearFieldError(input);
-    
+
     input.style.borderColor = '#ef4444';
     input.style.background = 'rgba(239, 68, 68, 0.05)';
-    
+
     const errorElement = document.createElement('div');
     errorElement.className = 'field-error';
     errorElement.textContent = message;
@@ -229,14 +228,14 @@ function showFieldError(input, message) {
         align-items: center;
         gap: 0.25rem;
     `;
-    
+
     input.parentNode.appendChild(errorElement);
 }
 
 function clearFieldError(input) {
     input.style.borderColor = '';
     input.style.background = '';
-    
+
     const errorElement = input.parentNode.querySelector('.field-error');
     if (errorElement) {
         errorElement.remove();
@@ -246,7 +245,7 @@ function clearFieldError(input) {
 function clearValidationErrors() {
     const errorElements = document.querySelectorAll('.field-error');
     errorElements.forEach(element => element.remove());
-    
+
     const inputs = document.querySelectorAll('.form-input');
     inputs.forEach(input => {
         input.style.borderColor = '';
@@ -267,48 +266,81 @@ function getFieldLabel(fieldName) {
 function initFormSubmission() {
     const loginForm = document.getElementById('login-form');
     const signupForm = document.getElementById('signup-form');
-    
+
     loginForm.addEventListener('submit', handleLogin);
     signupForm.addEventListener('submit', handleSignup);
 }
 
 async function handleLogin(e) {
     e.preventDefault();
-    
+
     const form = e.target;
     const submitBtn = form.querySelector('.submit-btn');
     const formData = new FormData(form);
-    
+
     // Validate form
     if (!validateForm(form)) {
-        showNotification('Please fix the errors and try again', 'error');
         return;
     }
-    
+
     // Show loading state
     setButtonLoading(submitBtn, true);
-    
-    try {ko       
+
+    try {
         const loginData = {
             mobile: formData.get('mobile'),
             password: formData.get('password'),
-            remember: formData.get('remember') === 'on'
         };
-        
+
         console.log('Login data:', loginData);
-        
-        // Success
-        showNotification('Login successful! Redirecting...', 'success');
-        
-        // Simulate redirect after delay
-        setTimeout(() => {
-            // window.location.href = '/dashboard';
-            console.log('Redirecting to dashboard...');
-        }, 2000);
-        
+
+
+        const response = await fetch('http://localhost:3000/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        });
+        const result = await response.json();
+        console.log(result);
+
+        if(result.success && result.message=='login successfully'){
+            location.href = 'home.html';
+        }
+        else if(result.success==false && result.message=='password incorrect')
+        {
+            msg=document.querySelector('#login-message'),
+            msg.innerHTML='please enter correct password';
+            document.querySelector('.login-msg').style.display='flex';
+            setTimeout(() => {
+                document.querySelector('.login-msg').style.display='none'; 
+            }, 3500);
+        }
+        else if (result.message=='some error occoured'){
+            msg=document.querySelector('#login-message')
+            msg.innerHTML='internal server error please try again after sometime'; 
+            document.querySelector('.login-msg').style.display='flex';
+            setTimeout(() => {
+                document.querySelector('.login-msg').style.display='none'; 
+            }, 3500);
+
+        }
+        else if (result.message==`Account doesn't exsist`){
+            msg=document.querySelector('#login-message')
+            msg.innerHTML='Account not found'; 
+            document.querySelector('.login-msg').style.display='flex';
+            setTimeout(() => {
+                document.querySelector('.login-msg').style.display='none'; 
+            }, 3500);
+
+        }
+
+
+
+
     } catch (error) {
         console.error('Login error:', error);
-        showNotification('Login failed. Please check your credentials.', 'error');
     } finally {
         setButtonLoading(submitBtn, false);
     }
@@ -316,49 +348,67 @@ async function handleLogin(e) {
 
 async function handleSignup(e) {
     e.preventDefault();
-    
+
     const form = e.target;
     const submitBtn = form.querySelector('.submit-btn');
     const formData = new FormData(form);
-    
+
     // Validate form
     if (!validateForm(form)) {
-        showNotification('Please fix the errors and try again', 'error');
         return;
     }
-    
-    // Check terms agreement
-    const termsCheckbox = form.querySelector('#terms-agreement');
-    if (!termsCheckbox.checked) {
-        showNotification('Please agree to the Terms of Service and Privacy Policy', 'error');
-        return;
-    }
-    
+
     // Show loading state
     setButtonLoading(submitBtn, true);
-    
-    try {        
+
+    try {
         const signupData = {
-            name: formData.get('name'),
+            username: formData.get('name'),
             mobile: formData.get('mobile'),
             password: formData.get('password'),
-            terms: formData.get('terms') === 'on'
         };
-        
+
         console.log('Signup data:', signupData);
-        
-        // Success
-        showNotification('Account created successfully! Welcome aboard!', 'success');
-        
-        // Switch to login form after delay
-        setTimeout(() => {
-            document.getElementById('login-tab').click();
-            document.getElementById('login-mobile').value = signupData.mobile;
-        }, 2000);
-        
+
+
+        const response = await fetch('http://localhost:3000/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(signupData)
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+        if(result.success && result.message=='user created successfully'){
+            location.href = 'home.html';
+        }
+        else if(result.success== false && result.message=='user already exist' ){
+            msg=document.querySelector('#message')
+          
+            msg.innerHTML='Account already exist with this mobile number';
+            
+            document.querySelector('.msg').style.display='flex';
+            setTimeout(() => {
+                document.querySelector('.msg').style.display='none'; 
+            }, 3500);
+
+        }
+        else{
+            msg=document.querySelector('#message')
+            msg.innerHTML='internal server error please try again after sometime'; 
+            document.querySelector('.msg').style.display='flex';
+            setTimeout(() => {
+                document.querySelector('.msg').style.display='none'; 
+            }, 3500);
+
+        }
+
+
     } catch (error) {
         console.error('Signup error:', error);
-        showNotification('Signup failed. Please try again.', 'error');
     } finally {
         setButtonLoading(submitBtn, false);
     }
@@ -367,13 +417,13 @@ async function handleSignup(e) {
 function validateForm(form) {
     const inputs = form.querySelectorAll('.form-input');
     let isValid = true;
-    
+
     inputs.forEach(input => {
         if (!validateField(input)) {
             isValid = false;
         }
     });
-    
+
     return isValid;
 }
 
@@ -381,7 +431,7 @@ function setButtonLoading(button, loading) {
     const btnText = button.querySelector('.btn-text');
     const btnIcon = button.querySelector('.btn-icon');
     const btnLoading = button.querySelector('.btn-loading');
-    
+
     if (loading) {
         btnText.style.opacity = '0';
         btnIcon.style.opacity = '0';
@@ -395,73 +445,13 @@ function setButtonLoading(button, loading) {
     }
 }
 
-// Notification System
-function initNotifications() {
-    // Auto-hide notifications after 5 seconds
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.notification-close')) {
-            hideNotification();
-        }
-    });
-}
-
-function showNotification(message, type = 'info') {
-    const notification = document.getElementById('notification');
-    const notificationText = notification.querySelector('.notification-text');
-    const notificationIcon = notification.querySelector('.notification-icon');
-    
-    // Set message
-    notificationText.textContent = message;
-    
-    // Set icon based on type
-    notificationIcon.innerHTML = '';
-    if (type === 'success') {
-        notificationIcon.innerHTML = '<i data-lucide="check-circle"></i>';
-        notification.className = 'notification success';
-    } else if (type === 'error') {
-        notificationIcon.innerHTML = '<i data-lucide="alert-circle"></i>';
-        notification.className = 'notification error';
-    } else {
-        notificationIcon.innerHTML = '<i data-lucide="info"></i>';
-        notification.className = 'notification';
-    }
-    
-    // Initialize new icons
-    lucide.createIcons();
-    
-    // Show notification
-    notification.style.display = 'flex';
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 100);
-    
-    // Auto-hide after 5 seconds
-    setTimeout(() => {
-        hideNotification();
-    }, 5000);
-}
-
-function hideNotification() {
-    const notification = document.getElementById('notification');
-    notification.classList.remove('show');
-    
-    setTimeout(() => {
-        notification.style.display = 'none';
-    }, 400);
-}
-
 // Keyboard Navigation
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     // Enter key on toggle buttons
     if (e.key === 'Enter' && e.target.classList.contains('toggle-btn')) {
         e.target.click();
     }
-    
-    // Escape key to close notifications
-    if (e.key === 'Escape') {
-        hideNotification();
-    }
-    
+
     // Tab navigation enhancement
     if (e.key === 'Tab') {
         const activeForm = document.querySelector('.auth-form.active');
@@ -469,10 +459,10 @@ document.addEventListener('keydown', function(e) {
             const focusableElements = activeForm.querySelectorAll(
                 'input, button, [tabindex]:not([tabindex="-1"])'
             );
-            
+
             const firstElement = focusableElements[0];
             const lastElement = focusableElements[focusableElements.length - 1];
-            
+
             if (e.shiftKey && document.activeElement === firstElement) {
                 e.preventDefault();
                 lastElement.focus();
@@ -485,9 +475,10 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Mobile Number Formatting
-document.addEventListener('input', function(e) {
+document.addEventListener('input', function (e) {
     if (e.target.type === 'tel') {
         let value = e.target.value.replace(/\D/g, '');
         e.target.value = value;
     }
 });
+

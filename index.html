@@ -443,6 +443,9 @@
                                 placeholder="Enter password"
                                 required                            
                                 >
+                                <div class="login-msg" style="display: none; align-items: center; justify-content: center;">
+                                    <p id="login-message" style="color: red; margin-top: 5px; font-family: 'Courier New', monospace;"></p>
+                                </div>
                             <button type="button" class="password-toggle" data-target="login-password">
                                 <i data-lucide="eye" class="eye-open"></i>
                                 <i data-lucide="eye-off" class="eye-closed" class="signup-eye-closed" style="display: none;"></i>
@@ -523,8 +526,10 @@
                             </button>
                         </div>
                     </div>
-
-                    <button type="submit" class="submit-btn">
+                    <div class="msg" style="display: none; align-items: center; justify-content: center;">
+                        <p id="message" style="color: red; padding-bottom: 5px; font-family: 'Courier New', monospace"> Your account already exsist</p>
+                    </div>
+                    <button type="submit" class="submit-btn" id="signup-btn">
                         <span class="btn-text">Sign Up</span>
                         <i data-lucide="arrow-right" class="btn-icon"></i>
                         <div class="btn-loading" style="display: none;">
