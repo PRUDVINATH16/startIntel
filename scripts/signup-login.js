@@ -295,7 +295,7 @@ async function handleLogin(e) {
         console.log('Login data:', loginData);
 
 
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -371,13 +371,15 @@ async function handleSignup(e) {
         console.log('Signup data:', signupData);
 
 
-        const response = await fetch('http://localhost:3000/api/auth/register', {
+        const response = await fetch('/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(signupData)
         });
+
+        console.log(response);
 
         const result = await response.json();
         console.log(result);
