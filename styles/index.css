@@ -1,5 +1,5 @@
 /* Custom Color Palette - Warm Brown/Beige Theme with Enhanced Text Colors */
-:root { 
+:root {
   --dark-brown: #2A1F1A;
   --soft-brown: #8B6F5E;
   --golden-beige: #CBAD8D;
@@ -46,7 +46,12 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-primary);
@@ -81,7 +86,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.7rem 1.25rem;
   border: none;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -100,7 +105,6 @@ p {
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--soft-brown), var(--dark-brown));
   box-shadow: 0 6px 20px rgba(42, 31, 26, 0.4);
-  transform: translateY(-2px);
 }
 
 .btn-secondary {
@@ -113,11 +117,10 @@ p {
 .btn-secondary:hover {
   background: var(--golden-beige);
   color: var(--text-primary);
-  transform: translateY(-2px);
 }
 
 .btn-large {
-  padding: 1rem 2rem;
+  padding: .7rem 1.4rem;
   font-size: 1.125rem;
 }
 
@@ -303,7 +306,7 @@ p {
 }
 
 .hero-inner {
-  padding: 5rem 0;
+  padding: 1rem 0;
 }
 
 .hero-badge {
@@ -329,14 +332,14 @@ p {
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8vw, 5rem);
+  font-size: clamp(3rem, 2vw, 4rem);
   font-weight: 900;
   margin-bottom: 1.5rem;
   line-height: 1.1;
 }
 
 .hero-subtitle {
-  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-size: clamp(1.125rem, 2vw, 1.2rem);
   color: var(--text-secondary);
   margin-bottom: 2rem;
   max-width: 64rem;
@@ -351,14 +354,14 @@ p {
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .stat-card {
@@ -430,19 +433,18 @@ p {
 
 /* Features Section */
 .features {
-  padding: 6rem 0;
+  padding: 2rem 0;
   background: var(--off-white);
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .section-title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 3vw, 3rem);
   font-weight: 900;
-  margin-bottom: 1rem;
   background: linear-gradient(135deg, var(--golden-beige), var(--dark-brown));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -450,7 +452,7 @@ p {
 }
 
 .section-subtitle {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   max-width: 48rem;
   margin: 0 auto;
@@ -460,14 +462,14 @@ p {
 .features-grid-large {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+  gap: 2.3rem;
   margin-bottom: 4rem;
 }
 
 .feature-card-large {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  padding: 3rem;
+  padding: 1.4rem 2rem;
   border-radius: 1.5rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -480,8 +482,8 @@ p {
 }
 
 .feature-icon-large {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   background: linear-gradient(135deg, var(--golden-beige), var(--dark-brown));
   border-radius: 1rem;
   display: flex;
@@ -492,14 +494,14 @@ p {
 }
 
 .feature-card-large h3 {
-  font-size: 1.875rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
 .feature-card-large p {
-  font-size: 1.125rem;
+  font-size: .9rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -511,7 +513,9 @@ p {
 .features-secondary-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--golden-beige), var(--dark-brown));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
   margin-bottom: 3rem;
 }
@@ -525,7 +529,7 @@ p {
 .feature-card-small {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  padding: 2rem;
+  padding: 1.6rem;
   border-radius: 1rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -563,7 +567,8 @@ p {
 
 /* Testimonials Section */
 .testimonials {
-  padding: 6rem 0;
+  padding: 2rem 0;
+  padding-bottom: 3.2rem;
   background: var(--gradient-4);
 }
 
@@ -643,7 +648,7 @@ p {
 .cta-card {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  padding: 4rem;
+  padding: 3rem;
   border-radius: 2rem;
   text-align: center;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -653,7 +658,7 @@ p {
 }
 
 .cta-card h2 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 3vw, 3.5rem);
   font-weight: 900;
   margin-bottom: 1.5rem;
   background: linear-gradient(135deg, var(--golden-beige), var(--dark-brown));
@@ -663,7 +668,7 @@ p {
 }
 
 .cta-card p {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
   max-width: 32rem;
@@ -766,8 +771,15 @@ p {
 
 /* Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes slideUp {
@@ -775,6 +787,7 @@ p {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -814,7 +827,7 @@ p {
   .hero-buttons {
     flex-direction: row;
   }
-  
+
   .cta-buttons {
     flex-direction: row;
   }
@@ -824,31 +837,31 @@ p {
   .nav-desktop {
     display: none;
   }
-  
+
   .nav-mobile-toggle {
     display: block;
   }
-  
+
   .nav-mobile.show {
     display: block;
   }
-  
+
   .hero-float {
     display: none;
   }
-  
+
   .features-grid-large {
     grid-template-columns: 1fr;
   }
-  
+
   .features-grid-small {
     grid-template-columns: 1fr;
   }
-  
+
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .cta-card {
     padding: 2rem;
   }
@@ -858,32 +871,32 @@ p {
   .container {
     padding: 0 0.75rem;
   }
-  
+
   .hero-inner {
     padding: 3rem 0;
   }
-  
+
   .hero-stats {
     grid-template-columns: 1fr;
   }
-  
+
   .stat-card {
     padding: 1.5rem;
   }
-  
+
   .feature-card-large {
     padding: 2rem;
   }
-  
+
   .feature-card-small {
     padding: 1.5rem;
   }
-  
+
   .testimonial-card {
     padding: 1.5rem;
   }
 
-  .nav-title{
+  .nav-title {
     font-size: .9rem;
   }
 }

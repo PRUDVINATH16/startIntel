@@ -109,7 +109,7 @@ body {
 }
 
 .sidebar.collapsed {
-  width: var(--sidebar-collapsed-width);
+  width: 6rem;
 }
 
 .sidebar.collapsed .sidebar-content {
@@ -117,7 +117,7 @@ body {
 }
 
 .sidebar-header {
-  padding: 1.5rem;
+  padding: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
@@ -180,7 +180,7 @@ body {
 
 .sidebar-content {
   flex: 1;
-  padding: 1.5rem;
+  padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -326,6 +326,7 @@ body {
   position: relative;
   margin-left: var(--sidebar-width);
   transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  align-items: center;
 }
 
 .sidebar.collapsed + .main-content {
@@ -344,6 +345,7 @@ body {
   min-height: 80px;
   position: relative;
   z-index: 50;
+  width: 100%;
 }
 
 .mobile-sidebar-toggle {
@@ -537,6 +539,8 @@ body {
   padding: 2rem;
   overflow-y: auto;
   min-height: 0;
+  align-self: center;
+  justify-self: center;
 }
 
 .welcome-content {
@@ -544,6 +548,10 @@ body {
   max-width: 900px;
   width: 100%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
 }
 
 .welcome-icon {
@@ -600,9 +608,8 @@ body {
 
 .suggestion-card:hover {
   background: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
-  border-color: var(--golden-beige);
+  box-shadow: 0 0px 18px rgba(215, 183, 40, 0.365);
+  border-color: #d2791a;
 }
 
 .suggestion-card i {

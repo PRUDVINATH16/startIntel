@@ -1,8 +1,8 @@
 // Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize Lucide icons
     lucide.createIcons();
-    
+
     // Initialize all functionality
     initSidebarToggle();
     initProfileDropdown();
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initChatFunctionality();
     initFullscreenModal();
     initMobileResponsive();
-    
+
     console.log('StratIntel home page loaded successfully!');
 });
 
@@ -21,54 +21,62 @@ function initSidebarToggle() {
     const sidebarToggle = document.getElementById('sidebar-toggle');
     const mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
     const mainContent = document.getElementById('main-content');
-    
+
     // Desktop sidebar toggle
-    sidebarToggle.addEventListener('click', function() {
+    sidebarToggle.addEventListener('click', function () {
         sidebar.classList.toggle('collapsed');
-        
+
         // Update toggle icon
         const icon = this.querySelector('i');
         if (sidebar.classList.contains('collapsed')) {
-            icon.setAttribute('data-lucide', 'panel-left-open');
+            document.querySelector('.sidebar-brand').style.display = 'none';
+            document.querySelector('.recent-section').style.display = 'none';
+            document.querySelector('.sidebar-header').style.justifyContent = 'center';
+            document.querySelector('.new-chat-btn').style.padding = '0.3rem 0rem';
+            document.querySelector('.new-chat-btn').style.marginLeft = '0.4rem 0rem';
+            document.querySelector('.new-chat-btn').style.width = '3.6rem';
         } else {
-            icon.setAttribute('data-lucide', 'panel-left-close');
+            document.querySelector('.sidebar-brand').style.display = 'block';
+            document.querySelector('.recent-section').style.display = 'block';
+            document.querySelector('.sidebar-header').style.justifyContent = 'space-between';
+            document.querySelector('.new-chat-btn').style.padding = '0.5rem 1.5rem';
+            document.querySelector('.new-chat-btn').style.width = '100%';
+
         }
         lucide.createIcons();
-        
+
         // Update main content margin
         if (sidebar.classList.contains('collapsed')) {
             mainContent.style.marginLeft = 'var(--sidebar-collapsed-width)';
         } else {
             mainContent.style.marginLeft = 'var(--sidebar-width)';
         }
-        
+
         // Save state to localStorage
         localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
     });
-    
+
     // Mobile sidebar toggle
-    mobileSidebarToggle.addEventListener('click', function() {
+    mobileSidebarToggle.addEventListener('click', function () {
         sidebar.classList.toggle('mobile-open');
         document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : '';
     });
-    
+
     // Close mobile sidebar when clicking outside
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768 && 
-            sidebar.classList.contains('mobile-open') && 
-            !sidebar.contains(e.target) && 
+    document.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768 &&
+            sidebar.classList.contains('mobile-open') &&
+            !sidebar.contains(e.target) &&
             !mobileSidebarToggle.contains(e.target)) {
             sidebar.classList.remove('mobile-open');
             document.body.style.overflow = '';
         }
     });
-    
+
     // Restore sidebar state from localStorage
     const savedState = localStorage.getItem('sidebarCollapsed');
     if (savedState === 'true') {
         sidebar.classList.add('collapsed');
-        const icon = sidebarToggle.querySelector('i');
-        icon.setAttribute('data-lucide', 'panel-left-open');
         lucide.createIcons();
         mainContent.style.marginLeft = 'var(--sidebar-collapsed-width)';
     }
@@ -78,34 +86,34 @@ function initSidebarToggle() {
 function initProfileDropdown() {
     const profileBtn = document.getElementById('profile-btn');
     const profileDropdown = document.getElementById('profile-dropdown');
-    
-    profileBtn.addEventListener('click', function(e) {
+
+    profileBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         profileBtn.classList.toggle('active');
         profileDropdown.classList.toggle('show');
     });
-    
+
     // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
             profileBtn.classList.remove('active');
             profileDropdown.classList.remove('show');
         }
     });
-    
+
     // Handle profile menu items
     const profileMenuItems = profileDropdown.querySelectorAll('.profile-menu-item');
     profileMenuItems.forEach(item => {
-        item.addEventListener('click', function(e) {
+        item.addEventListener('click', function (e) {
             e.preventDefault();
             const action = this.textContent.trim();
-            
+
             // Close dropdown
             profileBtn.classList.remove('active');
             profileDropdown.classList.remove('show');
-            
+
             // Handle different actions
-            switch(action) {
+            switch (action) {
                 case 'Profile Settings':
                     showNotification('Profile settings coming soon!', 'info');
                     break;
@@ -129,23 +137,23 @@ function initInputArea() {
     const sendBtn = document.getElementById('send-btn');
     const charCount = document.getElementById('char-count');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
-    
+
     // Auto-resize textarea
-    messageInput.addEventListener('input', function() {
+    messageInput.addEventListener('input', function () {
         // Reset height to auto to get the correct scrollHeight
         this.style.height = 'auto';
-        
+
         // Set height based on scrollHeight, with min and max limits
         const newHeight = Math.min(Math.max(this.scrollHeight, 24), 120);
         this.style.height = newHeight + 'px';
-        
+
         // Update character count
         const currentLength = this.value.length;
         charCount.textContent = currentLength;
-        
+
         // Enable/disable send button
         sendBtn.disabled = currentLength === 0 || currentLength > 2000;
-        
+
         // Update character count color
         if (currentLength > 1800) {
             charCount.style.color = '#ef4444';
@@ -155,9 +163,9 @@ function initInputArea() {
             charCount.style.color = 'var(--text-muted)';
         }
     });
-    
+
     // Handle Enter key (send message)
-    messageInput.addEventListener('keydown', function(e) {
+    messageInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             if (!sendBtn.disabled) {
@@ -165,12 +173,12 @@ function initInputArea() {
             }
         }
     });
-    
+
     // Send button click
     sendBtn.addEventListener('click', sendMessage);
-    
+
     // Fullscreen button
-    fullscreenBtn.addEventListener('click', function() {
+    fullscreenBtn.addEventListener('click', function () {
         openFullscreenModal();
     });
 }
@@ -178,25 +186,25 @@ function initInputArea() {
 // Suggestion Cards Functionality
 function initSuggestionCards() {
     const suggestionCards = document.querySelectorAll('.suggestion-card');
-    
+
     suggestionCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
             const suggestion = this.getAttribute('data-suggestion');
             const messageInput = document.getElementById('message-input');
-            
+
             // Set the suggestion text in the input
             messageInput.value = suggestion;
-            
+
             // Trigger input event to update UI
             messageInput.dispatchEvent(new Event('input'));
-            
+
             // Focus the input
             messageInput.focus();
-            
+
             // Scroll to input area
-            document.getElementById('input-area').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'end' 
+            document.getElementById('input-area').scrollIntoView({
+                behavior: 'smooth',
+                block: 'end'
             });
         });
     });
@@ -206,15 +214,15 @@ function initSuggestionCards() {
 function initChatFunctionality() {
     const newChatBtn = document.getElementById('new-chat-btn');
     const chatItems = document.querySelectorAll('.chat-item');
-    
+
     // New chat button
-    newChatBtn.addEventListener('click', function() {
+    newChatBtn.addEventListener('click', function () {
         startNewChat();
     });
-    
+
     // Chat item clicks
     chatItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             const chatTitle = this.querySelector('.chat-title').textContent;
             loadChat(chatTitle);
         });
@@ -229,15 +237,15 @@ function initFullscreenModal() {
     const fullscreenSend = document.getElementById('fullscreen-send');
     const fullscreenCancel = document.getElementById('fullscreen-cancel');
     const fullscreenClose = document.getElementById('fullscreen-close');
-    
+
     // Fullscreen input handling
-    fullscreenInput.addEventListener('input', function() {
+    fullscreenInput.addEventListener('input', function () {
         const currentLength = this.value.length;
         fullscreenCharCount.textContent = currentLength;
-        
+
         // Enable/disable send button
         fullscreenSend.disabled = currentLength === 0 || currentLength > 2000;
-        
+
         // Update character count color
         if (currentLength > 1800) {
             fullscreenCharCount.style.color = '#ef4444';
@@ -247,35 +255,35 @@ function initFullscreenModal() {
             fullscreenCharCount.style.color = 'var(--text-muted)';
         }
     });
-    
+
     // Send button
-    fullscreenSend.addEventListener('click', function() {
+    fullscreenSend.addEventListener('click', function () {
         const message = fullscreenInput.value.trim();
         if (message) {
             // Copy to main input
             const messageInput = document.getElementById('message-input');
             messageInput.value = message;
             messageInput.dispatchEvent(new Event('input'));
-            
+
             // Close modal and send
             closeFullscreenModal();
             sendMessage();
         }
     });
-    
+
     // Cancel and close buttons
     fullscreenCancel.addEventListener('click', closeFullscreenModal);
     fullscreenClose.addEventListener('click', closeFullscreenModal);
-    
+
     // Close on escape key
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && fullscreenModal.classList.contains('show')) {
             closeFullscreenModal();
         }
     });
-    
+
     // Close on backdrop click
-    fullscreenModal.addEventListener('click', function(e) {
+    fullscreenModal.addEventListener('click', function (e) {
         if (e.target === fullscreenModal) {
             closeFullscreenModal();
         }
@@ -285,40 +293,40 @@ function initFullscreenModal() {
 // Mobile Responsive Functionality
 function initMobileResponsive() {
     // Handle window resize
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
         const sidebar = document.getElementById('sidebar');
-        
+
         // Close mobile sidebar on desktop
         if (window.innerWidth > 768) {
             sidebar.classList.remove('mobile-open');
             document.body.style.overflow = '';
         }
     });
-    
+
     // Touch gestures for mobile sidebar
     let touchStartX = 0;
     let touchEndX = 0;
-    
-    document.addEventListener('touchstart', function(e) {
+
+    document.addEventListener('touchstart', function (e) {
         touchStartX = e.changedTouches[0].screenX;
     });
-    
-    document.addEventListener('touchend', function(e) {
+
+    document.addEventListener('touchend', function (e) {
         touchEndX = e.changedTouches[0].screenX;
         handleSwipeGesture();
     });
-    
+
     function handleSwipeGesture() {
         const sidebar = document.getElementById('sidebar');
         const swipeThreshold = 100;
-        
+
         if (window.innerWidth <= 768) {
             // Swipe right to open sidebar
             if (touchEndX - touchStartX > swipeThreshold && touchStartX < 50) {
                 sidebar.classList.add('mobile-open');
                 document.body.style.overflow = 'hidden';
             }
-            
+
             // Swipe left to close sidebar
             if (touchStartX - touchEndX > swipeThreshold && sidebar.classList.contains('mobile-open')) {
                 sidebar.classList.remove('mobile-open');
@@ -332,32 +340,32 @@ function initMobileResponsive() {
 function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const message = messageInput.value.trim();
-    
+
     if (!message) return;
-    
+
     // Hide welcome screen and show chat
     const welcomeScreen = document.getElementById('welcome-screen');
     const chatMessages = document.getElementById('chat-messages');
-    
+
     welcomeScreen.style.display = 'none';
     chatMessages.style.display = 'flex';
-    
+
     // Add user message
     addMessage(message, 'user');
-    
+
     // Clear input
     messageInput.value = '';
     messageInput.style.height = 'auto';
     messageInput.dispatchEvent(new Event('input'));
-    
+
     // Show loading
     showLoadingOverlay();
-    
+
     // Simulate AI response
     setTimeout(() => {
         hideLoadingOverlay();
         addMessage(generateAIResponse(message), 'assistant');
-        
+
         // Add to recent chats
         addToRecentChats(message);
     }, 2000 + Math.random() * 2000);
@@ -367,26 +375,26 @@ function addMessage(content, sender) {
     const chatMessages = document.getElementById('chat-messages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${sender}`;
-    
+
     const avatar = sender === 'user' ? 'JD' : '🧠';
     const avatarClass = sender === 'user' ? 'user' : 'assistant';
-    
+
     messageDiv.innerHTML = `
         <div class="message-avatar">${avatar}</div>
         <div class="message-content">
             <div class="message-bubble">${content}</div>
         </div>
     `;
-    
+
     chatMessages.appendChild(messageDiv);
-    
+
     // Scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    
+
     // Animate message in
     messageDiv.style.opacity = '0';
     messageDiv.style.transform = 'translateY(20px)';
-    
+
     requestAnimationFrame(() => {
         messageDiv.style.transition = 'all 0.3s ease';
         messageDiv.style.opacity = '1';
@@ -414,7 +422,7 @@ function generateAIResponse(userMessage) {
 4. Consider subscription models for frequent users
 
 Would you like me to dive deeper into any specific aspect?`,
-        
+
         'saas': `Excellent choice! SaaS project management tools have a robust market. Here's my analysis:
 
 **Market Analysis**: The project management software market is worth $6.68 billion and growing at 10.67% CAGR.
@@ -434,7 +442,7 @@ Would you like me to dive deeper into any specific aspect?`,
 **Next Steps**: Define your unique value proposition and target specific user personas.
 
 What specific industry or user type are you targeting?`,
-        
+
         'e-commerce': `Handmade products e-commerce is a thriving niche! Here's my comprehensive analysis:
 
 **Market Potential**: The global handicrafts market is valued at $718 billion with strong online growth.
@@ -454,7 +462,7 @@ What specific industry or user type are you targeting?`,
 **Recommendations**: Focus on a specific craft category or geographic region initially.
 
 Which type of handmade products are you most interested in featuring?`,
-        
+
         'fintech': `FinTech payment solutions are hot! Here's my detailed market analysis:
 
 **Market Size**: Mobile payment market is $1.48 trillion and growing at 33.8% CAGR.
@@ -478,10 +486,10 @@ Which type of handmade products are you most interested in featuring?`,
 
 What specific payment problem are you looking to solve?`
     };
-    
+
     // Find matching response based on keywords
     const lowerMessage = userMessage.toLowerCase();
-    
+
     if (lowerMessage.includes('food') || lowerMessage.includes('delivery') || lowerMessage.includes('restaurant')) {
         return responses['food delivery'];
     } else if (lowerMessage.includes('saas') || lowerMessage.includes('project management') || lowerMessage.includes('software')) {
@@ -491,7 +499,7 @@ What specific payment problem are you looking to solve?`
     } else if (lowerMessage.includes('fintech') || lowerMessage.includes('payment') || lowerMessage.includes('financial')) {
         return responses['fintech'];
     }
-    
+
     // Default response
     return `Thank you for sharing your business idea! I'm analyzing the following aspects:
 
@@ -516,7 +524,7 @@ I'd be happy to provide more detailed analysis once you share more specifics abo
 function addToRecentChats(message) {
     const recentChats = document.getElementById('recent-chats');
     const chatTitle = message.length > 30 ? message.substring(0, 30) + '...' : message;
-    
+
     // Create new chat item
     const chatItem = document.createElement('div');
     chatItem.className = 'chat-item';
@@ -527,21 +535,21 @@ function addToRecentChats(message) {
             <i data-lucide="more-horizontal"></i>
         </button>
     `;
-    
+
     // Add to top of recent chats
     recentChats.insertBefore(chatItem, recentChats.firstChild);
-    
+
     // Limit to 10 recent chats
     const chatItems = recentChats.querySelectorAll('.chat-item');
     if (chatItems.length > 10) {
         recentChats.removeChild(chatItems[chatItems.length - 1]);
     }
-    
+
     // Re-initialize icons
     lucide.createIcons();
-    
+
     // Add click handler
-    chatItem.addEventListener('click', function() {
+    chatItem.addEventListener('click', function () {
         loadChat(chatTitle);
     });
 }
@@ -550,31 +558,31 @@ function startNewChat() {
     // Clear chat messages
     const chatMessages = document.getElementById('chat-messages');
     const welcomeScreen = document.getElementById('welcome-screen');
-    
+
     chatMessages.innerHTML = '';
     chatMessages.style.display = 'none';
     welcomeScreen.style.display = 'flex';
-    
+
     // Clear input
     const messageInput = document.getElementById('message-input');
     messageInput.value = '';
     messageInput.style.height = 'auto';
     messageInput.dispatchEvent(new Event('input'));
-    
+
     showNotification('Started new chat session', 'success');
 }
 
 function loadChat(chatTitle) {
     showNotification(`Loading chat: ${chatTitle}`, 'info');
-    
+
     // Simulate loading a previous chat
     const welcomeScreen = document.getElementById('welcome-screen');
     const chatMessages = document.getElementById('chat-messages');
-    
+
     welcomeScreen.style.display = 'none';
     chatMessages.style.display = 'flex';
     chatMessages.innerHTML = '';
-    
+
     // Add some sample messages
     setTimeout(() => {
         addMessage(`I want to research ${chatTitle.replace('...', '')}`, 'user');
@@ -588,15 +596,15 @@ function openFullscreenModal() {
     const fullscreenModal = document.getElementById('fullscreen-modal');
     const fullscreenInput = document.getElementById('fullscreen-input');
     const messageInput = document.getElementById('message-input');
-    
+
     // Copy current input to fullscreen
     fullscreenInput.value = messageInput.value;
     fullscreenInput.dispatchEvent(new Event('input'));
-    
+
     // Show modal
     fullscreenModal.classList.add('show');
     document.body.style.overflow = 'hidden';
-    
+
     // Focus input
     setTimeout(() => {
         fullscreenInput.focus();
@@ -606,10 +614,10 @@ function openFullscreenModal() {
 function closeFullscreenModal() {
     const fullscreenModal = document.getElementById('fullscreen-modal');
     const fullscreenInput = document.getElementById('fullscreen-input');
-    
+
     fullscreenModal.classList.remove('show');
     document.body.style.overflow = '';
-    
+
     // Clear fullscreen input
     fullscreenInput.value = '';
     fullscreenInput.dispatchEvent(new Event('input'));
@@ -618,7 +626,7 @@ function closeFullscreenModal() {
 function showLoadingOverlay() {
     const loadingOverlay = document.getElementById('loading-overlay');
     loadingOverlay.style.display = 'flex';
-    
+
     // Animate loading icon
     const loadingSpinner = loadingOverlay.querySelector('.loading-spinner i');
     loadingSpinner.style.animation = 'pulse 2s ease-in-out infinite';
@@ -632,12 +640,14 @@ function hideLoadingOverlay() {
 function handleSignOut() {
     if (confirm('Are you sure you want to sign out?')) {
         showNotification('Signing out...', 'info');
-        
+        // Clear user data from localStorage
+        localStorage.removeItem('user');
+
         // Simulate sign out
         setTimeout(() => {
             // Redirect to login page
-            window.location.href = 'auth.html';
-        }, 1500);
+            window.location.href = 'http://localhost:5500';
+        }, 500);
     }
 }
 
@@ -646,15 +656,15 @@ function showNotification(message, type = 'info') {
     // Remove existing notifications
     const existingNotifications = document.querySelectorAll('.notification');
     existingNotifications.forEach(notification => notification.remove());
-    
+
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
-    
+
     let icon = 'info';
     if (type === 'success') icon = 'check-circle';
     else if (type === 'error') icon = 'alert-circle';
     else if (type === 'warning') icon = 'alert-triangle';
-    
+
     notification.innerHTML = `
         <div class="notification-content">
             <i data-lucide="${icon}" class="notification-icon"></i>
@@ -664,7 +674,7 @@ function showNotification(message, type = 'info') {
             <i data-lucide="x"></i>
         </button>
     `;
-    
+
     // Style the notification
     notification.style.cssText = `
         position: fixed;
@@ -685,24 +695,24 @@ function showNotification(message, type = 'info') {
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border-left: 4px solid ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6'};
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Initialize icons
     lucide.createIcons();
-    
+
     // Show notification
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
+
     // Close button functionality
     const closeBtn = notification.querySelector('.notification-close');
     closeBtn.addEventListener('click', () => {
         notification.style.transform = 'translateX(100%)';
         setTimeout(() => notification.remove(), 400);
     });
-    
+
     // Auto-hide after 5 seconds
     setTimeout(() => {
         if (notification.parentNode) {
@@ -713,19 +723,19 @@ function showNotification(message, type = 'info') {
 }
 
 // Keyboard Shortcuts
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     // Ctrl/Cmd + K to focus search (new chat)
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         document.getElementById('message-input').focus();
     }
-    
+
     // Ctrl/Cmd + N for new chat
     if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
         e.preventDefault();
         startNewChat();
     }
-    
+
     // Ctrl/Cmd + B to toggle sidebar
     if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
         e.preventDefault();
@@ -749,7 +759,7 @@ function debounce(func, wait) {
 // Auto-save functionality (optional)
 function initAutoSave() {
     const messageInput = document.getElementById('message-input');
-    
+
     const debouncedSave = debounce((value) => {
         if (value.trim()) {
             localStorage.setItem('stratintel_draft', value);
@@ -757,11 +767,11 @@ function initAutoSave() {
             localStorage.removeItem('stratintel_draft');
         }
     }, 1000);
-    
-    messageInput.addEventListener('input', function() {
+
+    messageInput.addEventListener('input', function () {
         debouncedSave(this.value);
     });
-    
+
     // Restore draft on load
     const savedDraft = localStorage.getItem('stratintel_draft');
     if (savedDraft) {
@@ -770,32 +780,30 @@ function initAutoSave() {
     }
 }
 
-// Initialize auto-save (uncomment if needed)
-// initAutoSave();
-
-// Analytics tracking (placeholder)
-function trackEvent(eventName, properties = {}) {
-    console.log('Track event:', eventName, properties);
-    // Integrate with your analytics service here
+let profileInitials = document.querySelector('.profile-st-letter');
+let profileInitials2 = document.querySelector('.profile-st-letter2');
+let profileName = document.querySelector('.profile-name');
+let profileMail = document.querySelector('.profile-email');
+async function updateProfileInitials() {
+    let user = localStorage.getItem('user');
+    if (!user){
+        console.log('No user found');
+        return;
+    }
+    user = JSON.parse(user);
+    let profile_data_request = await fetch('http://localhost:3000/api/profile/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mobile: user.mobile})
+    });
+    let profile_data = await profile_data_request.json();
+    console.log(profile_data);
+    profileInitials.textContent = profile_data.username.slice(0, 2).toUpperCase();
+    profileInitials2.textContent = profile_data.username.slice(0, 2).toUpperCase();
+    profileName.textContent = profile_data.username;
+    profileMail.textContent = profile_data.mobile;
 }
 
-// Track user interactions
-document.addEventListener('click', function(e) {
-    if (e.target.closest('.suggestion-card')) {
-        trackEvent('suggestion_card_click', { suggestion: e.target.closest('.suggestion-card').dataset.suggestion });
-    }
-    
-    if (e.target.closest('.send-btn')) {
-        trackEvent('message_sent', { input_method: 'button' });
-    }
-    
-    if (e.target.closest('.new-chat-btn')) {
-        trackEvent('new_chat_started');
-    }
-});
-
-console.log('🧠 StratIntel AI Research Assistant Ready!');
-console.log('Keyboard shortcuts:');
-console.log('• Ctrl/Cmd + K: Focus input');
-console.log('• Ctrl/Cmd + N: New chat');
-console.log('• Ctrl/Cmd + B: Toggle sidebar');
+updateProfileInitials();

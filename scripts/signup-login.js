@@ -305,33 +305,33 @@ async function handleLogin(e) {
         const result = await response.json();
         console.log(result);
 
-        if(result.success && result.message=='login successfully'){
+        if (result.success && result.message == 'login successfully') {
+            localStorage.setItem('user', JSON.stringify(loginData));
             location.href = 'home.html';
         }
-        else if(result.success==false && result.message=='password incorrect')
-        {
-            msg=document.querySelector('#login-message'),
-            msg.innerHTML='please enter correct password';
-            document.querySelector('.login-msg').style.display='flex';
+        else if (result.success == false && result.message == 'password incorrect') {
+            msg = document.querySelector('#login-message'),
+                msg.innerHTML = 'please enter correct password';
+            document.querySelector('.login-msg').style.display = 'flex';
             setTimeout(() => {
-                document.querySelector('.login-msg').style.display='none'; 
+                document.querySelector('.login-msg').style.display = 'none';
             }, 3500);
         }
-        else if (result.message=='some error occoured'){
-            msg=document.querySelector('#login-message')
-            msg.innerHTML='internal server error please try again after sometime'; 
-            document.querySelector('.login-msg').style.display='flex';
+        else if (result.message == 'some error occoured') {
+            msg = document.querySelector('#login-message')
+            msg.innerHTML = 'internal server error please try again after sometime';
+            document.querySelector('.login-msg').style.display = 'flex';
             setTimeout(() => {
-                document.querySelector('.login-msg').style.display='none'; 
+                document.querySelector('.login-msg').style.display = 'none';
             }, 3500);
 
         }
-        else if (result.message==`Account doesn't exsist`){
-            msg=document.querySelector('#login-message')
-            msg.innerHTML='Account not found'; 
-            document.querySelector('.login-msg').style.display='flex';
+        else if (result.message == `Account doesn't exsist`) {
+            msg = document.querySelector('#login-message')
+            msg.innerHTML = 'Account not found';
+            document.querySelector('.login-msg').style.display = 'flex';
             setTimeout(() => {
-                document.querySelector('.login-msg').style.display='none'; 
+                document.querySelector('.login-msg').style.display = 'none';
             }, 3500);
 
         }
@@ -384,26 +384,27 @@ async function handleSignup(e) {
         const result = await response.json();
         console.log(result);
 
-        if(result.success && result.message=='user created successfully'){
+        if (result.success && result.message == 'user created successfully') {
+            localStorage.setItem('user', JSON.stringify(signupData));
             location.href = 'home.html';
         }
-        else if(result.success== false && result.message=='user already exist' ){
-            msg=document.querySelector('#message')
-          
-            msg.innerHTML='Account already exist with this mobile number';
-            
-            document.querySelector('.msg').style.display='flex';
+        else if (result.success == false && result.message == 'user already exist') {
+            msg = document.querySelector('#message')
+
+            msg.innerHTML = 'Account already exist with this mobile number';
+
+            document.querySelector('.msg').style.display = 'flex';
             setTimeout(() => {
-                document.querySelector('.msg').style.display='none'; 
+                document.querySelector('.msg').style.display = 'none';
             }, 3500);
 
         }
-        else{
-            msg=document.querySelector('#message')
-            msg.innerHTML='internal server error please try again after sometime'; 
-            document.querySelector('.msg').style.display='flex';
+        else {
+            msg = document.querySelector('#message')
+            msg.innerHTML = 'internal server error please try again after sometime';
+            document.querySelector('.msg').style.display = 'flex';
             setTimeout(() => {
-                document.querySelector('.msg').style.display='none'; 
+                document.querySelector('.msg').style.display = 'none';
             }, 3500);
 
         }
