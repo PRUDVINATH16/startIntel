@@ -115,7 +115,8 @@ function initProfileDropdown() {
             // Handle different actions
             switch (action) {
                 case 'Profile Settings':
-                    showNotification('Profile settings coming soon!', 'info');
+                    
+                showNotification('Profile settings coming soon!', 'info');
                     break;
                 case 'Billing & Plans':
                     showNotification('Billing section coming soon!', 'info');
