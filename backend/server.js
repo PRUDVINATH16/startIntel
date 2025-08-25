@@ -6,6 +6,7 @@ const cors = require('cors');
 const port = process.env.PORT || 3000;
 const authroutes = require("./routes/auth-routes");
 const getUserByMobile = require('./profile');
+const researchRoutes = require('./routes/research-routes');
 
 app.use(cors({
     origin: true,
@@ -13,12 +14,12 @@ app.use(cors({
 }));
 
 connect();
-
-app.use(express.json())
+app.use(express.json());
 
 app.use('/api/auth', authroutes);
 app.use('/api/profile', getUserByMobile);
+app.use('/api/research', researchRoutes);  // 🔥 New
 
 app.listen(port, () => {
     console.log(`the server is running ${port}`);
-})
+});

@@ -1,0 +1,33 @@
+<input type="text" id="idea" placeholder="Enter your startup idea">
+<button onclick="getCompetitorAnalysis()">Get Competitor Analysis</button>
+<div id="result"></div>
+
+<script>
+  const API_BASE = "http://localhost:3000/api/research";
+
+  async function getCompetitorAnalysis() {
+    const idea = document.getElementById("idea").value.trim();
+    if (!idea) {
+      alert("Please enter an idea");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/competitors`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idea }) // 👈 Send your idea here
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      console.log("🔥 Competitor Analysis:", data);
+      alert("Check console for output!");
+      document.getElementById("result").innerText = JSON.stringify(data, null, 2);
+    } catch (err) {
+      console.error(err);
+      alert("Error fetching competitor analysis");
+    }
+  }
+</script>
