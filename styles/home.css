@@ -1,31 +1,3 @@
-/* Custom Color Palette - Warm Brown/Beige Theme */
-:root {
-  --dark-brown: #2A1F1A;
-  --soft-brown: #8B6F5E;
-  --golden-beige: #CBAD8D;
-  --light-brown: #D1C7BD;
-  --sand: #EBE3DB;
-  --off-white: #F1EDE6;
-
-  /* Enhanced Text Colors for Better Visibility */
-  --text-primary: #1A1A1A;
-  --text-secondary: #2D2D2D;
-  --text-muted: #4A4A4A;
-  --text-light: #666666;
-
-  /* Gradients */
-  --gradient-3: linear-gradient(45deg, var(--soft-brown), var(--sand));
-  --gradient-4: linear-gradient(to bottom right, var(--light-brown), var(--off-white));
-  --gradient-5: radial-gradient(circle at center, var(--golden-beige), var(--soft-brown));
-  --gradient-7: linear-gradient(to right, var(--off-white), var(--golden-beige), var(--soft-brown));
-  --gradient-8: linear-gradient(160deg, var(--light-brown), var(--golden-beige), var(--dark-brown));
-  --gradient-9: radial-gradient(circle at top right, var(--soft-brown), var(--light-brown), var(--off-white));
-
-  /* Sidebar */
-  --sidebar-width: 280px;
-  --sidebar-collapsed-width: 60px;
-}
-
 /* Reset and Base Styles */
 * {
   margin: 0;
@@ -554,19 +526,6 @@ body {
   justify-self: center;
 }
 
-.welcome-icon {
-  width: 4rem;
-  height: 4rem;
-  background: linear-gradient(135deg, var(--golden-beige), var(--dark-brown));
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--off-white);
-  margin: 0 auto 2rem;
-  box-shadow: 0 8px 25px rgba(42, 31, 26, 0.3);
-}
-
 .welcome-title {
   font-size: 2.5rem;
   font-weight: 800;
@@ -580,7 +539,7 @@ body {
 .welcome-subtitle {
   font-size: 1.125rem;
   color: var(--text-secondary);
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   line-height: 1.6;
 }
 
@@ -1021,6 +980,22 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 3000;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.go-to-result-page{
+  color: white;
+  padding: 1.2rem 1.5rem;
+  background: #cfaf8dcb;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.go-to-result-page:hover{
+  background: #cfaf8d7b;
 }
 
 .loading-content {

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Out - StratIntel</title>
+    <meta name="description" content="Sign out confirmation page for StratIntel">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        :root {
+            --dark-brown: #2A1F1A;
+            --soft-brown: #8B6F5E;
+            --golden-beige: #CBAD8D;
+            --light-brown: #D1C7BD;
+            --sand: #EBE3DB;
+            --off-white: #F1EDE6;
+
+            /* Enhanced Text Colors for Better Visibility */
+            --text-primary: #1A1A1A;
+            --text-secondary: #2D2D2D;
+            --text-muted: #4A4A4A;
+            --text-light: #666666;
+
+            /* Gradients */
+            --gradient-3: linear-gradient(45deg, var(--soft-brown), var(--sand));
+            --gradient-4: linear-gradient(to bottom right, var(--light-brown), var(--off-white));
+            --gradient-5: radial-gradient(circle at center, var(--golden-beige), var(--soft-brown));
+            --gradient-7: linear-gradient(to right, var(--off-white), var(--golden-beige), var(--soft-brown));
+            --gradient-8: linear-gradient(160deg, var(--light-brown), var(--golden-beige), var(--dark-brown));
+            --gradient-9: radial-gradient(circle at top right, var(--soft-brown), var(--light-brown), var(--off-white));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gradient-8);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Elements */
+        .background-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(203, 173, 141, 0.15);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bg-element-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            background: rgba(139, 111, 94, 0.1);
+        }
+
+        .bg-element-2 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+            background: rgba(209, 199, 189, 0.12);
+        }
+
+        .bg-element-3 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+            background: rgba(235, 227, 219, 0.08);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Main Container */
+        .signout-container {
+            background: rgba(241, 237, 230, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 25px 50px rgba(42, 31, 26, 0.15);
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(203, 173, 141, 0.3);
+        }
+
+        /* Brand Section */
+        .brand-section {
+            margin-bottom: 32px;
+        }
+
+        .brand-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-5);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 32px rgba(139, 111, 94, 0.3);
+        }
+
+        .brand-icon i {
+            color: var(--off-white);
+            width: 32px;
+            height: 32px;
+        }
+
+        .brand-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .brand-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Content Section */
+        .signout-content {
+            margin-bottom: 40px;
+        }
+
+        .signout-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #D2691E 0%, #A0522D 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 32px rgba(210, 105, 30, 0.3);
+        }
+
+        .signout-icon i {
+            color: var(--off-white);
+            width: 36px;
+            height: 36px;
+        }
+
+        .signout-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .signout-message {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Buttons Section */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #D2691E 0%, #A0522D 100%);
+            color: var(--off-white);
+            box-shadow: 0 4px 16px rgba(210, 105, 30, 0.3);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(210, 105, 30, 0.4);
+        }
+
+        .btn-yes:active {
+            transform: translateY(0);
+        }
+
+        .btn-no {
+            background: rgba(139, 111, 94, 0.1);
+            color: var(--soft-brown);
+            border: 2px solid var(--soft-brown);
+            box-shadow: 0 4px 16px rgba(139, 111, 94, 0.1);
+        }
+
+        .btn-no:hover {
+            background: var(--soft-brown);
+            color: var(--off-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(139, 111, 94, 0.3);
+        }
+
+        .btn-no:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .signout-container {
+                padding: 32px 24px;
+                margin: 16px;
+            }
+
+            .signout-title {
+                font-size: 24px;
+            }
+
+            .signout-message {
+                font-size: 14px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 14px 24px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading .btn {
+            position: relative;
+        }
+
+        .loading .btn::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Additional decorative elements */
+        .signout-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-7);
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="background-elements">
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+        <div class="bg-element bg-element-3"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="signout-container">
+        <!-- Brand Section -->
+        <div class="brand-section">
+            <div class="brand-icon">
+                <i data-lucide="brain"></i>
+            </div>
+            <h1 class="brand-title">StratIntel</h1>
+            <p class="brand-subtitle">AI-Powered Business Research</p>
+        </div>
+
+        <!-- Content Section -->
+        <div class="signout-content">
+            <div class="signout-icon">
+                <i data-lucide="log-out"></i>
+            </div>
+            <h2 class="signout-title">Do you want to sign out?</h2>
+            <p class="signout-message">
+                You will be logged out of your StratIntel account and redirected to the login page. 
+                Any unsaved work will be lost.
+            </p>
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="button-group">
+            <button class="btn btn-yes" id="signout-yes">
+                <i data-lucide="check"></i>
+                <span>Yes, Sign Out</span>
+            </button>
+            <button class="btn btn-no" id="signout-no">
+                <i data-lucide="x"></i>
+                <span>No, Stay Logged In</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Button event handlers
+        document.getElementById('signout-yes').addEventListener('click', function() {
+            // Add loading state
+            document.body.classList.add('loading');
+            
+            // Simulate sign out process
+            setTimeout(() => {
+                alert('You have been signed out successfully!');
+                // In a real application, this would redirect to login page
+                // window.location.href = 'login.html';
+                document.body.classList.remove('loading');
+            }, 1500);
+        });
+
+        document.getElementById('signout-no').addEventListener('click', function() {
+            // Add loading state
+            document.body.classList.add('loading');
+            
+            // Simulate staying logged in
+            setTimeout(() => {
+                alert('You will remain logged in.');
+                // In a real application, this would redirect back to the main app
+                // window.location.href = 'home.html';
+                document.body.classList.remove('loading');
+            }, 1000);
+        });
+
+        // Add keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('signout-yes').click();
+            } else if (e.key === 'Escape') {
+                document.getElementById('signout-no').click();
+            }
+        });
+    </script>
+</body>
+</html>
+

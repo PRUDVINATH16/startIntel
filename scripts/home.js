@@ -115,8 +115,8 @@ function initProfileDropdown() {
             // Handle different actions
             switch (action) {
                 case 'Profile Settings':
-                    
-                showNotification('Profile settings coming soon!', 'info');
+
+                    showNotification('Profile settings coming soon!', 'info');
                     break;
                 case 'Billing & Plans':
                     showNotification('Billing section coming soon!', 'info');
@@ -219,14 +219,6 @@ function initChatFunctionality() {
     // New chat button
     newChatBtn.addEventListener('click', function () {
         startNewChat();
-    });
-
-    // Chat item clicks
-    chatItems.forEach(item => {
-        item.addEventListener('click', function () {
-            const chatTitle = this.querySelector('.chat-title').textContent;
-            loadChat(chatTitle);
-        });
     });
 }
 
@@ -337,22 +329,19 @@ function initMobileResponsive() {
     }
 }
 
+const SECRET_KEY = "mySuperSecretKey123"; // Keep this same everywhere
+
+function encryptData(data) {
+    return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
+}
+
 // Core Functions
-function sendMessage() {
+async function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const message = messageInput.value.trim();
+    const idea = message;
 
     if (!message) return;
-
-    // Hide welcome screen and show chat
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const chatMessages = document.getElementById('chat-messages');
-
-    welcomeScreen.style.display = 'none';
-    chatMessages.style.display = 'flex';
-
-    // Add user message
-    addMessage(message, 'user');
 
     // Clear input
     messageInput.value = '';
@@ -362,197 +351,86 @@ function sendMessage() {
     // Show loading
     showLoadingOverlay();
 
-    // Simulate AI response
-    setTimeout(() => {
+    let data = await analyzeIdea(idea);
+    if (data.raw == 'Yes') {
+        let researchData = await sendData(idea);
+        let user = localStorage.getItem('user');
+        user = JSON.parse(user);
+
+        if (user) {
+            const mobile = user.mobile;
+            const result = researchData;
+
+            console.log(mobile, result);
+
+            await fetch("http://localhost:3000/api/report/save-report", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mobile, idea, result }),
+            });
+
+            hideLoadingOverlay();
+
+            // 🔥 Encrypt idea and send via GET param
+            const encryptedIdea = encodeURIComponent(encryptData({ idea }));
+            location.href = `results.html?data=${encryptedIdea}`;
+        } else {
+            console.log('user not found');
+        }
+    } else {
         hideLoadingOverlay();
-        addMessage(generateAIResponse(message), 'assistant');
-
-        // Add to recent chats
-        addToRecentChats(message);
-    }, 2000 + Math.random() * 2000);
+        showNotification("You have entered an invalid idea!", "info");
+        console.log("Idea not accepted");
+    }
 }
 
-function addMessage(content, sender) {
-    const chatMessages = document.getElementById('chat-messages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${sender}`;
-
-    const avatar = sender === 'user' ? 'JD' : '🧠';
-    const avatarClass = sender === 'user' ? 'user' : 'assistant';
-
-    messageDiv.innerHTML = `
-        <div class="message-avatar">${avatar}</div>
-        <div class="message-content">
-            <div class="message-bubble">${content}</div>
-        </div>
-    `;
-
-    chatMessages.appendChild(messageDiv);
-
-    // Scroll to bottom
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    // Animate message in
-    messageDiv.style.opacity = '0';
-    messageDiv.style.transform = 'translateY(20px)';
-
-    requestAnimationFrame(() => {
-        messageDiv.style.transition = 'all 0.3s ease';
-        messageDiv.style.opacity = '1';
-        messageDiv.style.transform = 'translateY(0)';
+async function analyzeIdea(idea) {
+    let response = await fetch('http://localhost:3000/api/research/analyze', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ idea })
     });
+
+    let data = await response.json();
+    return data;
 }
 
-function generateAIResponse(userMessage) {
-    // Simple AI response simulation based on keywords
-    const responses = {
-        'food delivery': `Great idea! The food delivery market is experiencing significant growth. Here's my analysis:
+async function sendData(idea) {
+    const endpoints = [
+        "competitors",
+        "market",
+        "pricing",
+        "success",
+        "audience",
+        "tech",
+        "time-budget",
+        "team",
+        "roadmap"
+    ];
 
-**Market Opportunity**: The global food delivery market is valued at $150+ billion and growing at 11% annually.
+    // Map endpoints to fetch promises
+    const requests = endpoints.map(async (endpoint) => {
+        const res = await fetch(`http://localhost:3000/api/research/${endpoint}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idea }),
+        });
+        const data = await res.json();
+        return { endpoint, data }; // Keep endpoint name
+    });
 
-**Key Insights**:
-• High demand in urban areas, especially post-pandemic
-• Competition from UberEats, DoorDash, Grubhub
-• Focus on local restaurants and unique cuisine
-• Consider delivery time optimization and driver management
+    // Wait for all in parallel
+    const results = await Promise.all(requests);
 
-**Recommendations**:
-1. Start with a specific geographic area
-2. Partner with local restaurants first
-3. Develop a strong mobile app experience
-4. Consider subscription models for frequent users
-
-Would you like me to dive deeper into any specific aspect?`,
-
-        'saas': `Excellent choice! SaaS project management tools have a robust market. Here's my analysis:
-
-**Market Analysis**: The project management software market is worth $6.68 billion and growing at 10.67% CAGR.
-
-**Competitive Landscape**:
-• Major players: Asana, Trello, Monday.com, Jira
-• Opportunity in niche markets and specific industries
-• Focus on user experience and integration capabilities
-
-**Success Factors**:
-1. Identify underserved market segments
-2. Develop intuitive user interface
-3. Strong integration ecosystem
-4. Freemium pricing model
-5. Excellent customer support
-
-**Next Steps**: Define your unique value proposition and target specific user personas.
-
-What specific industry or user type are you targeting?`,
-
-        'e-commerce': `Handmade products e-commerce is a thriving niche! Here's my comprehensive analysis:
-
-**Market Potential**: The global handicrafts market is valued at $718 billion with strong online growth.
-
-**Competitive Analysis**:
-• Etsy dominates with 90+ million active buyers
-• Amazon Handmade and Facebook Marketplace are growing
-• Opportunity for specialized, curated platforms
-
-**Key Success Factors**:
-1. Strong seller onboarding and support
-2. Quality assurance and authenticity verification
-3. Excellent search and discovery features
-4. Mobile-optimized shopping experience
-5. Community building around makers
-
-**Recommendations**: Focus on a specific craft category or geographic region initially.
-
-Which type of handmade products are you most interested in featuring?`,
-
-        'fintech': `FinTech payment solutions are hot! Here's my detailed market analysis:
-
-**Market Size**: Mobile payment market is $1.48 trillion and growing at 33.8% CAGR.
-
-**Key Trends**:
-• Contactless payments surge post-COVID
-• Buy-now-pay-later (BNPL) integration
-• Cryptocurrency payment acceptance
-• Cross-border payment solutions
-
-**Competitive Landscape**:
-• PayPal, Square, Stripe dominate
-• Emerging players: Klarna, Afterpay, Zelle
-• Opportunity in B2B payments and niche markets
-
-**Critical Considerations**:
-1. Regulatory compliance (PCI DSS, PSD2)
-2. Security and fraud prevention
-3. Integration ease for merchants
-4. Transaction fee competitiveness
-
-What specific payment problem are you looking to solve?`
-    };
-
-    // Find matching response based on keywords
-    const lowerMessage = userMessage.toLowerCase();
-
-    if (lowerMessage.includes('food') || lowerMessage.includes('delivery') || lowerMessage.includes('restaurant')) {
-        return responses['food delivery'];
-    } else if (lowerMessage.includes('saas') || lowerMessage.includes('project management') || lowerMessage.includes('software')) {
-        return responses['saas'];
-    } else if (lowerMessage.includes('e-commerce') || lowerMessage.includes('handmade') || lowerMessage.includes('marketplace')) {
-        return responses['e-commerce'];
-    } else if (lowerMessage.includes('fintech') || lowerMessage.includes('payment') || lowerMessage.includes('financial')) {
-        return responses['fintech'];
+    // Build final object WITHOUT reduce
+    const research = {};
+    for (const result of results) {
+        research[result.endpoint] = result.data;
     }
 
-    // Default response
-    return `Thank you for sharing your business idea! I'm analyzing the following aspects:
-
-**Initial Assessment**:
-• Market size and growth potential
-• Competitive landscape analysis
-• Target audience identification
-• Revenue model opportunities
-• Technical requirements
-• Go-to-market strategy
-
-**Key Questions to Consider**:
-1. What specific problem does your idea solve?
-2. Who is your target customer?
-3. What makes your solution unique?
-4. How do you plan to monetize?
-5. What's your initial budget and timeline?
-
-I'd be happy to provide more detailed analysis once you share more specifics about your industry, target market, or business model. What aspect would you like to explore first?`;
-}
-
-function addToRecentChats(message) {
-    const recentChats = document.getElementById('recent-chats');
-    const chatTitle = message.length > 30 ? message.substring(0, 30) + '...' : message;
-
-    // Create new chat item
-    const chatItem = document.createElement('div');
-    chatItem.className = 'chat-item';
-    chatItem.innerHTML = `
-        <i data-lucide="message-circle"></i>
-        <span class="chat-title">${chatTitle}</span>
-        <button class="chat-options">
-            <i data-lucide="more-horizontal"></i>
-        </button>
-    `;
-
-    // Add to top of recent chats
-    recentChats.insertBefore(chatItem, recentChats.firstChild);
-
-    // Limit to 10 recent chats
-    const chatItems = recentChats.querySelectorAll('.chat-item');
-    if (chatItems.length > 10) {
-        recentChats.removeChild(chatItems[chatItems.length - 1]);
-    }
-
-    // Re-initialize icons
-    lucide.createIcons();
-
-    // Add click handler
-    chatItem.addEventListener('click', function () {
-        loadChat(chatTitle);
-    });
+    return research;
 }
 
 function startNewChat() {
@@ -571,26 +449,6 @@ function startNewChat() {
     messageInput.dispatchEvent(new Event('input'));
 
     showNotification('Started new chat session', 'success');
-}
-
-function loadChat(chatTitle) {
-    showNotification(`Loading chat: ${chatTitle}`, 'info');
-
-    // Simulate loading a previous chat
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const chatMessages = document.getElementById('chat-messages');
-
-    welcomeScreen.style.display = 'none';
-    chatMessages.style.display = 'flex';
-    chatMessages.innerHTML = '';
-
-    // Add some sample messages
-    setTimeout(() => {
-        addMessage(`I want to research ${chatTitle.replace('...', '')}`, 'user');
-        setTimeout(() => {
-            addMessage(generateAIResponse(chatTitle), 'assistant');
-        }, 1000);
-    }, 500);
 }
 
 function openFullscreenModal() {
@@ -629,8 +487,8 @@ function showLoadingOverlay() {
     loadingOverlay.style.display = 'flex';
 
     // Animate loading icon
-    const loadingSpinner = loadingOverlay.querySelector('.loading-spinner i');
-    loadingSpinner.style.animation = 'pulse 2s ease-in-out infinite';
+    /* const loadingSpinner = document.querySelector('.loading-spinner>i');
+    loadingSpinner.style.animation = 'pulse 2s ease-in-out infinite'; */
 }
 
 function hideLoadingOverlay() {
@@ -661,10 +519,19 @@ function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
 
+    // Define icon and color based on type
     let icon = 'info';
-    if (type === 'success') icon = 'check-circle';
-    else if (type === 'error') icon = 'alert-circle';
-    else if (type === 'warning') icon = 'alert-triangle';
+    let color = '#3b82f6'; // Default info blue
+    if (type === 'success') {
+        icon = 'check-circle';
+        color = '#10b981'; // Green
+    } else if (type === 'error') {
+        icon = 'alert-circle';
+        color = '#ef4444'; // Red
+    } else if (type === 'warning') {
+        icon = 'alert-triangle';
+        color = '#f59e0b'; // Amber
+    }
 
     notification.innerHTML = `
         <div class="notification-content">
@@ -676,109 +543,105 @@ function showNotification(message, type = 'info') {
         </button>
     `;
 
-    // Style the notification
+    // --- REVAMPED STYLES ---
     notification.style.cssText = `
         position: fixed;
         top: 2rem;
         right: 2rem;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 1rem;
-        padding: 1rem 1.5rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(15px) saturate(150%);
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 0px 40px -10px ${color};
         z-index: 1000;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 1rem;
-        max-width: 400px;
-        transform: translateX(100%);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border-left: 4px solid ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6'};
+        max-width: 380px;
+        width: calc(100% - 4rem);
+        opacity: 0;
+        transform: translateX(calc(100% + 2rem)) rotate(3deg);
+        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+        -webkit-backdrop-filter: blur(15px) saturate(150%);
     `;
+
+    // Style inner elements
+    const contentEl = notification.querySelector('.notification-content');
+    contentEl.style.cssText = `
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    `;
+
+    const iconEl = notification.querySelector('.notification-icon');
+    iconEl.style.color = color;
+
+    const textEl = notification.querySelector('.notification-text');
+    textEl.style.cssText = `
+        font-weight: 500;
+        color: #333;
+        line-height: 1.4;
+    `;
+
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.style.cssText = `
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        opacity: 0.5;
+        padding: 0.25rem;
+        border-radius: 99px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    closeBtn.onmouseover = () => {
+        closeBtn.style.opacity = '1';
+        closeBtn.style.background = 'rgba(0, 0, 0, 0.1)';
+    };
+    closeBtn.onmouseout = () => {
+        closeBtn.style.opacity = '0.5';
+        closeBtn.style.background = 'transparent';
+    };
+    // --- END OF STYLES ---
 
     document.body.appendChild(notification);
 
-    // Initialize icons
+    // Initialize Lucide icons
     lucide.createIcons();
+    // Ensure close icon is small and subtle
+    const closeIcon = closeBtn.querySelector('svg');
+    if (closeIcon) {
+        closeIcon.style.width = '16px';
+        closeIcon.style.height = '16px';
+    }
+
+
+    // Function to close the notification
+    const closeNotification = () => {
+        if (notification.parentNode) {
+            notification.style.opacity = '0';
+            notification.style.transform = `translateX(calc(100% + 2rem)) rotate(3deg)`;
+            setTimeout(() => notification.remove(), 600);
+        }
+    };
 
     // Show notification
     setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0) rotate(0deg)';
     }, 100);
 
     // Close button functionality
-    const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.addEventListener('click', () => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => notification.remove(), 400);
-    });
+    closeBtn.addEventListener('click', closeNotification);
 
     // Auto-hide after 5 seconds
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => notification.remove(), 400);
-        }
-    }, 5000);
-}
+    const autoHideTimeout = setTimeout(closeNotification, 5000);
 
-// Keyboard Shortcuts
-document.addEventListener('keydown', function (e) {
-    // Ctrl/Cmd + K to focus search (new chat)
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        e.preventDefault();
-        document.getElementById('message-input').focus();
-    }
-
-    // Ctrl/Cmd + N for new chat
-    if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
-        e.preventDefault();
-        startNewChat();
-    }
-
-    // Ctrl/Cmd + B to toggle sidebar
-    if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
-        e.preventDefault();
-        document.getElementById('sidebar-toggle').click();
-    }
-});
-
-// Performance Optimization
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Auto-save functionality (optional)
-function initAutoSave() {
-    const messageInput = document.getElementById('message-input');
-
-    const debouncedSave = debounce((value) => {
-        if (value.trim()) {
-            localStorage.setItem('stratintel_draft', value);
-        } else {
-            localStorage.removeItem('stratintel_draft');
-        }
-    }, 1000);
-
-    messageInput.addEventListener('input', function () {
-        debouncedSave(this.value);
-    });
-
-    // Restore draft on load
-    const savedDraft = localStorage.getItem('stratintel_draft');
-    if (savedDraft) {
-        messageInput.value = savedDraft;
-        messageInput.dispatchEvent(new Event('input'));
-    }
+    // Optional: Pause auto-hide on hover
+    notification.addEventListener('mouseover', () => clearTimeout(autoHideTimeout));
 }
 
 let profileInitials = document.querySelector('.profile-st-letter');
@@ -787,7 +650,7 @@ let profileName = document.querySelector('.profile-name');
 let profileMail = document.querySelector('.profile-email');
 async function updateProfileInitials() {
     let user = localStorage.getItem('user');
-    if (!user){
+    if (!user) {
         console.log('No user found');
         return;
     }
@@ -797,10 +660,9 @@ async function updateProfileInitials() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ mobile: user.mobile})
+        body: JSON.stringify({ mobile: user.mobile })
     });
     let profile_data = await profile_data_request.json();
-    console.log(profile_data);
     profileInitials.textContent = profile_data.username.slice(0, 2).toUpperCase();
     profileInitials2.textContent = profile_data.username.slice(0, 2).toUpperCase();
     profileName.textContent = profile_data.username;

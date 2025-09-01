@@ -9,7 +9,7 @@ from waitress import serve
 from prompts import (
     COMPETITOR_PROMPT, MARKET_PROMPT, PRICING_PROMPT,
     SUCCESS_PROMPT, AUDIENCE_PROMPT, TECH_REQS_PROMPT,
-    TIME_BUDGET_PROMPT, TEAM_BUILD_PROMPT, ROADMAP_PROMPT
+    TIME_BUDGET_PROMPT, TEAM_BUILD_PROMPT, ROADMAP_PROMPT, ANALYZE_PROMPT
 )
 
 load_dotenv()
@@ -64,6 +64,13 @@ def run_prompt(idea: str, prompt: str):
     result = agent.kickoff(full_prompt)
     return extract_json(str(result))
 
+@app.post("/analyze")
+def analyze():
+    idea = (request.get_json() or {}).get("idea", "").strip()
+    if not idea:
+        return jsonify({"error": "Missing 'idea' field"}), 400
+    return jsonify(run_prompt(idea, ANALYZE_PROMPT))
+
 @app.post("/competitors")
 def competitors():
     idea = (request.get_json() or {}).get("idea", "").strip()
@@ -111,7 +118,9 @@ def time_budget():
     idea = (request.get_json() or {}).get("idea", "").strip()
     if not idea:
         return jsonify({"error": "Missing 'idea' field"}), 400
-    return jsonify(run_prompt(idea, TIME_BUDGET_PROMPT))
+    res = jsonify(run_prompt(idea, TIME_BUDGET_PROMPT))
+    print(res)
+    return res
 
 @app.post("/team")
 def team():

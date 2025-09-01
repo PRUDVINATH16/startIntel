@@ -17,6 +17,11 @@ async function callPython(path, body) {
 }
 
 // Controllers
+exports.analyzeIdea = async (req, res) => {
+  const result = await callPython("/analyze", req.body);
+  res.json(result);
+};
+
 exports.getCompetitors = async (req, res) => {
   const result = await callPython("/competitors", req.body);
   res.json(result);
@@ -48,7 +53,7 @@ exports.getTech = async (req, res) => {
 };
 
 exports.getTimeline = async (req, res) => {
-  const result = await callPython("/timeline", req.body);
+  const result = await callPython("/time-budget", req.body);
   res.json(result);
 };
 

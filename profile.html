@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Settings</title>
+  <style>
+    :root {
+      --dark-brown: #2A1F1A;
+      --soft-brown: #8B6F5E;
+      --golden-beige: #CBAD8D;
+      --light-brown: #D1C7BD;
+      --sand: #EBE3DB;
+      --off-white: #F1EDE6;
+
+      --text-primary: #1A1A1A;
+      --text-secondary: #2D2D2D;
+      --text-muted: #4A4A4A;
+
+      --gradient-7: linear-gradient(to right, var(--off-white), var(--golden-beige), var(--soft-brown));
+      --gradient-8: linear-gradient(160deg, var(--light-brown), var(--golden-beige), var(--dark-brown));
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--gradient-8);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .profile-card {
+      background: var(--off-white);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 400px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border: 1px solid var(--light-brown);
+    }
+
+    .avatar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar-container  .user_img{
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--golden-beige);
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+
+    .username-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .username-row h2 {
+      font-size: 22px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .username-row input {
+      font-size: 22px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--light-brown);
+      outline: none;
+      background: var(--sand);
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    #edit {
+      width: 20px;
+      height: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid var(--light-brown);
+      outline: none;
+      font-size: 14px;
+      background: var(--sand);
+    }
+
+    .form-group input:focus {
+      border-color: var(--soft-brown);
+      background: var(--off-white);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--gradient-7);
+      color: var(--dark-brown);
+    }
+
+    .btn-primary:hover {
+      background: var(--gradient-8);
+      color: white;
+    }
+    #edit{
+        border:none
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <div class="avatar-container">
+      <img src="img/user.png" alt="User Avatar" class="user_img">
+      <div class="username-row">
+        <h2 id="username-display">PATNAM PRUDVI</h2>
+        <input id="username-input" type="text" value="PATNAM PRUDVI" style="display:none;">
+        <button id="edit-btn" class="icon-btn">
+          <img src="img/edit.png" id="edit" alt="edit icon">
+        </button>
+      </div>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label for="password">Change Password</label>
+        <input type="password" id="password" placeholder="Enter old password">
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="confirm-password" placeholder="Enter new password">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+
+  <script>
+    const editBtn = document.getElementById("edit-btn");
+    const usernameDisplay = document.getElementById("username-display");
+    const usernameInput = document.getElementById("username-input");
+    const editImg = document.getElementById("edit"); // ✅ fixed variable name
+
+    let editing = false;
+
+    editBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // prevent form submit
+      if (!editing) {
+        usernameDisplay.style.display = "none";
+        usernameInput.style.display = "inline-block";
+        usernameInput.focus();
+        editImg.src = "img/check-mark.png"; // ✅ change to tick icon
+        editing = true;
+      } else {
+        usernameDisplay.textContent = usernameInput.value;
+        usernameDisplay.style.display = "inline-block";
+        usernameInput.style.display = "none";
+        editImg.src = "img/edit.png"; // back to pencil icon
+        editing = false;
+      }
+    });
+  </script>
+</body>
+</html>

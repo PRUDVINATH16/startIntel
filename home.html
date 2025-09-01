@@ -1,37 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StratIntel - AI-Powered Business Research</title>
-    <meta name="description" content="Transform your startup ideas into market success with AI-powered business intelligence and research.">
+    <meta name="description"
+        content="Transform your startup ideas into market success with AI-powered business intelligence and research.">
     <meta name="keywords" content="startup research, AI business intelligence, competitor analysis, market trends">
     <meta name="author" content="StratIntel">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="StratIntel - AI-Powered Business Research">
-    <meta property="og:description" content="Transform your startup ideas into market success with AI-powered business intelligence.">
+    <meta property="og:description"
+        content="Transform your startup ideas into market success with AI-powered business intelligence.">
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="StratIntel - AI-Powered Business Research">
-    <meta name="twitter:description" content="Transform your startup ideas into market success with AI-powered business intelligence.">
-    
+    <meta name="twitter:description"
+        content="Transform your startup ideas into market success with AI-powered business intelligence.">
+
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
-    
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
+
     <!-- CSS -->
+    <link rel="stylesheet" href="styles/colors.css">
     <link rel="stylesheet" href="styles/home.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+
 </head>
+
 <body>
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
@@ -45,14 +57,14 @@
                 <i data-lucide="panel-left-close"></i>
             </button>
         </div>
-        
+
         <div class="sidebar-content">
             <!-- New Chat Button -->
             <button class="new-chat-btn" id="new-chat-btn">
                 <i data-lucide="plus"></i>
                 <span>New Chat</span>
             </button>
-            
+
             <!-- Recent Chats -->
             <div class="recent-section">
                 <h3 class="section-title">Recent</h3>
@@ -97,11 +109,11 @@
             <button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle">
                 <i data-lucide="menu"></i>
             </button>
-            
+
             <div class="header-center">
                 <h1 class="app-title">StratIntel</h1>
             </div>
-            
+
             <div class="header-right">
                 <div class="profile-section">
                     <button class="profile-btn" id="profile-btn">
@@ -110,7 +122,7 @@
                         </div>
                         <i data-lucide="chevron-down" class="profile-chevron"></i>
                     </button>
-                    
+
                     <!-- Profile Dropdown -->
                     <div class="profile-dropdown" id="profile-dropdown">
                         <div class="profile-info">
@@ -149,41 +161,43 @@
         <!-- Chat Area -->
         <div class="chat-container-main">
             <div class="chat-area" id="chat-area">
-            <!-- Welcome Screen -->
-            <div class="welcome-screen" id="welcome-screen">
-                <div class="welcome-content">
-                    <div class="welcome-icon">
-                        <i data-lucide="brain"></i>
-                    </div>
-                    <h2 class="welcome-title">Welcome to StratIntel</h2>
-                    <p class="welcome-subtitle">
-                        Your AI-powered business research assistant. Share your startup idea and get comprehensive market analysis, competitor insights, and strategic recommendations.
-                    </p>
-                    
-                    <div class="suggestion-cards">
-                        <div class="suggestion-card" data-suggestion="I want to start a food delivery app in my city">
-                            <i data-lucide="utensils"></i>
-                            <h3>Food Delivery App</h3>
-                            <p>Analyze market potential for a local food delivery service</p>
-                        </div>
-                        <div class="suggestion-card" data-suggestion="Help me research the SaaS project management tools market">
-                            <i data-lucide="kanban-square"></i>
-                            <h3>SaaS Project Management</h3>
-                            <p>Research project management software market opportunities</p>
-                        </div>
-                        <div class="suggestion-card" data-suggestion="I'm planning to launch an e-commerce platform for handmade products">
-                            <i data-lucide="shopping-bag"></i>
-                            <h3>E-commerce Platform</h3>
-                            <p>Explore handmade products marketplace potential</p>
-                        </div>
-                        <div class="suggestion-card" data-suggestion="Research the fintech mobile payment solutions market">
-                            <i data-lucide="credit-card"></i>
-                            <h3>FinTech Payment</h3>
-                            <p>Analyze mobile payment solutions and market trends</p>
+                <!-- Welcome Screen -->
+                <div class="welcome-screen" id="welcome-screen">
+                    <div class="welcome-content">
+                        <h2 class="welcome-title">Welcome to StratIntel</h2>
+                        <p class="welcome-subtitle">
+                            Your AI-powered business research assistant. Share your startup idea and get comprehensive
+                            market analysis, competitor insights, and strategic recommendations.
+                        </p>
+
+                        <div class="suggestion-cards">
+                            <div class="suggestion-card"
+                                data-suggestion="I want to start a food delivery app in my city">
+                                <i data-lucide="utensils"></i>
+                                <h3>Food Delivery App</h3>
+                                <p>Analyze market potential for a local food delivery service</p>
+                            </div>
+                            <div class="suggestion-card"
+                                data-suggestion="Help me research the SaaS project management tools market">
+                                <i data-lucide="kanban-square"></i>
+                                <h3>SaaS Project Management</h3>
+                                <p>Research project management software market opportunities</p>
+                            </div>
+                            <div class="suggestion-card"
+                                data-suggestion="I'm planning to launch an e-commerce platform for handmade products">
+                                <i data-lucide="shopping-bag"></i>
+                                <h3>E-commerce Platform</h3>
+                                <p>Explore handmade products marketplace potential</p>
+                            </div>
+                            <div class="suggestion-card"
+                                data-suggestion="Research the fintech mobile payment solutions market">
+                                <i data-lucide="credit-card"></i>
+                                <h3>FinTech Payment</h3>
+                                <p>Analyze mobile payment solutions and market trends</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
 
             <!-- Chat Messages -->
@@ -196,15 +210,10 @@
         <div class="input-area" id="input-area">
             <div class="input-container">
                 <div class="input-wrapper">
-                    <textarea 
-                        id="message-input" 
-                        class="message-input" 
-                        placeholder="Describe your startup idea or business concept..."
-                        rows="1"
-                        maxlength="2000"
-                        
-                    ></textarea>
-                    
+                    <textarea id="message-input" class="message-input"
+                        placeholder="Describe your startup idea or business concept..." rows="1"
+                        maxlength="2000"></textarea>
+
                     <div class="input-actions">
                         <button class="fullscreen-btn" id="fullscreen-btn" title="Expand">
                             <i data-lucide="maximize-2"></i>
@@ -238,15 +247,12 @@
                     <i data-lucide="x"></i>
                 </button>
             </div>
-            
+
             <div class="fullscreen-body">
-                <textarea 
-                    id="fullscreen-input" 
-                    class="fullscreen-textarea" 
+                <textarea id="fullscreen-input" class="fullscreen-textarea"
                     placeholder="Provide detailed information about your startup idea, target market, business model, and any specific areas you'd like to research..."
-                    maxlength="2000"
-                ></textarea>
-                
+                    maxlength="2000"></textarea>
+
                 <div class="fullscreen-footer">
                     <div class="character-count">
                         <span id="fullscreen-char-count">0</span>/2000
@@ -274,6 +280,10 @@
             <h3>Analyzing Your Idea...</h3>
             <p>Our AI is processing your request and gathering market insights</p>
         </div>
+
+        <div class="loading-footer">
+            <button class="btn-secondary go-to-result-page" id="results-page" style="display: none;">Go to Results</button>
+        </div>
     </div>
 
     <!-- Background Elements -->
@@ -286,4 +296,5 @@
     <!-- JavaScript -->
     <script src="scripts/home.js"></script>
 </body>
+
 </html>
