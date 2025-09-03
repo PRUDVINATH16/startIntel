@@ -34,6 +34,8 @@
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
 
     <!-- CSS -->
     <link rel="stylesheet" href="styles/colors.css">
@@ -59,44 +61,11 @@
         </div>
 
         <div class="sidebar-content">
-            <!-- New Chat Button -->
-            <button class="new-chat-btn" id="new-chat-btn">
-                <i data-lucide="plus"></i>
-                <span>New Chat</span>
-            </button>
-
             <!-- Recent Chats -->
             <div class="recent-section">
                 <h3 class="section-title">Recent</h3>
                 <div class="recent-chats" id="recent-chats">
-                    <div class="chat-item">
-                        <i data-lucide="message-circle"></i>
-                        <span class="chat-title">E-commerce Platform Analysis</span>
-                        <button class="chat-options">
-                            <i data-lucide="more-horizontal"></i>
-                        </button>
-                    </div>
-                    <div class="chat-item">
-                        <i data-lucide="message-circle"></i>
-                        <span class="chat-title">SaaS Startup Market Research</span>
-                        <button class="chat-options">
-                            <i data-lucide="more-horizontal"></i>
-                        </button>
-                    </div>
-                    <div class="chat-item">
-                        <i data-lucide="message-circle"></i>
-                        <span class="chat-title">Mobile App Competitor Study</span>
-                        <button class="chat-options">
-                            <i data-lucide="more-horizontal"></i>
-                        </button>
-                    </div>
-                    <div class="chat-item">
-                        <i data-lucide="message-circle"></i>
-                        <span class="chat-title">FinTech Market Trends</span>
-                        <button class="chat-options">
-                            <i data-lucide="more-horizontal"></i>
-                        </button>
-                    </div>
+                    <!-- Recent chat items will be dynamically inserted here -->
                 </div>
             </div>
         </div>
@@ -142,10 +111,6 @@
                             <a href="#" class="profile-menu-item">
                                 <i data-lucide="credit-card"></i>
                                 <span>Billing & Plans</span>
-                            </a>
-                            <a href="#" class="profile-menu-item">
-                                <i data-lucide="history"></i>
-                                <span>Research History</span>
                             </a>
                             <a href="#" class="profile-menu-item">
                                 <i data-lucide="log-out"></i>
@@ -198,11 +163,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Chat Messages -->
-            <div class="chat-messages" id="chat-messages" style="display: none;">
-                <!-- Messages will be dynamically added here -->
             </div>
         </div>
 
@@ -280,10 +240,6 @@
             <h3>Analyzing Your Idea...</h3>
             <p>Our AI is processing your request and gathering market insights</p>
         </div>
-
-        <div class="loading-footer">
-            <button class="btn-secondary go-to-result-page" id="results-page" style="display: none;">Go to Results</button>
-        </div>
     </div>
 
     <!-- Background Elements -->
@@ -295,6 +251,7 @@
 
     <!-- JavaScript -->
     <script src="scripts/home.js"></script>
+    <script src="scripts/home-recent-chats.js"></script>
 </body>
 
 </html>

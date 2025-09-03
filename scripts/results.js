@@ -8,6 +8,7 @@ function decryptData(ciphertext) {
 function getIdeaFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   const encryptedData = urlParams.get("data");
+  console.log(encryptedData)
   if (encryptedData) {
     return decryptData(encryptedData);
   }
@@ -15,4 +16,22 @@ function getIdeaFromURL() {
 }
 
 let idea = getIdeaFromURL();
-console.log(idea);
+
+async function fetchResearchData(idea){
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  mobile = user.mobile;
+  console.log(idea)
+  idea = idea.idea;
+  let request = await fetch(`http://localhost:3000/api/report/report1`,{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ mobile, idea })
+  })
+  let response = await request.json();
+  console.log(response);
+}
+
+fetchResearchData(idea);

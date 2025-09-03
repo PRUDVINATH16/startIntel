@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initProfileDropdown();
     initInputArea();
     initSuggestionCards();
-    initChatFunctionality();
     initFullscreenModal();
     initMobileResponsive();
 
@@ -115,14 +114,10 @@ function initProfileDropdown() {
             // Handle different actions
             switch (action) {
                 case 'Profile Settings':
-
                     showNotification('Profile settings coming soon!', 'info');
                     break;
                 case 'Billing & Plans':
                     showNotification('Billing section coming soon!', 'info');
-                    break;
-                case 'Research History':
-                    showNotification('Research history coming soon!', 'info');
                     break;
                 case 'Sign Out':
                     handleSignOut();
@@ -208,17 +203,6 @@ function initSuggestionCards() {
                 block: 'end'
             });
         });
-    });
-}
-
-// Chat Functionality
-function initChatFunctionality() {
-    const newChatBtn = document.getElementById('new-chat-btn');
-    const chatItems = document.querySelectorAll('.chat-item');
-
-    // New chat button
-    newChatBtn.addEventListener('click', function () {
-        startNewChat();
     });
 }
 
@@ -351,37 +335,57 @@ async function sendMessage() {
     // Show loading
     showLoadingOverlay();
 
-    let data = await analyzeIdea(idea);
-    if (data.raw == 'Yes') {
-        let researchData = await sendData(idea);
-        let user = localStorage.getItem('user');
-        user = JSON.parse(user);
+    let out = await checkIdea(idea);
+    if (out == 'No') {
+        let data = await analyzeIdea(idea);
+        if (data.raw == 'Yes') {
+            let researchData = await sendData(idea);
+            let user = localStorage.getItem('user');
+            user = JSON.parse(user);
 
-        if (user) {
-            const mobile = user.mobile;
-            const result = researchData;
+            if (user) {
+                const mobile = user.mobile;
+                const result = researchData;
 
-            console.log(mobile, result);
+                console.log(mobile, result);
 
-            await fetch("http://localhost:3000/api/report/save-report", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mobile, idea, result }),
-            });
+                await fetch("http://localhost:3000/api/report/save-report", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mobile, idea, result }),
+                });
 
-            hideLoadingOverlay();
+                hideLoadingOverlay();
 
-            // 🔥 Encrypt idea and send via GET param
-            const encryptedIdea = encodeURIComponent(encryptData({ idea }));
-            location.href = `results.html?data=${encryptedIdea}`;
+                // 🔥 Encrypt idea and send via GET param
+                const encryptedIdea = encodeURIComponent(encryptData({ idea }));
+                location.href = `results.html?data=${encryptedIdea}`;
+            } else {
+                console.log('user not found');
+            }
         } else {
-            console.log('user not found');
+            hideLoadingOverlay();
+            showNotification("You have entered an invalid idea!", "info");
+            console.log("Idea not accepted");
         }
     } else {
         hideLoadingOverlay();
-        showNotification("You have entered an invalid idea!", "info");
-        console.log("Idea not accepted");
+        showNotification("This idea research is already completed!", "info");
+        console.log("Idea already there");
     }
+}
+
+async function checkIdea(idea) {
+    let response = await fetch('http://localhost:3000/api/report/check', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ idea })
+    });
+
+    let data = await response.json();
+    return data.message;
 }
 
 async function analyzeIdea(idea) {
@@ -431,24 +435,6 @@ async function sendData(idea) {
     }
 
     return research;
-}
-
-function startNewChat() {
-    // Clear chat messages
-    const chatMessages = document.getElementById('chat-messages');
-    const welcomeScreen = document.getElementById('welcome-screen');
-
-    chatMessages.innerHTML = '';
-    chatMessages.style.display = 'none';
-    welcomeScreen.style.display = 'flex';
-
-    // Clear input
-    const messageInput = document.getElementById('message-input');
-    messageInput.value = '';
-    messageInput.style.height = 'auto';
-    messageInput.dispatchEvent(new Event('input'));
-
-    showNotification('Started new chat session', 'success');
 }
 
 function openFullscreenModal() {
