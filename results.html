@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Intelligence Dashboard</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="styles/results.css">
 </head>
+
 <body>
+    <div class="overlay2" id="infoOverlay" style="display: flex;">
+  <div class="info-note" id="infoNote">
+    <h2 class="info-heading">IMPORTANT NOTE</h2>
+    <p class="info-description">
+      <p>**PLEASE READ THIS**</p>
+      <p>In the backend we are using ai tools so sometimes they may do assumption and gives incorrect results.</p>
+      <p>So, please do a small verification if you get any doubt.</p>
+      <hr></hr>
+      <p>And we generates the results based on their results if they do any mistakes. You can get some bad UI elements or layouts as a result.</p>
+      <p>Ignore that and please try again after sometime.</p>
+      <hr></hr>
+      <p>We are constantly working to improve our system.</p>
+      <p>We appreciate your understanding and patience.</p>
+    </p>
+    <button class="info-close" onclick="document.getElementById('infoOverlay').style.display='none'">
+      ✕ 
+    </button>
+  </div>
+</div>
+
+
     <div class="dashboard-container">
         <aside id="sidebar">
             <div class="sidebar-header">
-                <h2>CraftIntel</h2>
+                <h2>StartIntel</h2>
+                <a class="a-home-btn" href="home.html">
+                    <img src="img/home.png" width="25px" alt="home-logo" id="home-logo">
+                </a>
                 <button id="sidebar-close" class="sidebar-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
                 </button>
             </div>
             <nav class="sidebar-nav">
@@ -38,14 +69,19 @@
         <main id="main-content">
             <header class="main-header">
                 <button id="sidebar-toggle" class="sidebar-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
                 </button>
                 <div id="main-header-text">
                     <h1>Competitor Analysis</h1>
                     <p>An in-depth look at the key players in the handmade e-commerce space.</p>
                 </div>
             </header>
-            
+
             <div id="page-content-wrapper">
                 <div id="competitors-content" class="page-content is-active">
                     <section id="competitor-insight-card" class="card"></section>
@@ -65,6 +101,10 @@
 
     <div id="overlay"></div>
 
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="scripts/results.js"></script>
 </body>
+
 </html>

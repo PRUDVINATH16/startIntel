@@ -376,15 +376,19 @@ async function sendMessage() {
 }
 
 async function checkIdea(idea) {
+    let user = localStorage.getItem('user');
+    user = JSON.parse(user);
+    const mobile = user.mobile;
     let response = await fetch('http://localhost:3000/api/report/check', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ idea })
+        body: JSON.stringify({ idea, mobile })
     });
 
     let data = await response.json();
+    console.log(data.message)
     return data.message;
 }
 

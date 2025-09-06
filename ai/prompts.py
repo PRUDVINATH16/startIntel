@@ -105,8 +105,9 @@ RULES:
 - Be accurate; cite known facts succinctly in text (no URLs beyond website field).
 - If a field is unknown, use "unknown" (never make up precise numbers).
 - Keep JSON minimal but complete. No markdown, no commentary, no trailing commas.
+- The name for objects also should be same for everytime like in this example OUTPUT (valid JSON only).
+- IMPORTANT: Your final response MUST be ONLY the raw JSON text, starting with "{" and ending with "}". Do not include markdown formatting like ```json, explanations, or any other text outside the JSON structure.
 """
-
 
 MARKET_PROMPT = """
 You are a market intelligence agent. Analyze current and future trends for the given startup idea.
@@ -340,7 +341,10 @@ OUTPUT (valid JSON only):
   ],
   "org_design": {
     "structure": "",
-    "reporting_lines": [],
+    "reporting_lines": [
+        { "CEO": ["CTO", "CMO"] },
+        { "CTO": ["Lead Developer", "Data Analyst"] }
+    ],
     "pods": []
   },
   "vendor_vs_inhouse": {"what_to_outsource": [], "what_to_keep_inhouse": []},
@@ -352,29 +356,52 @@ OUTPUT (valid JSON only):
 RULES:
 - Keep pragmatic for an early-stage startup.
 - No markdown; valid JSON only.
+- IMPORTANT: Your final response MUST be ONLY the raw JSON text, starting with "{" and ending with "}". Do not include markdown formatting like ```json, explanations, or any other text outside the JSON structure.
 """
+
+# prompts.py (Modified Snippet)
 
 ROADMAP_PROMPT = """
-You are a product operations leader. Create a step-by-step implementation roadmap.
+You are a product operations leader. Your task is to generate a 24-week product implementation roadmap.
+Your entire response must be a single, valid JSON object that strictly follows the schema.
 
-TASK:
-1) Provide a 24-week roadmap in biweekly sprints with sprint_goal, key_tasks, owner_role, success_metric.
-2) Provide dependencies and critical_path notes.
-3) Provide launch_checklist (go_to_market + tech).
-4) Provide post_launch_metrics (north star + guardrails).
-
-OUTPUT (valid JSON only):
+Schema:
 {
-  "roadmap": [
-    {"sprint": 1, "weeks": "1-2", "sprint_goal": "", "key_tasks": [], "owner_role": "", "success_metric": ""}
-  ],
-  "dependencies": [],
-  "critical_path": [],
-  "launch_checklist": [],
-  "post_launch_metrics": {"north_star": "", "guardrails": []}
+  "roadmap": {
+    "critical_path": [
+      { "sprint": 1, "task": "A non-negotiable step to hit launch." }
+    ],
+    "dependencies": [
+      { "from": "sprint 1", "to": "sprint 2" }
+    ],
+    "launch_checklist": [
+      { "item": "A go-to-market or tech readiness item." }
+    ],
+    "post_launch_metrics": {
+      "north_star": "The single most important metric.",
+      "guardrails": ["A list of 3-5 metrics to ensure sustainable growth."]
+    },
+    "roadmap": [
+      {
+        "sprint": 1,
+        "weeks": "1-2",
+        "sprint_goal": "A clear, actionable outcome for the sprint.",
+        "key_tasks": ["A list of 3-5 concrete tasks."],
+        "owner_role": "e.g., Product Manager",
+        "success_metric": "A measurable and outcome-oriented metric."
+      }
+    ]
+  }
 }
 
-RULES:
-- Be clear and actionable.
-- No markdown; valid JSON only.
+Rules:
+1. The entire output must be a single JSON object with one top-level key: "roadmap".
+2. The value of this top-level "roadmap" key must be an OBJECT.
+3. Inside this object, there must be a key ALSO named "roadmap". The value of this INNER "roadmap" key MUST be an ARRAY of sprint objects.
+4. The object must also contain the keys "critical_path", "dependencies", "launch_checklist" (all ARRAYS), and "post_launch_metrics" (an OBJECT).
+5. Provide a full 24-week plan (12 sprints).
+6. Ground all content in the user’s idea.
+7. IMPORTANT: Your final response MUST be ONLY the raw JSON text, starting with "{" and ending with "}". Do not include markdown or any other text.
 """
+
+

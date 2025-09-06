@@ -1,6 +1,10 @@
 async function getRecentChats() {
   let user = JSON.parse(localStorage.getItem('user'));
+  if(!user){
+    location.href = "index.html";
+  }
   let mobile = user.mobile;
+  
 
   const response = await fetch('http://localhost:3000/api/report/reports', {
     method: 'POST',
@@ -15,6 +19,11 @@ async function getRecentChats() {
 async function displayRecentChats() {
   const recentChatsContainer = document.getElementById("recent-chats");
   let ideas = await getRecentChats();
+  console.log(ideas);
+  if(!ideas || ideas.length === 0 || ideas.error) {
+    recentChatsContainer.innerHTML = "<p>No recent chats found.</p>";
+    return;
+  }
 
   ideas.forEach(idea => {
     const chatItem = document.createElement("div");

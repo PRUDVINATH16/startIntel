@@ -256,3 +256,9 @@ document.getElementById('popup-close-btn').addEventListener('click', function ()
     popupContainer.style.display = 'none';
     document.body.style.overflowY = 'auto';
 });
+
+document.querySelectorAll('.btn-secondary').forEach(btn => {
+    btn.addEventListener('click', function () {
+        location.href = "results.html"
+    });
+});

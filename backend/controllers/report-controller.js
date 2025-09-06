@@ -59,14 +59,15 @@ exports.getReportByIdea = async (req, res) => {
 
 exports.checkIdea = async (req, res) => {
   try {
-    const { idea } = req.body;
+    const { idea, mobile } = req.body;
 
-    const report = await StartupReport.findOne({ idea });
-
-    if (!report) {
+    // 2️⃣ Check if the same mobile has the given idea
+    const ideaExists = await StartupReport.findOne({ mobile, idea });
+    if (!ideaExists) {
       return res.json({ message: "No" });
     }
 
+    // ✅ Both mobile and idea exist
     res.json({ message: "Yes" });
   } catch (error) {
     console.error(error);
