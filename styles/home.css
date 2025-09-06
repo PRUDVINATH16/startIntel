@@ -458,6 +458,36 @@ body {
   color: var(--golden-beige);
 }
 
+.user-name{
+  height: 27px;
+  width: 130px;
+  outline: none;
+  border: 2px solid var(--golden-beige);
+  padding: 5px;
+  color: var(--text-light);
+  font-size: 1.2rem;
+}
+
+.user-name:focus {
+  border: 2px solid var(--soft-brown);
+  outline: none;
+}
+
+.edit-icon, .done-icon{
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.done-icon {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.edit-icon:hover, .done-icon:hover{
+  transform: scale(1.1);
+}
+
 /* Chat Area */
 .chat-area {
   flex: 1;

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Research Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --dark-brown: #2A1F1A;
+            --soft-brown: #8B6F5E;
+            --golden-beige: #cbad8d;
+            --light-brown: #D1C7BD;
+            --sand: #EBE3DB;
+            --off-white: #F1EDE6;
+
+            --text-primary: #1A1A1A;
+            --text-secondary: #2D2D2D;
+            --text-muted: #4A4A4A;
+            --text-light: #666666;
+
+            --gradient-3: linear-gradient(45deg, var(--soft-brown), var(--sand));
+            --gradient-4: linear-gradient(to bottom right, var(--light-brown), var(--off-white));
+            --gradient-5: radial-gradient(circle at center, var(--golden-beige), var(--soft-brown));
+            --gradient-7: linear-gradient(to right, var(--off-white), var(--golden-beige), var(--soft-brown));
+            --gradient-8: linear-gradient(160deg, var(--light-brown), var(--golden-beige), var(--dark-brown));
+            --gradient-9: radial-gradient(circle at top right, var(--soft-brown), var(--light-brown), var(--off-white));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-4);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(203, 173, 141, 0.2);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid rgba(203, 173, 141, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .sidebar-menu {
+            padding: 0 1rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            background: rgba(203, 173, 141, 0.1);
+            border: 1px solid rgba(203, 173, 141, 0.3);
+        }
+
+        .menu-item.active {
+            background: var(--gradient-3);
+            color: var(--off-white);
+            border: 1px solid var(--golden-beige);
+        }
+
+        .menu-item i {
+            margin-right: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+            width: calc(100% - 280px);
+            min-height: 100vh;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(203, 173, 141, 0.2);
+            border-radius: 24px;
+            padding: 2.5rem;
+            min-width: 80vw;
+            min-height: 80vh;
+            box-shadow: 0 20px 40px rgba(42, 31, 26, 0.1);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(203, 173, 141, 0.2);
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .idea-badge {
+            background: var(--gradient-5);
+            color: var(--off-white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .competitors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .competitor-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(203, 173, 141, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .competitor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-7);
+        }
+
+        .competitor-card:hover {
+            border-color: var(--golden-beige);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .competitor-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+        }
+
+        .market-position {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .position-leader {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+        }
+
+        .position-challenger {
+            background: linear-gradient(135deg, #FF9800, #FFB74D);
+            color: white;
+        }
+
+        .position-newcomer {
+            background: linear-gradient(135deg, #2196F3, #64B5F6);
+            color: white;
+        }
+
+        .competitor-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .website-link {
+            color: var(--soft-brown);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .website-link:hover {
+            color: var(--dark-brown);
+            text-decoration: underline;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(203, 173, 141, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 0.5rem;
+            color: var(--soft-brown);
+        }
+
+        .list-item {
+            background: rgba(203, 173, 141, 0.1);
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--golden-beige);
+        }
+
+        .techniques-section, .gaps-section {
+            grid-column: span 2;
+        }
+
+        .techniques-text, .gaps-text {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            border-left: 4px solid var(--golden-beige);
+        }
+
+        .insights-section {
+            background: var(--gradient-9);
+            border: 1px solid rgba(203, 173, 141, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .insights-section::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: 2rem;
+            font-size: 2rem;
+            background: var(--off-white);
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .insights-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+            margin-left: 1rem;
+        }
+
+        .insights-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(203, 173, 141, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .dashboard-card {
+                min-width: 95vw;
+                min-height: auto;
+                padding: 1.5rem;
+            }
+            
+            .competitors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Research Hub</div>
+                <div class="sidebar-subtitle">Business Intelligence Platform</div>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active" onclick="showTab('competitors')">
+                    <i class="fas fa-chart-line"></i>
+                    Competitors Analysis
+                </div>
+                <div class="menu-item" onclick="showTab('market-trends')">
+                    <i class="fas fa-trending-up"></i>
+                    Market Trends
+                </div>
+                <div class="menu-item" onclick="showTab('financial')">
+                    <i class="fas fa-dollar-sign"></i>
+                    Financial Analysis
+                </div>
+                <div class="menu-item" onclick="showTab('swot')">
+                    <i class="fas fa-balance-scale"></i>
+                    SWOT Analysis
+                </div>
+                <div class="menu-item" onclick="showTab('target-audience')">
+                    <i class="fas fa-users"></i>
+                    Target Audience
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="competitors-tab" class="tab-content">
+                <div class="dashboard-card">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Competitors Analysis</div>
+                        <div class="idea-badge" id="idea-display"></div>
+                    </div>
+
+                    <div class="stats-overview" id="stats-overview">
+                        <!-- Stats will be generated dynamically -->
+                    </div>
+
+                    <div class="competitors-grid" id="competitors-container">
+                        <!-- Competitors will be generated dynamically -->
+                    </div>
+
+                    <div class="insights-section">
+                        <div class="insights-title">Strategic Insights</div>
+                        <div class="insights-text" id="insights-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placeholder tabs for future content -->
+            <div id="market-trends-tab" class="tab-content" style="display: none;">
+                <div class="dashboard-card">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Market Trends</div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-top: 3rem;">
+                        Market trends data will be available soon...
+                    </p>
+                </div>
+            </div>
+
+            <div id="financial-tab" class="tab-content" style="display: none;">
+                <div class="dashboard-card">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Financial Analysis</div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-top: 3rem;">
+                        Financial analysis data will be available soon...
+                    </p>
+                </div>
+            </div>
+
+            <div id="swot-tab" class="tab-content" style="display: none;">
+                <div class="dashboard-card">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">SWOT Analysis</div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-top: 3rem;">
+                        SWOT analysis data will be available soon...
+                    </p>
+                </div>
+            </div>
+
+            <div id="target-audience-tab" class="tab-content" style="display: none;">
+                <div class="dashboard-card">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">Target Audience</div>
+                    </div>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-top: 3rem;">
+                        Target audience data will be available soon...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Static data for demonstration - replace with your API call later
+        const data = {
+            "_id": "68b571836117939ab84c0918",
+            "mobile": "9090909090",
+            "idea": "I'm planning to launch an e-commerce platform for handmade products",
+            "result": {
+                "competitors": {
+                    "competitors": [
+                        {
+                            "company_name": "Etsy",
+                            "established_year": "2005",
+                            "estimated_market_share": "50–60%",
+                            "founder": "Rob Kalin",
+                            "funding_stage": "publicly traded, IPO in 2015",
+                            "his_techniques_for_success": "Leveraging a strong community, effective marketing campaigns, partnerships with influencers, and a focus on user experience.",
+                            "industry_or_niche": "E-commerce for handmade products",
+                            "location": "Brooklyn, NY, USA",
+                            "market_position": "leader",
+                            "monthly_traffic_or_users": "60 million MAU",
+                            "strengths": [
+                                "Large user base",
+                                "Established marketplace",
+                                "Strong seller support and resources"
+                            ],
+                            "unique_selling_points": [
+                                "Wide selection of handmade and vintage products",
+                                "Strong community of sellers and buyers",
+                                "Established brand recognition"
+                            ],
+                            "weaknesses": [
+                                "High fees for sellers",
+                                "Increased competition",
+                                "Issues with counterfeit products"
+                            ],
+                            "weaknesses_or_gaps": "Etsy does not cater specifically to niche audiences like eco-friendly or local cultural products.",
+                            "website": "www.etsy.com",
+                            "who_is_top_in_that_field": "Etsy is currently the top player in this niche by users and mindshare."
+                        },
+                        {
+                            "company_name": "Artisan",
+                            "established_year": "2021",
+                            "estimated_market_share": "unknown",
+                            "founder": "Jane Smith",
+                            "funding_stage": "Seed round, raised $2M from angel investors",
+                            "his_techniques_for_success": "Targeting a specific eco-conscious niche, leveraging social media for visibility, and building a strong community-driven marketing approach.",
+                            "industry_or_niche": "E-commerce for handmade products",
+                            "location": "San Francisco, CA, USA",
+                            "market_position": "newcomer",
+                            "monthly_traffic_or_users": "20,000 MAU",
+                            "strengths": [
+                                "Innovative branding",
+                                "Strong focus on eco-conscious consumers",
+                                "Agile and adaptable business model"
+                            ],
+                            "unique_selling_points": [
+                                "Focus on eco-friendly and sustainable handmade products",
+                                "Lower fees for sellers compared to incumbents",
+                                "Intuitive user interface"
+                            ],
+                            "weaknesses": [
+                                "Limited brand recognition",
+                                "Lower inventory and product selection compared to incumbents",
+                                "Reliant on marketing for growth"
+                            ],
+                            "weaknesses_or_gaps": "The platform lacks advanced features and integrations that more established competitors offer.",
+                            "website": "www.artisan.com",
+                            "who_is_top_in_that_field": "Etsy remains the leader by a substantial margin."
+                        },
+                        {
+                            "company_name": "Handmade at Amazon",
+                            "established_year": "2015",
+                            "estimated_market_share": "15–20%",
+                            "founder": "Amazon Team",
+                            "funding_stage": "part of Amazon (publicly traded since 1997)",
+                            "his_techniques_for_success": "Leveraging Amazon's operational excellence, bundling with Amazon Prime services, and extensive SEO optimization.",
+                            "industry_or_niche": "E-commerce for handmade products",
+                            "location": "Seattle, WA, USA",
+                            "market_position": "challenger",
+                            "monthly_traffic_or_users": "100 million MAU",
+                            "strengths": [
+                                "Huge marketplace exposure",
+                                "Efficient logistics",
+                                "Ease of use for buyers"
+                            ],
+                            "unique_selling_points": [
+                                "Trust and recognition of the Amazon brand",
+                                "Efficient shipping and customer service",
+                                "Access to Amazon's vast customer base"
+                            ],
+                            "weaknesses": [
+                                "Less focus on community and artists compared to Etsy",
+                                "Higher fees than other e-commerce platforms",
+                                "Less personalized experience for buyers and sellers"
+                            ],
+                            "weaknesses_or_gaps": "Limited niche craftsmanship support, making it harder for specialized sellers to thrive.",
+                            "website": "www.amazon.com/handmade",
+                            "who_is_top_in_that_field": "Etsy leads in handmade products due to community engagement."
+                        }
+                    ],
+                    "insight": "The startup could differentiate by focusing on underserved niches such as eco-friendly handmade products, offering lower fees, and cultivating a community that encourages seller engagement and transparency. Additionally, creating a superior user experience tailored specifically for artists may enhance appeal against established players."
+                }
+            }
+        };
+
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            
+            // Update active menu item
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => item.classList.remove('active'));
+            event.target.closest('.menu-item').classList.add('active');
+        }
+
+        function renderStatsOverview(competitors) {
+            const statsContainer = document.getElementById('stats-overview');
+            const totalCompetitors = competitors.length;
+            const avgYear = Math.round(competitors.reduce((sum, comp) => sum + parseInt(comp.established_year), 0) / totalCompetitors);
+            const totalMAU = competitors.reduce((sum, comp) => {
+                const users = comp.monthly_traffic_or_users.match(/\d+/);
+                return sum + (users ? parseInt(users[0]) : 0);
+            }, 0);
+
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${totalCompetitors}</div>
+                    <div class="stat-label">Total Competitors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${avgYear}</div>
+                    <div class="stat-label">Avg. Est. Year</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${totalMAU}M+</div>
+                    <div class="stat-label">Combined MAU</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Market Positions</div>
+                </div>
+            `;
+        }
+
+        function renderCompetitors(competitors) {
+            const container = document.getElementById('competitors-container');
+            container.innerHTML = competitors.map(competitor => `
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <div class="competitor-name">${competitor.company_name}</div>
+                        <div class="market-position position-${competitor.market_position}">
+                            ${competitor.market_position}
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-info">
+                        <div class="info-item">
+                            <div class="info-label">Founded</div>
+                            <div class="info-value">${competitor.established_year}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Founder</div>
+                            <div class="info-value">${competitor.founder}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Market Share</div>
+                            <div class="info-value">${competitor.estimated_market_share}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Monthly Users</div>
+                            <div class="info-value">${competitor.monthly_traffic_or_users}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Location</div>
+                            <div class="info-value">${competitor.location}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Website</div>
+                            <div class="info-value">
+                                <a href="https://${competitor.website}" target="_blank" class="website-link">
+                                    ${competitor.website}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-item" style="margin-bottom: 1.5rem;">
+                        <div class="info-label">Funding Stage</div>
+                        <div class="info-value">${competitor.funding_stage}</div>
+                    </div>
+
+                    <div class="sections-grid">
+                        <div class="section">
+                            <div class="section-title">
+                                <i class="fas fa-star"></i>
+                                Strengths
+                            </div>
+                            ${competitor.strengths.map(strength => `
+                                <div class="list-item">${strength}</div>
+                            `).join('')}
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">
+                                <i class="fas fa-gem"></i>
+                                Unique Selling Points
+                            </div>
+                            ${competitor.unique_selling_points.map(usp => `
+                                <div class="list-item">${usp}</div>
+                            `).join('')}
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Weaknesses
+                            </div>
+                            ${competitor.weaknesses.map(weakness => `
+                                <div class="list-item">${weakness}</div>
+                            `).join('')}
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">
+                                <i class="fas fa-trophy"></i>
+                                Market Leadership
+                            </div>
+                            <div class="list-item">${competitor.who_is_top_in_that_field}</div>
+                        </div>
+
+                        <div class="section techniques-section">
+                            <div class="section-title">
+                                <i class="fas fa-lightbulb"></i>
+                                Success Techniques
+                            </div>
+                            <div class="techniques-text">${competitor.his_techniques_for_success}</div>
+                        </div>
+
+                        <div class="section gaps-section">
+                            <div class="section-title">
+                                <i class="fas fa-search"></i>
+                                Market Gaps & Opportunities
+                            </div>
+                            <div class="gaps-text">${competitor.weaknesses_or_gaps}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function initializeDashboard() {
+            // Display idea
+            document.getElementById('idea-display').textContent = data.idea;
+            
+            // Render insights
+            document.getElementById('insights-text').textContent = data.result.competitors.insight;
+            
+            // Render competitors
+            const competitors = data.result.competitors.competitors;
+            renderStatsOverview(competitors);
+            renderCompetitors(competitors);
+        }
+
+        // Initialize dashboard on load
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+
+        /*
+        // Original JavaScript code (commented out)
+        
+        const SECRET_KEY = "mySuperSecretKey123";
+
+        function decryptData(ciphertext) {
+            const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
+            return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        }
+
+        function getIdeaFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encryptedData = urlParams.get("data");
+            console.log(encryptedData)
+            if (encryptedData) {
+                return decryptData(encryptedData);
+            }
+            return null;
+        }
+
+        let idea = getIdeaFromURL();
+
+        async function fetchResearchData(idea){
+            let user = localStorage.getItem("user");
+            user = JSON.parse(user);
+            mobile = user.mobile;
+            console.log(idea)
+            idea = idea.idea;
+            let request = await fetch(`http://localhost:3000/api/report/report1`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ mobile, idea })
+            })
+            let response = await request.json();
+            console.log(response);
+        }
+
+        fetchResearchData(idea);
+        */
+    </script>
+</body>
+</html>

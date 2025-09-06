@@ -3,22 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Competitor Analysis Dashboard</title>
+    <title>Business Intelligence Dashboard</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles/colors.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles/results.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
-    
-    
+    <div class="dashboard-container">
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <h2>CraftIntel</h2>
+                <button id="sidebar-close" class="sidebar-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="active" data-tab="competitors">Competitors</a></li>
+                    <li><a href="#" data-tab="market-trends">Market Trends</a></li>
+                    <li><a href="#" data-tab="pricing-models">Industry Pricing</a></li>
+                    <li><a href="#" data-tab="targeted-audience">Target Audience</a></li>
+                    <li><a href="#" data-tab="success-suggestions">Success Suggestions</a></li>
+                    <li><a href="#" data-tab="tech-stack">Tech Stack</a></li>
+                    <li><a href="#" data-tab="time-budget">Time & Budget</a></li>
+                    <li><a href="#" data-tab="team-plan">Team Plan</a></li>
+                    <li><a href="#" data-tab="roadmap">Roadmap</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main id="main-content">
+            <header class="main-header">
+                <button id="sidebar-toggle" class="sidebar-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <div id="main-header-text">
+                    <h1>Competitor Analysis</h1>
+                    <p>An in-depth look at the key players in the handmade e-commerce space.</p>
+                </div>
+            </header>
+            
+            <div id="page-content-wrapper">
+                <div id="competitors-content" class="page-content is-active">
+                    <section id="competitor-insight-card" class="card"></section>
+                    <div id="competitor-grid"></div>
+                </div>
+                <div id="market-trends-content" class="page-content"></div>
+                <div id="pricing-models-content" class="page-content"></div>
+                <div id="targeted-audience-content" class="page-content"></div>
+                <div id="success-suggestions-content" class="page-content"></div>
+                <div id="tech-stack-content" class="page-content"></div>
+                <div id="time-budget-content" class="page-content"></div>
+                <div id="team-plan-content" class="page-content"></div>
+                <div id="roadmap-content" class="page-content"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="overlay"></div>
 
     <script src="scripts/results.js"></script>
 </body>
 </html>
-
-

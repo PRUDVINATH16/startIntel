@@ -656,3 +656,72 @@ async function updateProfileInitials() {
 }
 
 updateProfileInitials();
+
+let edit_icon = document.querySelector('.edit-icon');
+let done_icon = document.querySelector('.done-icon');
+
+edit_icon.addEventListener('click', () => {
+    profileName.style.display = 'none';
+    let user_name_input = document.querySelector('.user-name');
+    user_name_input.style.display = 'block';
+    user_name_input.focus();
+    user_name_input.value = profileName.textContent;
+    edit_icon.style.display = 'none';
+    done_icon.style.display = 'block';
+});
+
+done_icon.addEventListener('click', handleUpdate);
+
+// Get the input element
+const user_name_input = document.querySelector('.user-name');
+
+// Run on Enter key
+user_name_input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        handleUpdate();
+    }
+});
+
+async function handleUpdate() {
+    profileName.style.display = 'block';
+    user_name_input.style.display = 'none';
+    edit_icon.style.display = 'block';
+    done_icon.style.display = 'none';
+    let choice = await updateUserName(user_name_input.value);
+    if (choice) {
+        profileName.textContent = user_name_input.value;
+    }
+}
+
+
+async function updateUserName(name) {
+    if (!isAlpha(name)) {
+        showNotification('Invalid name. Please use letters only.');
+        return false;
+    }
+    let userData = JSON.parse(localStorage.getItem('user')) || {};
+    // Update username
+    userData.username = name;
+    // Save back
+    localStorage.setItem('user', JSON.stringify(userData));
+
+    let response = await fetch('http://localhost:3000/api/users/update-username', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mobile: userData.mobile, username: name })
+    });
+    let data = await response.json();
+    if (response.ok) {
+        showNotification(data.message || 'Usename updated successfully');
+        return true;
+    } else {
+        showNotification(data.message || 'Failed to update username');
+        return false;
+    }
+}
+
+function isAlpha(str) {
+    return /^[A-Za-z]+$/.test(str);
+}

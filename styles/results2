@@ -700,6 +700,26 @@ body {
 
 
 
+    promtp = 
+
+    Excellent work gemini
+
+
+
+Now i will again you html, css and js
+
+
+
+And also data for market you keep it as market trends in frontend.
+
+
+
+and the tab market trends after the compitetors tab and when i click on market trends the data will come from right side not down side means you shouldn't the results of market trends after competitors the data will be hided and when i click on markets tab the comipetotors data will be hidden and market will come from right.
+
+
+
+
+
     {
     "_id": "68b571836117939ab84c0918",
     "mobile": "9090909090",
@@ -1002,71 +1022,6 @@ body {
             ],
             "insight": "One strong strategic takeaway is that platforms offering low entry costs combined with performance-based fees (like Etsy and Amazon Handmade) seem to attract a larger crowd, suggesting a focus on accessibility in an entry-level tier could foster growth.",
             "recommendation": "For the startup, a hybrid pricing strategy that combines a low subscription fee with transaction-based fees would be optimal. It allows for initial affordability that attracts artisans while ensuring revenue through sales. Incorporating premium features for advanced analytics and marketing tools can create value for serious sellers."
-        },
-        "success": {
-            "go_no_go_guidance": [
-                "Achieve 50+ validated customer interviews with clear pain points",
-                "Obtain 200+ sign-ups on the landing page before launch",
-                "Demonstrate at least 1,000 in sales from pilot testing within craft fairs"
-            ],
-            "mitigations": [
-                "Develop niche targeting and unique value propositions",
-                "Partner with reliable local artisans and suppliers",
-                "Implement strict quality assurance processes",
-                "Invest in brand marketing and storytelling",
-                "Focus on customer engagement and loyalty programs",
-                "Diversify product offerings to withstand economic shifts"
-            ],
-            "risks": [
-                "High competition from established platforms",
-                "Logistical challenges in product sourcing",
-                "Quality control issues",
-                "Limited brand recognition",
-                "Customer retention difficulties",
-                "Economic downturn affecting discretionary spending"
-            ],
-            "success_assessment": {
-                "justification": "The market for handmade products is growing, with consumers increasingly seeking unique and personalized items, indicating a readiness for a dedicated e-commerce platform. User pain is moderately severe, as buyers often struggle to find reliable marketplaces for handmade goods. Competitive pressure is present but fragmented, presenting an opportunity to establish a niche. However, defensibility is weak without established branding or unique sourcing solutions. Go-to-market feasibility is strong due to existing online commerce trends, but execution complexity remains high in terms of logistics and quality assurance.",
-                "success_probability": 70
-            },
-            "validation_plan": [
-                {
-                    "experiment": "Conduct customer interviews to assess needs",
-                    "metric": "Number of interviews completed",
-                    "target": "50 interviews",
-                    "timeframe_weeks": 2
-                },
-                {
-                    "experiment": "Launch a landing page with product concepts",
-                    "metric": "Email sign-ups",
-                    "target": "200 sign-ups",
-                    "timeframe_weeks": 3
-                },
-                {
-                    "experiment": "Run social media ad campaign targeting handmade product buyers",
-                    "metric": "Click-through rate",
-                    "target": "3% CTR",
-                    "timeframe_weeks": 4
-                },
-                {
-                    "experiment": "Survey potential customers on pricing preferences",
-                    "metric": "Response rate",
-                    "target": "100 responses",
-                    "timeframe_weeks": 2
-                },
-                {
-                    "experiment": "Pilot a small collection via local craft fairs",
-                    "metric": "Sales during event",
-                    "target": "$1,000 in sales",
-                    "timeframe_weeks": 6
-                },
-                {
-                    "experiment": "Test product return rates with trial customers",
-                    "metric": "Return rate percentage",
-                    "target": "5% or lower",
-                    "timeframe_weeks": 4
-                }
-            ]
         },
         "audience": {
             "channels": [
@@ -1643,6 +1598,71 @@ body {
                     "Digital Marketing Campaigns"
                 ]
             }
+        },
+        "success": {
+            "go_no_go_guidance": [
+                "Achieve 50+ validated customer interviews with clear pain points",
+                "Obtain 200+ sign-ups on the landing page before launch",
+                "Demonstrate at least 1,000 in sales from pilot testing within craft fairs"
+            ],
+            "mitigations": [
+                "Develop niche targeting and unique value propositions",
+                "Partner with reliable local artisans and suppliers",
+                "Implement strict quality assurance processes",
+                "Invest in brand marketing and storytelling",
+                "Focus on customer engagement and loyalty programs",
+                "Diversify product offerings to withstand economic shifts"
+            ],
+            "risks": [
+                "High competition from established platforms",
+                "Logistical challenges in product sourcing",
+                "Quality control issues",
+                "Limited brand recognition",
+                "Customer retention difficulties",
+                "Economic downturn affecting discretionary spending"
+            ],
+            "success_assessment": {
+                "justification": "The market for handmade products is growing, with consumers increasingly seeking unique and personalized items, indicating a readiness for a dedicated e-commerce platform. User pain is moderately severe, as buyers often struggle to find reliable marketplaces for handmade goods. Competitive pressure is present but fragmented, presenting an opportunity to establish a niche. However, defensibility is weak without established branding or unique sourcing solutions. Go-to-market feasibility is strong due to existing online commerce trends, but execution complexity remains high in terms of logistics and quality assurance.",
+                "success_probability": 70
+            },
+            "validation_plan": [
+                {
+                    "experiment": "Conduct customer interviews to assess needs",
+                    "metric": "Number of interviews completed",
+                    "target": "50 interviews",
+                    "timeframe_weeks": 2
+                },
+                {
+                    "experiment": "Launch a landing page with product concepts",
+                    "metric": "Email sign-ups",
+                    "target": "200 sign-ups",
+                    "timeframe_weeks": 3
+                },
+                {
+                    "experiment": "Run social media ad campaign targeting handmade product buyers",
+                    "metric": "Click-through rate",
+                    "target": "3% CTR",
+                    "timeframe_weeks": 4
+                },
+                {
+                    "experiment": "Survey potential customers on pricing preferences",
+                    "metric": "Response rate",
+                    "target": "100 responses",
+                    "timeframe_weeks": 2
+                },
+                {
+                    "experiment": "Pilot a small collection via local craft fairs",
+                    "metric": "Sales during event",
+                    "target": "$1,000 in sales",
+                    "timeframe_weeks": 6
+                },
+                {
+                    "experiment": "Test product return rates with trial customers",
+                    "metric": "Return rate percentage",
+                    "target": "5% or lower",
+                    "timeframe_weeks": 4
+                }
+            ]
         },
         "roadmap": {
             "critical_path": [

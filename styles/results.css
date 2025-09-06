@@ -1,0 +1,233 @@
+/* --- Root Variables & Global Styles --- */
+:root {
+    --dark-brown: #2A1F1A;
+    --soft-brown: #8B6F5E;
+    --golden-beige: #cbad8d;
+    --light-brown: #D1C7BD;
+    --sand: #EBE3DB;
+    --off-white: #F1EDE6;
+    --text-primary: #1A1A1A;
+    --text-secondary: #2D2D2D;
+    --text-muted: #4A4A4A;
+    --text-light: #666666;
+    --success-green: #5E8B7E;
+    --risk-red: #c48a8a;
+    --gradient-bg: linear-gradient(to bottom right, var(--light-brown), var(--off-white));
+    --font-family: 'Poppins', sans-serif;
+    --border-radius: 16px;
+    --shadow: 0 10px 30px rgba(42, 31, 26, 0.08);
+    --transition-speed: 0.4s;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-family);
+    background: var(--gradient-bg);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Main Layout --- */
+.dashboard-container { 
+    position: relative;
+    min-height: 100vh; 
+}
+#sidebar {
+    width: 260px; background-color: var(--off-white); border-right: 1px solid var(--sand);
+    padding: 24px; display: flex; flex-direction: column; position: fixed;
+    top: 0; left: 0; bottom: 0; z-index: 200;
+    transition: transform var(--transition-speed) ease;
+}
+#main-content {
+    padding: 40px; margin-left: 260px;
+    transition: margin-left var(--transition-speed) ease;
+}
+
+/* --- Tabbing System & Animation --- */
+#page-content-wrapper { position: relative; }
+.page-content {
+    display: none; opacity: 0;
+    transition: opacity var(--transition-speed) ease-in-out;
+}
+.page-content.is-active { display: block; opacity: 1; }
+
+/* --- Sidebar Styling --- */
+.sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+.sidebar-header h2 { font-weight: 700; color: var(--dark-brown); }
+.sidebar-nav ul { list-style: none; }
+.sidebar-nav a {
+    display: block; padding: 12px 16px; margin-bottom: 8px; text-decoration: none;
+    color: var(--text-muted); font-weight: 500; border-radius: 8px;
+    transition: all var(--transition-speed) ease;
+}
+.sidebar-nav a:hover { background-color: var(--sand); color: var(--dark-brown); }
+.sidebar-nav a.active { background-color: var(--soft-brown); color: var(--off-white); font-weight: 600; }
+
+/* --- Mobile Toggle Buttons & Overlay --- */
+.sidebar-btn { display: none; background: transparent; border: none; cursor: pointer; padding: 4px; color: var(--dark-brown); }
+#overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 150; opacity: 0; visibility: hidden; transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease; }
+#overlay.is-active { opacity: 1; visibility: visible; }
+
+/* --- General Content Styling --- */
+.main-header { margin-bottom: 32px; display: flex; align-items: center; gap: 16px; }
+#main-header-text h1 { font-size: 2.5rem; color: var(--dark-brown); font-weight: 700; line-height: 1.2; }
+#main-header-text p { font-size: 1.1rem; color: var(--soft-brown); }
+
+.card { background: var(--off-white); border-radius: var(--border-radius); border: 1px solid var(--sand); box-shadow: var(--shadow); padding: 24px 32px; margin-bottom: 32px; transition: box-shadow var(--transition-speed) ease; display: flex; flex-direction: column; }
+.competitor-card-wrapper { transition: transform var(--transition-speed) ease; }
+.competitor-card-wrapper:hover { transform: translateY(-8px); }
+.competitor-card-wrapper:hover .card { box-shadow: 0 20px 40px rgba(42, 31, 26, 0.12); }
+
+#competitor-insight-card, #market-summary-card, .recommendation-card { background: var(--dark-brown); color: var(--sand); }
+#competitor-insight-card h3, #market-summary-card h3, .recommendation-card h3 { color: var(--golden-beige); margin-bottom: 12px; font-size: 1.4rem; }
+#competitor-insight-card p, #market-summary-card p, .recommendation-card p { font-size: 1rem; line-height: 1.7; color: var(--light-brown); }
+
+.data-section h3 { font-size: 1.15rem; color: var(--dark-brown); margin-bottom: 12px; border-bottom: 1px solid var(--sand); padding-bottom: 8px; }
+.data-section ul { list-style: none; padding-left: 0; }
+.data-section ul li { margin-bottom: 10px; padding-left: 20px; position: relative; color: var(--text-muted); }
+.data-section ul li::before { content: '•'; position: absolute; left: 0; color: var(--golden-beige); font-weight: bold; }
+.data-table-wrapper { overflow-x: auto; background: var(--off-white); padding: 24px; border-radius: var(--border-radius); border: 1px solid var(--sand); }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--sand); white-space: nowrap; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table th { font-weight: 600; color: var(--soft-brown); font-size: 0.9rem; }
+.data-table td { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- Reusable Grids --- */
+.content-grid-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.content-grid-three-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+
+/* --- Competitor Page --- */
+.competitor-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--sand); padding-bottom: 16px; margin-bottom: 20px; }
+.competitor-header h2 { font-size: 1.8rem; color: var(--dark-brown); }
+.industry-niche { color: var(--soft-brown); font-size: 0.9rem; margin-top: 4px; }
+.market-position { display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: 600; text-transform: capitalize; }
+.market-position.leader { background-color: var(--golden-beige); color: var(--dark-brown); }
+.market-position.challenger { background-color: var(--soft-brown); color: var(--off-white); }
+.market-position.newcomer { background-color: var(--light-brown); color: var(--text-muted); }
+.competitor-body { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; flex: 1; }
+.main-details { display: flex; flex-direction: column; gap: 24px; }
+.techniques-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+.key-metrics { border-left: 1px solid var(--sand); padding-left: 32px; }
+.key-metrics-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.metric-item { padding-bottom: 12px; border-bottom: 1px solid var(--sand); }
+.metric-item:last-child { border-bottom: none; }
+.metric-item strong { display: block; color: var(--soft-brown); font-size: 0.85rem; margin-bottom: 4px; }
+.metric-item span { font-size: 1.1rem; font-weight: 600; color: var(--dark-brown); }
+.competitor-footer { border-top: 1px solid var(--sand); padding-top: 20px; margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+.competitor-footer p { color: var(--text-muted); font-size: 0.9rem; }
+.website-link { color: var(--soft-brown); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+.website-link:hover { text-decoration: underline; color: var(--dark-brown); }
+.sw-container { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.data-section.weaknesses ul li::before { color: var(--risk-red); }
+
+/* --- Market Trends Page --- */
+.market-grid, .recommendation-grid, .audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+.market-overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 32px; }
+.overview-card { background: var(--sand); padding: 24px; border-radius: var(--border-radius); text-align: center; }
+.overview-card h4 { font-size: 1rem; color: var(--soft-brown); margin-bottom: 8px; text-transform: uppercase; }
+.overview-card .value { font-size: 2.2rem; font-weight: 600; color: var(--dark-brown); }
+.overview-card .stage { font-size: 1rem; font-weight: 500; color: var(--soft-brown); margin-top: 4px; text-transform: capitalize; }
+.methodology-note { grid-column: 1 / -1; font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-top: -16px; }
+.timeline-card { background: var(--off-white); }
+.timeline { display: flex; flex-direction: column; gap: 16px; }
+.timeline-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--sand); }
+.timeline-item:last-child { border-bottom: none; }
+.timeline-item .year { font-weight: 600; color: var(--dark-brown); }
+.timeline-item .size { font-weight: 500; color: var(--soft-brown); }
+
+/* --- Industry Pricing Page --- */
+.pricing-grid { display: grid; gap: 32px; }
+.pricing-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--sand); padding-bottom: 16px; margin-bottom: 20px; }
+.pricing-header h2 { font-size: 1.8rem; color: var(--dark-brown); }
+.pricing-header .model { font-size: 1rem; font-weight: 500; color: var(--off-white); background: var(--soft-brown); padding: 4px 12px; border-radius: 20px; }
+.tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+.tier-card { background-color: var(--sand); border-radius: var(--border-radius); padding: 20px; display: flex; flex-direction: column; }
+.tier-card h4 { font-size: 1.1rem; color: var(--dark-brown); }
+.tier-card .price { font-size: 2rem; font-weight: 600; color: var(--dark-brown); margin: 8px 0; }
+.tier-card .price-note { font-size: 0.8rem; color: var(--text-muted); }
+.tier-card ul { list-style: none; padding: 16px 0; margin: 16px 0; border-top: 1px solid var(--light-brown); border-bottom: 1px solid var(--light-brown); flex-grow: 1; }
+.tier-card li { margin-bottom: 8px; font-size: 0.9rem; }
+.tier-card .target { font-size: 0.85rem; color: var(--soft-brown); font-style: italic; }
+
+/* --- Targeted Audience Page --- */
+.audience-personas { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+.persona-card { background-color: var(--sand); border-radius: var(--border-radius); padding: 24px; }
+.persona-card h3 { color: var(--dark-brown); border-bottom: 1px solid var(--light-brown); padding-bottom: 8px; margin-bottom: 12px; }
+.persona-card p { color: var(--text-muted); }
+
+/* --- Tech, Time/Budget, Team & Success Pages --- */
+.build-buy-tag { font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; color: var(--dark-brown); }
+.build-buy-tag.build { background-color: var(--golden-beige); }
+.build-buy-tag.buy { background-color: var(--light-brown); }
+.total-budget-card { text-align: center; }
+.total-budget-card .price-range { font-size: 2.5rem; font-weight: 600; color: var(--dark-brown); margin: 8px 0; }
+.phase-card { background-color: var(--sand); border-radius: var(--border-radius); padding: 20px; }
+.phase-duration { color: var(--soft-brown); font-weight: 500; }
+.role-card { background-color: var(--sand); padding: 20px; border-radius: var(--border-radius); }
+.role-card h4 { color: var(--dark-brown); margin-bottom: 8px; }
+.risk-list li::before { color: var(--risk-red); }
+
+/* --- Roadmap & Success Pages --- */
+.success-assessment-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: center; }
+.probability-score { display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--sand); border-radius: var(--border-radius); padding: 24px; }
+@property --p{ syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+.probability-circle { width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: conic-gradient(var(--success-green) 0% var(--p, 0%), var(--light-brown) var(--p, 0%) 100%); transition: --p 1.5s ease-out; }
+.probability-circle::before { content: attr(data-score) '%'; font-size: 2.5rem; font-weight: 600; color: var(--dark-brown); }
+.probability-score h4 { margin-top: 16px; font-size: 1.2rem; color: var(--dark-brown); }
+.validation-card { background-color: var(--sand); border-radius: var(--border-radius); padding: 20px; }
+.validation-card h4 { font-size: 1.1rem; color: var(--dark-brown); margin-bottom: 12px; }
+.validation-item { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; font-size: 0.9rem; padding: 8px 0; border-bottom: 1px solid var(--light-brown); }
+.validation-item:last-child { border-bottom: none; }
+.validation-item strong { color: var(--soft-brown); }
+.validation-item span { text-align: right; }
+.roadmap-container { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; position: relative; }
+.roadmap-timeline-wrapper { position: relative; }
+#dependency-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+#dependency-svg path { stroke: var(--golden-beige); stroke-width: 2; fill: none; stroke-dasharray: 5 5; animation: dash 20s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: 1000; } }
+.roadmap-timeline { position: relative; padding: 20px 0; }
+.timeline-node { display: flex; align-items: center; margin-bottom: 40px; position: relative; }
+.timeline-node .node-icon { min-width: 24px; height: 24px; background: var(--soft-brown); border-radius: 50%; border: 4px solid var(--off-white); z-index: 1; }
+.timeline-node.is-critical .node-icon { background: var(--golden-beige); }
+.timeline-line { position: absolute; left: 11px; top: 20px; bottom: 20px; width: 2px; background: var(--light-brown); z-index: 0; }
+.timeline-node .node-content { margin-left: 20px; font-weight: 500; color: var(--text-muted); }
+.sprint-accordion .sprint-item:not(:last-child) { margin-bottom: 16px; }
+.sprint-accordion .sprint-header { cursor: pointer; padding: 16px; background-color: var(--sand); border-radius: var(--border-radius); transition: background-color var(--transition-speed); }
+.sprint-accordion .sprint-header:hover { background-color: var(--light-brown); }
+.sprint-accordion .sprint-header h4 { font-size: 1.2rem; color: var(--dark-brown); }
+.sprint-accordion .sprint-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out, padding 0.5s ease-out; padding: 0 16px; border-left: 1px solid var(--sand); border-right: 1px solid var(--sand); border-bottom: 1px solid var(--sand); border-radius: 0 0 var(--border-radius) var(--border-radius); }
+.sprint-accordion .sprint-content.is-open { max-height: 500px; padding-top: 16px; padding-bottom: 16px; }
+.launch-checklist ul li { padding-left: 0; }
+.launch-checklist ul li::before { content: '☐'; color: var(--light-brown); font-size: 1.5em; position: absolute; left: -5px; top: -5px; }
+.launch-checklist ul li.is-checked::before { content: '☑'; color: var(--success-green); }
+
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+    .content-grid-two-col, .roadmap-container { grid-template-columns: 1fr; }
+    .key-metrics { border-left: none; padding-left: 0; border-top: 1px solid var(--sand); padding-top: 24px; }
+}
+@media (max-width: 992px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.is-open { transform: translateX(0); box-shadow: 0 0 40px rgba(0,0,0,0.2); }
+    #main-content { margin-left: 0; padding: 24px; }
+    .main-header { flex-direction: row; }
+    #main-header-text p { display: none; }
+    .sidebar-btn { display: block; }
+    .competitor-body, .market-overview-grid, .recommendation-grid, .audience-personas, .success-assessment-grid { grid-template-columns: 1fr; }
+    .sw-container { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    #main-header-text h1 { font-size: 1.5rem; }
+    .competitor-header h2, .pricing-header h2 { font-size: 1.4rem; }
+    .data-section h3 { font-size: 1.1rem; }
+    .card { padding: 20px; }
+    .competitor-body, .sw-container { gap: 24px; }
+    .key-metrics { padding-left: 0; }
+    .competitor-footer, .timeline-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .overview-card .value { font-size: 1.8rem; }
+}
