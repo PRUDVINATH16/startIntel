@@ -11,29 +11,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+
     <link rel="stylesheet" href="styles/results.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </head>
 
 <body>
     <div class="overlay2" id="infoOverlay" style="display: flex;">
-  <div class="info-note" id="infoNote">
-    <h2 class="info-heading">IMPORTANT NOTE</h2>
-    <p class="info-description">
-      <p>**PLEASE READ THIS**</p>
-      <p>In the backend we are using ai tools so sometimes they may do assumption and gives incorrect results.</p>
-      <p>So, please do a small verification if you get any doubt.</p>
-      <hr></hr>
-      <p>And we generates the results based on their results if they do any mistakes. You can get some bad UI elements or layouts as a result.</p>
-      <p>Ignore that and please try again after sometime.</p>
-      <hr></hr>
-      <p>We are constantly working to improve our system.</p>
-      <p>We appreciate your understanding and patience.</p>
-    </p>
-    <button class="info-close" onclick="document.getElementById('infoOverlay').style.display='none'">
-      ✕ 
-    </button>
-  </div>
-</div>
+        <div class="info-note" id="infoNote">
+            <h2 class="info-heading">IMPORTANT NOTE</h2>
+            <p class="info-description">
+            <p>**PLEASE READ THIS**</p>
+            <p>In the backend we are using ai tools so sometimes they may do assumption and gives incorrect results.</p>
+            <p>So, please do a small verification if you get any doubt.</p>
+            <hr>
+            </hr>
+            <p>And we generates the results based on their results if they do any mistakes. You can get some bad UI
+                elements or layouts as a result.</p>
+            <p>Ignore that and please try again after sometime.</p>
+            <hr>
+            </hr>
+            <p>We are constantly working to improve our system.</p>
+            <p>We appreciate your understanding and patience.</p>
+            </p>
+            <button class="info-close" onclick="document.getElementById('infoOverlay').style.display='none'">
+                ✕
+            </button>
+        </div>
+    </div>
 
 
     <div class="dashboard-container">
@@ -62,6 +71,7 @@
                     <li><a href="#" data-tab="time-budget">Time & Budget</a></li>
                     <li><a href="#" data-tab="team-plan">Team Plan</a></li>
                     <li><a href="#" data-tab="roadmap">Roadmap</a></li>
+                    <button id="download-pdf-btn" style="display: none;">Download Report</button>
                 </ul>
             </nav>
         </aside>
@@ -101,7 +111,7 @@
 
     <div id="overlay"></div>
 
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="scripts/results.js"></script>

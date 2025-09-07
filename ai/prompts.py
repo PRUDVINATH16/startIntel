@@ -399,7 +399,7 @@ Rules:
 2. The value of this top-level "roadmap" key must be an OBJECT.
 3. Inside this object, there must be a key ALSO named "roadmap". The value of this INNER "roadmap" key MUST be an ARRAY of sprint objects.
 4. The object must also contain the keys "critical_path", "dependencies", "launch_checklist" (all ARRAYS), and "post_launch_metrics" (an OBJECT).
-5. Provide a full 24-week plan (12 sprints).
+5. Provide a full 24-week plan (12 sprints) You definetly should add the all sprints in critical path too.
 6. Ground all content in the user’s idea.
 7. IMPORTANT: Your final response MUST be ONLY the raw JSON text, starting with "{" and ending with "}". Do not include markdown or any other text.
 """

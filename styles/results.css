@@ -168,16 +168,16 @@ hr{
 #competitor-insight-card h3, #market-summary-card h3, .recommendation-card h3 { color: var(--golden-beige); margin-bottom: 12px; font-size: 1.4rem; }
 #competitor-insight-card p, #market-summary-card p, .recommendation-card p { font-size: 1rem; line-height: 1.7; color: var(--light-brown); }
 
-.data-section h3 { font-size: 1.15rem; color: var(--dark-brown); margin-bottom: 12px; border-bottom: 1px solid var(--sand); padding-bottom: 8px; }
+.data-section h3 { font-size: 1.15rem; color: var(--golden-beige); margin-bottom: 12px; border-bottom: 1px solid var(--sand); padding-bottom: 8px; }
 .data-section ul { list-style: none; padding-left: 0; }
 .data-section ul li { margin-bottom: 10px; padding-left: 20px; position: relative; color: var(--text-muted); }
 .data-section ul li::before { content: '•'; position: absolute; left: 0; color: var(--golden-beige); font-weight: bold; }
 .data-table-wrapper { overflow-x: auto; background: var(--off-white); padding: 24px; border-radius: var(--border-radius); border: 1px solid var(--sand); }
 .data-table { width: 100%; border-collapse: collapse; }
-.data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--sand); white-space: nowrap; }
+.data-table th, .data-table td { padding: 12px 16px; text-align: left;  border-bottom: 1px solid var(--sand); white-space: nowrap; }
 .data-table tr:last-child td { border-bottom: none; }
-.data-table th { font-weight: 600; color: var(--soft-brown); font-size: 0.9rem; }
-.data-table td { color: var(--text-muted); font-size: 0.95rem; }
+.data-table th { font-weight: 600; color: var(--golden-beige); font-size: 0.9rem; }
+.data-table td { color: var(--light-brown); font-size: 0.95rem; }
 
 /* --- Reusable Grids --- */
 .content-grid-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -193,7 +193,7 @@ hr{
 .market-position.newcomer { background-color: var(--light-brown); color: var(--text-muted); }
 .competitor-body { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; flex: 1; }
 .main-details { display: flex; flex-direction: column; gap: 24px; }
-.techniques-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+.techniques-text { color: var(--light-brown); font-size: 0.9rem; line-height: 1.6; }
 .key-metrics { border-left: 1px solid var(--sand); padding-left: 32px; }
 .key-metrics-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 .metric-item { padding-bottom: 12px; border-bottom: 1px solid var(--sand); }
@@ -238,24 +238,26 @@ hr{
 
 /* --- Targeted Audience Page --- */
 .audience-personas { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-.persona-card { background-color: var(--sand); border-radius: var(--border-radius); padding: 24px; }
-.persona-card h3 { color: var(--dark-brown); border-bottom: 1px solid var(--light-brown); padding-bottom: 8px; margin-bottom: 12px; }
-.persona-card p { color: var(--text-muted); }
+.persona-card { background: var(--dark-brown); border-radius: var(--border-radius); padding: 24px; }
+.persona-card h3 { color: var(--golden-beige); border-bottom: 1px solid var(--light-brown); padding-bottom: 8px; margin-bottom: 12px; }
+.persona-card p { color: var(--light-brown); }
 
 /* --- Tech, Time/Budget, Team & Success Pages --- */
+.system-arch-card { background: var(--dark-brown); border-radius: var(--border-radius); padding: 24px; }
 .build-buy-tag { font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; color: var(--dark-brown); }
 .build-buy-tag.build { background-color: var(--golden-beige); }
 .build-buy-tag.buy { background-color: var(--light-brown); }
-.total-budget-card { text-align: center; }
-.total-budget-card .price-range { font-size: 2.5rem; font-weight: 600; color: var(--dark-brown); margin: 8px 0; }
+.total-budget-card { text-align: center; background: var(--dark-brown);}
+.total-budget-card .price-range { font-size: 2.5rem; font-weight: 600; color: var(--golden-beige); margin: 8px 0; }
+.total-budget-title {color: var(--golden-beige)}
 .phase-card { background-color: var(--sand); border-radius: var(--border-radius); padding: 20px; }
-.phase-duration { color: var(--soft-brown); font-weight: 500; }
+.phase-duration { color: var(--light-brown); font-weight: 500; }
 .role-card { background-color: var(--sand); padding: 20px; border-radius: var(--border-radius); }
-.role-card h4 { color: var(--dark-brown); margin-bottom: 8px; }
+.role-card h4 { color: var(--light-brown); margin-bottom: 8px; }
 .risk-list li::before { color: var(--risk-red); }
 
 /* --- Roadmap & Success Pages --- */
-.success-assessment-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: center; }
+.success-assessment-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: center; background: var(--dark-brown);}
 .probability-score { display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: var(--sand); border-radius: var(--border-radius); padding: 24px; }
 @property --p{ syntax: '<percentage>'; inherits: false; initial-value: 0%; }
 .probability-circle { width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: conic-gradient(var(--success-green) 0% var(--p, 0%), var(--light-brown) var(--p, 0%) 100%); transition: --p 1.5s ease-out; }
@@ -326,4 +328,32 @@ hr{
   .info-description {
     font-size: 10px !important;
   }
+}
+
+/* --- Download Button Styling --- */
+#download-pdf-btn {
+   /* Pushes the button to the right */
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-brown);
+    background-color: var(--golden-beige);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#download-pdf-btn:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    background-color: #cbad8d90;
+}
+
+#download-pdf-btn:disabled {
+    background-color: var(--light-brown);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }

@@ -1170,6 +1170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         else {
             initializeDashboard(data);
+            setupPDFDownloader();
         }
         return null;
     }
@@ -1190,6 +1191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         data = await request.json();
         initializeDashboard(data);
+        setupPDFDownloader();
     }
 
     fetchResearchData(idea);
@@ -1441,7 +1443,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById('tech-stack-content');
         if (!container || !data) return;
         container.innerHTML = `
-            <div class="card"><div class="data-section"><h3>System Architecture</h3><p class="techniques-text">${data.system_architecture}</p></div></div>
+            <div class="card system-arch-card"><div class="data-section"><h3>System Architecture</h3><p class="techniques-text">${data.system_architecture}</p></div></div>
             <div class="card"><div class="data-section"><h3>Components</h3>
                 <div class="content-grid-three-col">
                     ${data.components.map(c => `
@@ -1494,7 +1496,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!container || !data) return;
         container.innerHTML = `
             <div class="card total-budget-card">
-                <h3>Total Budget Estimate</h3>
+                <h3 class="total-budget-title">Total Budget Estimate</h3>
                 <div class="price-range">$${data.budget_estimate.total_usd.low.toLocaleString()} - $${data.budget_estimate.total_usd.high.toLocaleString()}</div>
                 <div class="table-wrapper"><table class="data-table">
                     <thead><tr><th>Phase</th><th>Low Estimate</th><th>High Estimate</th></tr></thead>
@@ -1658,4 +1660,77 @@ document.addEventListener("DOMContentLoaded", () => {
             closeSidebar();
         });
     });
+});
+
+// Replace the old setupPDFDownloader function with this new one.
+function setupPDFDownloader() {
+    const downloadBtn = document.getElementById('download-pdf-btn');
+    // This is the wrapper that contains all 9 of your report sections.
+    const reportElement = document.getElementById('page-content-wrapper');
+
+    if (!downloadBtn || !reportElement) {
+        console.error("Download button or report container not found!");
+        return;
+    }
+
+    downloadBtn.addEventListener('click', () => {
+        downloadBtn.disabled = true;
+        downloadBtn.textContent = 'Generating...';
+
+        // --- KEY CHANGE: Temporarily show all hidden sections ---
+        const allSections = reportElement.querySelectorAll('.page-content');
+        allSections.forEach(section => {
+            section.style.display = 'block';
+            section.style.opacity = '1';          // ✅ force visible
+            section.style.visibility = 'visible'; // ✅ force visible
+        });
+
+        // ✅ force a solid background for PDF
+        reportElement.style.background = '#ffffff';
+
+
+        const options = {
+            margin: [0.5, 0.5, 0.5, 0.5], // Margins in inches
+            filename: 'Complete_Business_Report.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().from(reportElement).set(options).save().then(() => {
+            // --- KEY CHANGE: Restore original view after PDF is saved ---
+            allSections.forEach(section => {
+                section.style.display = '';
+                section.style.opacity = '';
+                section.style.visibility = '';
+            });
+
+            // restore background
+            reportElement.style.background = '';
+
+
+            downloadBtn.disabled = false;
+            downloadBtn.textContent = 'Download Report';
+        }).catch(err => {
+            console.error("Error generating PDF:", err);
+            // Also restore the view on error
+            allSections.forEach(section => {
+                section.style.display = '';
+                section.style.opacity = '';
+                section.style.visibility = '';
+            });
+
+            // restore background
+            reportElement.style.background = '';
+
+            downloadBtn.disabled = false;
+            downloadBtn.textContent = 'Download Report';
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        document.getElementById('download-pdf-btn').style.display = 'block';
+    }, 1500);
 });
