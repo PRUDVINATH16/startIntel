@@ -347,7 +347,6 @@ async function sendMessage() {
                 const mobile = user.mobile;
                 const result = researchData;
 
-                console.log(mobile, result);
 
                 await fetch("http://localhost:3000/api/report/save-report", {
                     method: "POST",
@@ -388,7 +387,6 @@ async function checkIdea(idea) {
     });
 
     let data = await response.json();
-    console.log(data.message)
     return data.message;
 }
 

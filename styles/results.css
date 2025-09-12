@@ -176,8 +176,9 @@ hr{
 .data-table { width: 100%; border-collapse: collapse; }
 .data-table th, .data-table td { padding: 12px 16px; text-align: left;  border-bottom: 1px solid var(--sand); white-space: nowrap; }
 .data-table tr:last-child td { border-bottom: none; }
-.data-table th { font-weight: 600; color: var(--golden-beige); font-size: 0.9rem; }
-.data-table td { color: var(--light-brown); font-size: 0.95rem; }
+.data-table th { font-weight: 600; color: var(--dark-brown); font-size: 0.9rem; }
+.data-table td { color: var(--text-muted); font-size: 0.95rem; }
+.budget-td {color: var(--sand) !important;}
 
 /* --- Reusable Grids --- */
 .content-grid-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -193,7 +194,8 @@ hr{
 .market-position.newcomer { background-color: var(--light-brown); color: var(--text-muted); }
 .competitor-body { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; flex: 1; }
 .main-details { display: flex; flex-direction: column; gap: 24px; }
-.techniques-text { color: var(--light-brown); font-size: 0.9rem; line-height: 1.6; }
+.techniques-text { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; }
+.success-data {color: var(--off-white) !important;}
 .key-metrics { border-left: 1px solid var(--sand); padding-left: 32px; }
 .key-metrics-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 .metric-item { padding-bottom: 12px; border-bottom: 1px solid var(--sand); }
@@ -251,9 +253,9 @@ hr{
 .total-budget-card .price-range { font-size: 2.5rem; font-weight: 600; color: var(--golden-beige); margin: 8px 0; }
 .total-budget-title {color: var(--golden-beige)}
 .phase-card { background-color: var(--sand); border-radius: var(--border-radius); padding: 20px; }
-.phase-duration { color: var(--light-brown); font-weight: 500; }
+.phase-duration { color: var(--text-light); font-weight: 500; }
 .role-card { background-color: var(--sand); padding: 20px; border-radius: var(--border-radius); }
-.role-card h4 { color: var(--light-brown); margin-bottom: 8px; }
+.role-card h4 { color: var(--dark-brown); margin-bottom: 8px; }
 .risk-list li::before { color: var(--risk-red); }
 
 /* --- Roadmap & Success Pages --- */
@@ -357,3 +359,26 @@ hr{
     transform: none;
     box-shadow: none;
 }
+
+/* initial off-screen state */
+.page-content {
+  opacity: 0;
+  transform: translateX(60%);   /* 60% of the SECTION's own width */
+  transition: all 0.8s ease-out;
+}
+
+/* visible state */
+.page-content.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* export state */
+body.exporting .page-content {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition: none !important;
+  display: block !important;
+  visibility: visible !important;
+}
+

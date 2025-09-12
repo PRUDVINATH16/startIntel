@@ -36,7 +36,7 @@ llm = LLM(
 agent = Agent(
     role="Startup Research Agent",
     goal="Deliver accurate, structured competitor, market, pricing, and execution research for startup founders.",
-    backstory="You are a research analyst specializing in startup strategy, competitor intelligence, market analysis, pricing models, and execution planning.",
+    backstory="You are an indian research analyst specializing in startup strategy, competitor intelligence, market analysis, pricing models, and execution planning. Although you are an Indian, so you should be research on only data which is related to india. And also represent every single data in INR.",
     llm=llm,
 )
 

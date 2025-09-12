@@ -50,7 +50,42 @@
 <body>
     <!-- Navigation -->
     <nav class="nav-fixed">
-        <!-- js will add navigation -->
+        <div class="nav-container">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <div class="nav-logo">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <span class="nav-title">StartIntel</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="nav-desktop">
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#testimonials" class="nav-link">Reviews</a>
+                    <a href="results.html" class="nav-link">Demo</a>
+                    <button class="btn btn-primary">Get Started <i data-lucide="arrow-right"></i></button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="nav-mobile-toggle">
+                    <button id="mobile-menu-btn" class="mobile-menu-btn">
+                        <i data-lucide="menu" id="menu-icon"></i>
+                        <i data-lucide="x" id="close-icon" style="display: none;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="nav-mobile">
+                <div class="nav-mobile-content">
+                    <a href="#features" class="nav-mobile-link">Features</a>
+                    <a href="#testimonials" class="nav-mobile-link">Reviews</a>
+                    <a href="results.html" class="nav-mobile-link">Demo</a>
+                    <button class="btn btn-primary btn-full">Start Research</button>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -70,8 +105,9 @@
                 </div>
 
                 <h1 class="hero-title">
-                    <span class="text-gradient">Transform Your <span class="text-primary" style="color: black !important;">Startup Ideas Into</span></span><br>
-                    <span class="text-gradient-warm">Market Success</span>
+                    <span class="text-gradient">Place where <span class="text-primary"
+                            style="color: black !important;">Startup Ideas Find</span></span><br>
+                    <span class="text-gradient-warm">Best Research</span>
                 </h1>
 
                 <p class="hero-subtitle">
@@ -106,11 +142,12 @@
 
                     <div class="stat-card">
                         <div class="stat-icon">
-                            <i data-lucide="users"></i>
+                            <i data-lucide="lightbulb"></i>
                         </div>
-                        <h3>10K+ Users</h3>
-                        <p>Trusted by entrepreneurs and investors worldwide</p>
+                        <h3>Action-Ready Insights</h3>
+                        <p>Get research you can actually use, not just read.</p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -385,170 +422,147 @@
 
     <div class="login-signup-container" id="login-signup-popup" style="display: none;">
         <div class="main-container">
-        <!-- Auth Container -->
-        <div class="auth-container">
-            <!-- Close Button -->
-            <button class="popup-close-btn" id="popup-close-btn">
-                <i data-lucide="x"></i>
-            </button>
-            <!-- Toggle Navigation -->
-            <div class="toggle-nav">
-                <button id="login-tab" class="toggle-btn active" data-form="login">
-                    <i data-lucide="log-in"></i>
-                    <span>Login</span>
+            <!-- Auth Container -->
+            <div class="auth-container">
+                <!-- Close Button -->
+                <button class="popup-close-btn" id="popup-close-btn">
+                    <i data-lucide="x"></i>
                 </button>
-                <button id="signup-tab" class="toggle-btn" data-form="signup">
-                    <i data-lucide="user-plus"></i>
-                    <span>Sign Up</span>
-                </button>
-                <div class="toggle-indicator"></div>
-            </div>
+                <!-- Toggle Navigation -->
+                <div class="toggle-nav">
+                    <button id="login-tab" class="toggle-btn active" data-form="login">
+                        <i data-lucide="log-in"></i>
+                        <span>Login</span>
+                    </button>
+                    <button id="signup-tab" class="toggle-btn" data-form="signup">
+                        <i data-lucide="user-plus"></i>
+                        <span>Sign Up</span>
+                    </button>
+                    <div class="toggle-indicator"></div>
+                </div>
 
-            <!-- Forms Container -->
-            <div class="forms-container">
-                <!-- Login Form -->
-                <form id="login-form" class="auth-form active">
-                    <div class="form-header">
-                        <h2>Welcome Back</h2>
-                        <p>Sign in to access your dashboard</p>
-                    </div>
+                <!-- Forms Container -->
+                <div class="forms-container">
+                    <!-- Login Form -->
+                    <form id="login-form" class="auth-form active">
+                        <div class="form-header">
+                            <h2>Welcome Back</h2>
+                            <p>Sign in to access your dashboard</p>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="login-mobile" class="form-label">
-                            <i data-lucide="smartphone"></i>
-                            Mobile Number
-                        </label>
-                        <input 
-                            type="tel" 
-                            id="login-mobile" 
-                            name="mobile" 
-                            class="form-input" 
-                            placeholder="Enter your mobile number"
-                            required
-                            maxlength="10"
-                            >
-                    </div>
+                        <div class="form-group">
+                            <label for="login-mobile" class="form-label">
+                                <i data-lucide="smartphone"></i>
+                                Mobile Number
+                            </label>
+                            <input type="tel" id="login-mobile" name="mobile" class="form-input"
+                                placeholder="Enter your mobile number" required maxlength="10">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="login-password" class="form-label">
-                            <i data-lucide="lock"></i>
-                            Password
-                        </label>
-                        <div class="password-input-container">
-                            <input 
-                                type="password" 
-                                id="login-password" 
-                                name="password" 
-                                class="form-input" 
-                                placeholder="Enter password"
-                                required                            
-                                >
-                                <div class="login-msg" style="display: none; align-items: center; justify-content: center;">
-                                    <p id="login-message" style="color: red; margin-top: 5px; font-family: 'Courier New', monospace;"></p>
+                        <div class="form-group">
+                            <label for="login-password" class="form-label">
+                                <i data-lucide="lock"></i>
+                                Password
+                            </label>
+                            <div class="password-input-container">
+                                <input type="password" id="login-password" name="password" class="form-input"
+                                    placeholder="Enter password" required>
+                                <div class="login-msg"
+                                    style="display: none; align-items: center; justify-content: center;">
+                                    <p id="login-message"
+                                        style="color: red; margin-top: 5px; font-family: 'Courier New', monospace;"></p>
                                 </div>
-                            <button type="button" class="password-toggle" data-target="login-password">
-                                <i data-lucide="eye" class="eye-open"></i>
-                                <i data-lucide="eye-off" class="eye-closed" class="signup-eye-closed" style="display: none;"></i>
-                            </button>
+                                <button type="button" class="password-toggle" data-target="login-password">
+                                    <i data-lucide="eye" class="eye-open"></i>
+                                    <i data-lucide="eye-off" class="eye-closed" class="signup-eye-closed"
+                                        style="display: none;"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-options">
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" class="submit-btn">
-                        <span class="btn-text">Login</span>
-                        <i data-lucide="arrow-right" class="btn-icon"></i>
-                        <div class="btn-loading" style="display: none;">
-                            <i data-lucide="loader-2" class="loading-spinner"></i>
+                        <div class="form-options">
+                            <a href="#" class="forgot-password">Forgot Password?</a>
                         </div>
-                    </button>
 
-                    <div class="form-footer">
-                        <p>Don't have an account? <button type="button" class="switch-form" data-target="signup">Sign up here</button></p>
-                    </div>
-                </form>
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Login</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                            <div class="btn-loading" style="display: none;">
+                                <i data-lucide="loader-2" class="loading-spinner"></i>
+                            </div>
+                        </button>
 
-                <!-- Signup Form -->
-                <form id="signup-form" class="auth-form">
-                    <div class="form-header">
-                        <h2>Create Account</h2>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="signup-name" class="form-label">
-                            <i data-lucide="user"></i>
-                            Full Name
-                        </label>
-                        <input 
-                            type="text" 
-                            id="signup-name" 
-                            name="name" 
-                            class="form-input" 
-                            placeholder="Enter your full name"
-                            required                        
-                            >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="signup-mobile" class="form-label">
-                            <i data-lucide="smartphone"></i>
-                            Mobile Number
-                        </label>
-                        <input 
-                            type="tel" 
-                            id="signup-mobile" 
-                            name="mobile" 
-                            class="form-input" 
-                            placeholder="Enter your mobile number"
-                            required
-                            maxlength="10">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="signup-password" class="form-label">
-                            <i data-lucide="lock"></i>
-                            Create Password
-                        </label>
-                        <div class="password-input-container">
-                            <input 
-                                type="password" 
-                                id="signup-password" 
-                                name="password" 
-                                class="form-input" 
-                                placeholder="Create a password"
-                                required                            
-                                >
-                            <button type="button" class="password-toggle" data-target="signup-password">
-                                <i data-lucide="eye" class="eye-open"></i>
-                                <i data-lucide="eye-off" class="eye-closed" style="display: none;"></i>
-                            </button>
+                        <div class="form-footer">
+                            <p>Don't have an account? <button type="button" class="switch-form"
+                                    data-target="signup">Sign up here</button></p>
                         </div>
-                    </div>
-                    <div class="msg" style="display: none; align-items: center; justify-content: center;">
-                        <p id="message" style="color: red; padding-bottom: 5px; font-family: 'Courier New', monospace"> Your account already exsist</p>
-                    </div>
-                    <button type="submit" class="submit-btn" id="signup-btn">
-                        <span class="btn-text">Sign Up</span>
-                        <i data-lucide="arrow-right" class="btn-icon"></i>
-                        <div class="btn-loading" style="display: none;">
-                            <i data-lucide="loader-2" class="loading-spinner"></i>
-                        </div>
-                    </button>
+                    </form>
 
-                    <div class="form-footer">
-                        <p>Already have an account? <button type="button" class="switch-form" data-target="login">Login here</button></p>
-                    </div>
-                </form>
+                    <!-- Signup Form -->
+                    <form id="signup-form" class="auth-form">
+                        <div class="form-header">
+                            <h2>Create Account</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-name" class="form-label">
+                                <i data-lucide="user"></i>
+                                Full Name
+                            </label>
+                            <input type="text" id="signup-name" name="name" class="form-input"
+                                placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-mobile" class="form-label">
+                                <i data-lucide="smartphone"></i>
+                                Mobile Number
+                            </label>
+                            <input type="tel" id="signup-mobile" name="mobile" class="form-input"
+                                placeholder="Enter your mobile number" required maxlength="10">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signup-password" class="form-label">
+                                <i data-lucide="lock"></i>
+                                Create Password
+                            </label>
+                            <div class="password-input-container">
+                                <input type="password" id="signup-password" name="password" class="form-input"
+                                    placeholder="Create a password" required>
+                                <button type="button" class="password-toggle" data-target="signup-password">
+                                    <i data-lucide="eye" class="eye-open"></i>
+                                    <i data-lucide="eye-off" class="eye-closed" style="display: none;"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="msg" style="display: none; align-items: center; justify-content: center;">
+                            <p id="message"
+                                style="color: red; padding-bottom: 5px; font-family: 'Courier New', monospace"> Your
+                                account already exsist</p>
+                        </div>
+                        <button type="submit" class="submit-btn" id="signup-btn">
+                            <span class="btn-text">Sign Up</span>
+                            <i data-lucide="arrow-right" class="btn-icon"></i>
+                            <div class="btn-loading" style="display: none;">
+                                <i data-lucide="loader-2" class="loading-spinner"></i>
+                            </div>
+                        </button>
+
+                        <div class="form-footer">
+                            <p>Already have an account? <button type="button" class="switch-form"
+                                    data-target="login">Login here</button></p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     </div>
 
     <!-- JavaScript -->
     <script src="scripts/index.js"></script>
     <script src="scripts/signup-login.js"></script>
 </body>
+
 </html>

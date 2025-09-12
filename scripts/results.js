@@ -1190,6 +1190,7 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify({ mobile, idea })
         })
         data = await request.json();
+        console.log(data)
         initializeDashboard(data);
         setupPDFDownloader();
     }
@@ -1340,29 +1341,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderPricingPage(data) {
-        const container = document.getElementById('pricing-models-content');
+    const container = document.getElementById('pricing-models-content');
         if (!container || !data) return;
         let competitorPricingHTML = data.competitor_pricing.map(comp => `
-            <div class="card">
-                <div class="pricing-header"><h2>${comp.name}</h2><span class="model">${comp.model}</span></div>
-                <div class="tier-grid">
-                    ${comp.tiers.map(tier => `
-                        <div class="tier-card">
-                            <h4>${tier.plan}</h4>
+                <div class="card">
+                    <div class="pricing-header"><h2>${comp.name}</h2><span class="model">${comp.model}</span></div>
+                    <div class="tier-grid">
+                        ${comp.tiers.map(tier => `
+                            <div class="tier-card">
+                                <h4>${tier.plan}</h4>
                             <div class="price">${tier.price_usd.includes("per") ? tier.price_usd.split(" ")[0] : tier.price_usd}</div>
                             <div class="price-note">${tier.price_usd.includes("per") ? "per " + tier.price_usd.split(" ").slice(1).join(" ") : (tier.price_usd === "Varies" ? "Based on usage" : "One-time or varied fee")}</div>
-                            <ul>${tier.features.map(f => `<li>${f}</li>`).join('')}</ul>
-                            <div class="target"><strong>Best for:</strong> ${tier.target_customer}</div>
-                        </div>`).join('')}
-                </div>
+                                <ul>${tier.features.map(f => `<li>${f}</li>`).join('')}</ul>
+                                <div class="target"><strong>Best for:</strong> ${tier.target_customer}</div>
+                            </div>`).join('')}
+                    </div>
             </div>`).join('');
         container.innerHTML = `
             <div class="recommendation-grid">
                 <div class="card recommendation-card"><h3>Strategic Insight</h3><p>${data.insight}</p></div>
                 <div class="card recommendation-card"><h3>Recommendation</h3><p>${data.recommendation}</p></div>
-            </div>
+        </div>
             <div class="pricing-grid">${competitorPricingHTML}</div>`;
-    }
+}
 
     function renderAudiencePage(data) {
         const container = document.getElementById('targeted-audience-content');
@@ -1386,7 +1387,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div>
                     <div class="data-section">
                         <h3>Success Assessment</h3>
-                        <p class="techniques-text">${data.success_assessment.justification}</p>
+                        <p class="techniques-text success-data">${data.success_assessment.justification}</p>
                     </div>
                 </div>
                 <div class="probability-score">
@@ -1443,7 +1444,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById('tech-stack-content');
         if (!container || !data) return;
         container.innerHTML = `
-            <div class="card system-arch-card"><div class="data-section"><h3>System Architecture</h3><p class="techniques-text">${data.system_architecture}</p></div></div>
+            <div class="card system-arch-card"><div class="data-section"><h3>System Architecture</h3><p class="techniques-text success-data">${data.system_architecture}</p></div></div>
             <div class="card"><div class="data-section"><h3>Components</h3>
                 <div class="content-grid-three-col">
                     ${data.components.map(c => `
@@ -1500,7 +1501,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="price-range">$${data.budget_estimate.total_usd.low.toLocaleString()} - $${data.budget_estimate.total_usd.high.toLocaleString()}</div>
                 <div class="table-wrapper"><table class="data-table">
                     <thead><tr><th>Phase</th><th>Low Estimate</th><th>High Estimate</th></tr></thead>
-                    <tbody>${data.budget_estimate.by_phase_usd.map(p => `<tr><td>${p.phase}</td><td>$${p.low.toLocaleString()}</td><td>$${p.high.toLocaleString()}</td></tr>`).join('')}</tbody>
+                    <tbody>${data.budget_estimate.by_phase_usd.map(p => `<tr><td class="budget-td">${p.phase}</td><td class="budget-td">$${p.low.toLocaleString()}</td><td class="budget-td">$${p.high.toLocaleString()}</td></tr>`).join('')}</tbody>
                 </table></div>
             </div>
             <div class="card"><div class="data-section"><h3>Project Phases</h3>
@@ -1592,7 +1593,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (resultData.competitors) { renderCompetitorsPage(resultData.competitors); }
         if (resultData.market) { renderMarketTrendsPage(resultData.market); }
-        if (resultData.pricing) { renderPricingPage(resultData.pricing); }
+        renderPricingPage(resultData.pricing || null);
         if (resultData.audience) { renderAudiencePage(resultData.audience); }
         if (resultData.success) { renderSuccessPage(resultData.success); }
         if (resultData.tech) { renderTechPage(resultData.tech); }
@@ -1662,10 +1663,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Replace the old setupPDFDownloader function with this new one.
 function setupPDFDownloader() {
     const downloadBtn = document.getElementById('download-pdf-btn');
-    // This is the wrapper that contains all 9 of your report sections.
     const reportElement = document.getElementById('page-content-wrapper');
 
     if (!downloadBtn || !reportElement) {
@@ -1677,20 +1676,23 @@ function setupPDFDownloader() {
         downloadBtn.disabled = true;
         downloadBtn.textContent = 'Generating...';
 
-        // --- KEY CHANGE: Temporarily show all hidden sections ---
+        // ✅ Add "exporting" flag to stop animations
+        document.body.classList.add("exporting");
+
+        // ✅ Show all sections for PDF
         const allSections = reportElement.querySelectorAll('.page-content');
         allSections.forEach(section => {
             section.style.display = 'block';
-            section.style.opacity = '1';          // ✅ force visible
-            section.style.visibility = 'visible'; // ✅ force visible
+            section.style.opacity = '1';
+            section.style.visibility = 'visible';
+            section.style.transform = 'translateX(0)'; // force reset
         });
 
-        // ✅ force a solid background for PDF
+        // ✅ Force background for PDF
         reportElement.style.background = '#ffffff';
 
-
         const options = {
-            margin: [0.5, 0.5, 0.5, 0.5], // Margins in inches
+            margin: [0.5, 0.5, 0.5, 0.5],
             filename: 'Complete_Business_Report.pdf',
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, logging: false },
@@ -1698,29 +1700,32 @@ function setupPDFDownloader() {
         };
 
         html2pdf().from(reportElement).set(options).save().then(() => {
-            // --- KEY CHANGE: Restore original view after PDF is saved ---
+            // ✅ Restore normal view
+            document.body.classList.remove("exporting");
+
             allSections.forEach(section => {
                 section.style.display = '';
                 section.style.opacity = '';
                 section.style.visibility = '';
+                section.style.transform = '';
             });
 
-            // restore background
             reportElement.style.background = '';
-
 
             downloadBtn.disabled = false;
             downloadBtn.textContent = 'Download Report';
         }).catch(err => {
             console.error("Error generating PDF:", err);
-            // Also restore the view on error
+
+            document.body.classList.remove("exporting");
+
             allSections.forEach(section => {
                 section.style.display = '';
                 section.style.opacity = '';
                 section.style.visibility = '';
+                section.style.transform = '';
             });
 
-            // restore background
             reportElement.style.background = '';
 
             downloadBtn.disabled = false;
@@ -1729,8 +1734,37 @@ function setupPDFDownloader() {
     });
 }
 
+// Show the download button after loading
 document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         document.getElementById('download-pdf-btn').style.display = 'block';
     }, 1500);
 });
+
+// IntersectionObserver for animations
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll(".page-content");
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    // 🔥 If you want animations only once:
+                    // observer.unobserve(entry.target);
+                } else {
+                    entry.target.classList.remove("visible"); // <- remove this if you want one-time
+                }
+            });
+        },
+        { threshold: 0.1 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+});
+
+
+document.querySelector('.sidebar-title').addEventListener('click', () => {
+    window.location.href = 'home.html';
+});
+
