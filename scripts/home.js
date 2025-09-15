@@ -337,6 +337,8 @@ async function sendMessage() {
 
     let out = await checkIdea(idea);
     if (out == 'No') {
+        await sendForm(idea);
+        return;
         let data = await analyzeIdea(idea);
         if (data.raw == 'Yes') {
             let researchData = await sendData(idea);
@@ -371,6 +373,23 @@ async function sendMessage() {
         hideLoadingOverlay();
         showNotification("This idea research is already completed!", "info");
         console.log("Idea already there");
+    }
+}
+
+async function sendForm(idea) {
+    let user = localStorage.getItem('user');
+    user = JSON.parse(user);
+    const mobile = user.mobile;
+    if(mobile){
+        let req = await fetch('http://localhost:3000/api/form/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ idea, mobile })
+        });
+        let res = await req.json();
+        console.log('send');
     }
 }
 

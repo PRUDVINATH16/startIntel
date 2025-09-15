@@ -2,8 +2,6 @@ $(document).ready(function () {
    $(".chat-bot-container").load("askit.html");
 });
 
-// --- All your other functions remain the same ---
-
 // Mobile Menu Functionality
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');

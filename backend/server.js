@@ -9,6 +9,7 @@ const getUserByMobile = require('./profile');
 const researchRoutes = require('./routes/research-routes');
 const reportRoutes = require('./routes/report-routes');
 const userRoutes = require('./routes/profile-routes');
+const formRoutes = require('./routes/form-routes');
 
 app.use(cors({
     origin: true,
@@ -21,7 +22,8 @@ app.use(express.json());
 app.use('/api/auth', authroutes);
 app.use('/api/users', userRoutes);
 app.use('/api/profile', getUserByMobile);
-app.use('/api/research', researchRoutes);  // 🔥 New
+app.use('/api/form', formRoutes);
+app.use('/api/research', researchRoutes);   // 🔥 New
 app.use('/api/report', reportRoutes);
 
 

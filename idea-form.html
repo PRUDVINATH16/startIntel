@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>startIntel Survey</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/idea-form.css">
+  <link rel="stylesheet" href="styles/colors.css">
+</head>
+
+<body>
+
+  <div class="background-container"></div>
+
+  <main class="content-wrapper">
+    <header class="survey-header">
+      <h1>startIntel-SURVEY</h1>
+      <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure, assumenda! Dolorum voluptas sed accusamus laboriosam?</h2>
+    </header>
+
+    <form id="survey-form" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" placeholder="e.g., 25" required min="1">
+      </div>
+
+      <div class="form-group">
+        <label for="q1">Q1: Does this idea make sense to you in one sentence?</label>
+        <textarea id="q1" name="q1" rows="3" placeholder="Describe your understanding..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <legend>Q2: How likely are you to use a product like this if it becomes real?</legend>
+        <input type="text" id="likelihood_percentage" name="likelihood_percentage"
+          placeholder="Try to in tell in percentage" required>
+      </div>
+
+      <div class="form-group">
+        <label for="q3">Q3: What part of the idea excites you the most?</label>
+        <textarea id="q3" name="q3" rows="4" placeholder="Tell us what you find exciting..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="q4">Q4: What’s the first doubt or worry that pops into your head?</label>
+        <textarea id="q4" name="q4" rows="4" placeholder="What are your initial concerns?" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="q5">Q5: If you could improve this idea, what would you add or change?</label>
+        <textarea id="q5" name="q5" rows="4" placeholder="Share your suggestion..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Feedback</button>
+    </form>
+  </main>
+
+  <script src="scripts/idea-form.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+:root {
+    --dark-brown: #2A1F1A;
+    --soft-brown: #8B6F5E;
+    --golden-beige: #cbad8d;
+    --light-brown: #D1C7BD;
+    --sand: #EBE3DB;
+    --off-white: #F1EDE6;
+    --text-primary: #1A1A1A;
+    --text-secondary: #2D2D2D;
+    --text-muted: #4A4A4A;
+    --text-light: #666666;
+
+    /* --- Gradients for the new design --- */
+    --gradient-background: linear-gradient(370deg, var(--golden-beige) 20%, var(--sand));
+    --gradient-border: linear-gradient(160deg, var(--golden-beige), var(--soft-brown));
+    --gradient-text: linear-gradient(90deg, var(--dark-brown), var(--soft-brown));
+    --gradient-cta: linear-gradient(45deg, var(--soft-brown), var(--golden-beige));
+    --gradient-cta-hover: linear-gradient(45deg, var(--golden-beige), var(--soft-brown));
+    
+    --shadow-color: rgba(42, 31, 26, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: var(--gradient-background);
+    color: var(--text-primary);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 10px 16px;
+    line-height: 1.6;
+}
+
+/* --- Main Survey Container & Header --- */
+.survey-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    /* Gradient Text Effect */
+    background-image: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* --- Form Styling --- */
+/* Add this to control the overall content area */
+.content-wrapper {
+    width: 100%;
+    max-width: 750px; /* Sets a maximum width for the entire content block */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Modify this existing rule */
+.survey-header {
+    text-align: center;
+    margin-bottom: 32px; /* Adds some spacing */
+}
+
+.survey-header h2{
+  font-size: 1.3rem;
+}
+
+/* Modify this existing rule */
+#survey-form {
+    background: var(--off-white);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border: 2px solid transparent;
+    position: relative;
+    z-index: 1;
+    width: 100%; /* Allow it to fill the content-wrapper */
+}
+
+/* --- Form Inputs & Textarea --- */
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px 4px; /* Reduced side padding for underline effect */
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--light-brown);
+    background-color: transparent; /* Remove input background */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--soft-brown);
+    box-shadow: none; /* Removed focus box-shadow */
+}
+
+textarea {
+    resize: none; /* Disable textarea resizing */
+    min-height: 80px;
+}
+
+/* --- Radio Button Styling --- */
+.radio-label input[type="radio"]:checked + span {
+    background-image: var(--gradient-cta);
+    border-color: transparent;
+    color: var(--off-white);
+    font-weight: 600;
+}
+
+.radio-label:hover span {
+    border-color: var(--golden-beige);
+    background-color: rgba(203, 173, 141, 0.1);
+}
+
+/* --- Submit Button --- */
+.submit-btn {
+    padding: 16px;
+    background-image: var(--gradient-cta);
+    color: var(--off-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-image 0.4s ease;
+    margin-top: 16px;
+}
+
+.submit-btn:hover {
+    background-image: var(--gradient-cta-hover);
+}
