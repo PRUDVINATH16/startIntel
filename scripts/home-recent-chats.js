@@ -19,7 +19,6 @@ async function getRecentChats() {
 async function displayRecentChats() {
   const recentChatsContainer = document.getElementById("recent-chats");
   let ideas = await getRecentChats();
-  console.log(ideas);
   if(!ideas || ideas.length === 0 || ideas.error) {
     recentChatsContainer.innerHTML = "<p>No recent chats found.</p>";
     return;

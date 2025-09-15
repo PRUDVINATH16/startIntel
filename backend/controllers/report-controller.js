@@ -4,7 +4,6 @@ exports.saveStartupReport = async (req, res) => {
   try {
     const { mobile, idea, result } = req.body;
     const report = await StartupReport.create({ mobile, idea, result });
-    console.log("report saved");
 
     res.status(201).json({
       message: "Report saved successfully",

@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",async () => {
 
     let data;
+    let reviews;
 
     data = {
         "_id": "68bc63ce74eaee3eb1317efc",
@@ -1169,7 +1170,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return decryptData(encryptedData);
         }
         else {
-            initializeDashboard(data);
+            initializeDashboard(data, reviews);
             setupPDFDownloader();
         }
         return null;
@@ -1191,11 +1192,15 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         data = await request.json();
         console.log(data)
-        initializeDashboard(data);
+        // NOTE: In a real application, you would also fetch review data here
+        initializeDashboard(data, reviews); // Pass both static datasets
         setupPDFDownloader();
     }
 
-    fetchResearchData(idea);
+    // Only fetch if there is an idea from the URL
+    if (idea) {
+        fetchResearchData(idea);
+    }
 
     // --- RENDER FUNCTIONS ---
     function renderCompetitorsPage(data) {
@@ -1263,7 +1268,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="timeline-node ${item.sprint ? 'is-critical' : ''}">
                         <div class="node-icon"></div>
                         <div class="node-content">
-                            <strong>${item.sprint || 'N/A'}</strong>: ${item.task || 'N/A'}
+                            <strong>Sprint ${item.sprint || 'N/A'}</strong>: ${item.task || 'N/A'}
                         </div>
                     </div>
                 `).join('')}
@@ -1341,7 +1346,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderPricingPage(data) {
-    const container = document.getElementById('pricing-models-content');
+        const container = document.getElementById('pricing-models-content');
         if (!container || !data) return;
         let competitorPricingHTML = data.competitor_pricing.map(comp => `
                 <div class="card">
@@ -1363,7 +1368,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card recommendation-card"><h3>Recommendation</h3><p>${data.recommendation}</p></div>
         </div>
             <div class="pricing-grid">${competitorPricingHTML}</div>`;
-}
+    }
 
     function renderAudiencePage(data) {
         const container = document.getElementById('targeted-audience-content');
@@ -1585,9 +1590,59 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
+    function renderCustomerReviewsPage(data) {
+        const container = document.getElementById('customer-reviews-content');
+        if (!container || !data || data.length === 0) {
+            container.innerHTML = `<p>No customer reviews available at this time.</p>`;
+            return;
+        }
+        console.log(data)
+        if(data.message == 'No'){
+            container.innerHTML = `<p>No customer reviews available at this time.</p>`;
+            return;
+        }
+         else{
+            const reviewsHTML = data.data.map(review => `
+            <div class="card review-card">
+                <div class="review-header">
+                    <h3 class="review-name">${review.name}</h3>
+                    <span class="review-age">Age: ${review.age}</span>
+                </div>
+                <div class="review-body">
+                    <div class="review-qa">
+                        <strong>What are your biggest frustrations with current food delivery apps?</strong>
+                        <p>${review.q1}</p>
+                    </div>
+                    <div class="review-qa">
+                        <strong>What features would make you switch to a new delivery app?</strong>
+                        <p>${review.q2}</p>
+                    </div>
+                    <div class="review-qa">
+                        <strong>How much are you willing to pay for a monthly subscription for free delivery?</strong>
+                        <p>${review.q3}</p>
+                    </div>
+                    <div class="review-qa">
+                        <strong>What kind of loyalty rewards would you find most appealing?</strong>
+                        <p>${review.q4}</p>
+                    </div>
+                    <div class="review-qa">
+                        <strong>How important is supporting local restaurants to you?</strong>
+                        <p>${review.q5}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        container.innerHTML = `<div class="content-grid-two-col">${reviewsHTML}</div>`;
+        }
+
+        
+    }
+
+    reviews = await getCustomerReviews();
 
     // --- INITIALIZE DASHBOARD ---
-    function initializeDashboard(data) {
+    function initializeDashboard(data, reviews) {
         if (!data || !data.result) { console.error("Data structure is incorrect or 'result' object is missing."); return; }
         const resultData = data.result;
 
@@ -1598,11 +1653,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resultData.success) { renderSuccessPage(resultData.success); }
         if (resultData.tech) { renderTechPage(resultData.tech); }
         if (resultData['time-budget']) { renderTimeBudgetPage(resultData['time-budget']); }
-        if (resultData.team) {
-            renderTeamPage(resultData.team);
-        }
+        if (resultData.team) { renderTeamPage(resultData.team); }
         if (resultData.roadmap) { renderRoadmapPage(resultData.roadmap); }
+        if (reviews) { renderCustomerReviewsPage(reviews); }
 
+    }
+
+    async function getCustomerReviews() {
+        let realcusrev = await fetch("http://localhost:3000/api/form/getu", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ mobile, idea:idea.idea })
+        });
+        console.log(realcusrev)
+        
+        if (!realcusrev) return null;
+        return await realcusrev.json();
     }
 
 
@@ -1623,15 +1691,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const headerTextContainer = document.getElementById('main-header-text');
 
     const pageHeaders = {
-        competitors: { title: "Competitor Analysis", subtitle: "An in-depth look at the key players in the handmade e-commerce space." },
-        'market-trends': { title: "Market Trends", subtitle: "An overview of the handmade e-commerce market landscape." },
+        competitors: { title: "Competitor Analysis", subtitle: "An in-depth look at the key players in the food delivery space." },
+        'market-trends': { title: "Market Trends", subtitle: "An overview of the food delivery market landscape." },
         'pricing-models': { title: "Industry Pricing", subtitle: "A comparative analysis of pricing strategies in the market." },
         'targeted-audience': { title: "Target Audience", subtitle: "Understanding customer personas and outreach channels." },
         'success-suggestions': { title: "Success Suggestions", subtitle: "Key risks, mitigations, and validation plan for your idea." },
         'tech-stack': { title: "Tech Stack", subtitle: "The technology and infrastructure blueprint for the project." },
         'time-budget': { title: "Time & Budget", subtitle: "Project timeline, budget, and resource planning." },
         'team-plan': { title: "Team Plan", subtitle: "Organizational structure, roles, and hiring strategy." },
-        'roadmap': { title: "Roadmap", subtitle: "A detailed project roadmap with critical path and launch checklist." }
+        'roadmap': { title: "Roadmap", subtitle: "A detailed project roadmap with critical path and launch checklist." },
+        'customer-reviews': { title: "Real Customer Reviews", subtitle: "Direct feedback and insights from potential customers." }
     };
 
     navLinks.forEach(link => {
@@ -1767,4 +1836,3 @@ document.addEventListener("DOMContentLoaded", () => {
 document.querySelector('.sidebar-title').addEventListener('click', () => {
     window.location.href = 'home.html';
 });
-

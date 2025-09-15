@@ -135,3 +135,8 @@ textarea {
 .submit-btn:hover {
     background-image: var(--gradient-cta-hover);
 }
+
+.form-success{
+  color: green;
+  padding: 20px;
+}
