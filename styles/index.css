@@ -64,14 +64,7 @@ p {
 
 /* Text Gradients */
 .text-gradient {
-  background: linear-gradient(135deg, var(--golden-beige), var(--dark-brown));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-warm {
-  background: linear-gradient(135deg, var(--soft-brown), var(--golden-beige));
+  background: rgb(177, 90, 7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -135,9 +128,9 @@ p {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(241, 237, 230, 0.95);
+  background: var(--light-brown);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--light-brown);
+  border-bottom: 1.4px solid rgba(0, 0, 0, 0.121);
 }
 
 .nav-container {
@@ -250,7 +243,7 @@ p {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--gradient-4);
+  background: linear-gradient(280deg, #d8d4d15f, #cfaa868c);
   overflow: hidden;
   padding-top: 4rem;
 }
@@ -336,6 +329,10 @@ p {
   font-weight: 900;
   margin-bottom: 1.5rem;
   line-height: 1.1;
+  background: rgba(190, 117, 7, 0.92);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-subtitle {
@@ -365,10 +362,10 @@ p {
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.384);
+  backdrop-filter: blur(1px);
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: .8rem;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -431,6 +428,7 @@ p {
   color: var(--golden-beige);
 }
 
+
 /* Features Section */
 .features {
   padding: 2rem 0;
@@ -449,6 +447,7 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin-bottom: 1rem;
 }
 
 .section-subtitle {
@@ -467,18 +466,17 @@ p {
 }
 
 .feature-card-large {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.384);
+  backdrop-filter: blur(1px);
   padding: 1.4rem 2rem;
-  border-radius: 1.5rem;
+  border-radius: .8rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: 1px solid rgba(203, 173, 141, 0.2);
 }
 
 .feature-card-large:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  background-color: var(--off-white);
 }
 
 .feature-icon-large {
@@ -527,18 +525,17 @@ p {
 }
 
 .feature-card-small {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.63);
+  backdrop-filter: blur(1px);
   padding: 1.6rem;
-  border-radius: 1rem;
+  border-radius: .8rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: 1px solid rgba(203, 173, 141, 0.2);
 }
 
 .feature-card-small:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background-color: var(--off-white);
 }
 
 .feature-icon-small {
@@ -579,17 +576,17 @@ p {
 }
 
 .testimonial-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.653);
+  backdrop-filter: blur(1px);
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: .8rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   border: 1px solid rgba(203, 173, 141, 0.2);
 }
 
 .testimonial-card:hover {
-  transform: translateY(-5px);
+  background-color: var(--off-white);
 }
 
 .testimonial-header {
@@ -646,10 +643,10 @@ p {
 }
 
 .cta-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 60%, rgba(243, 222, 185, 0.7));
+  backdrop-filter: blur(1px);
   padding: 3rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   text-align: center;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(203, 173, 141, 0.2);

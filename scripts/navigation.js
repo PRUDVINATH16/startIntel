@@ -1,19 +1,5 @@
 $(document).ready(function () {
-    // Load the header
-    // The second argument is a "callback" function that runs only after the header is successfully loaded.
-    /* $(".nav-fixed").load("header.html", function() {
-        // Now that the header is loaded, we can safely initialize the mobile menu
-        initMobileMenu();
-        
-        // We also need to render the Lucide icons that are inside the header
-        lucide.createIcons();
-    }); */
-
-    // Load the footer
-    $(".footer").load("footer.html", function() {
-        // Re-initialize icons for the footer content as well
-        lucide.createIcons();
-    });
+   $(".chat-bot-container").load("askit.html");
 });
 
 // --- All your other functions remain the same ---

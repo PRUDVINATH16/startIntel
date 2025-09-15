@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="styles/colors.css">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/signup-login.css">
+    <link rel="stylesheet" href="styles/askit.css">
 
     <!-- header & footer js -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
@@ -48,6 +49,13 @@
 </head>
 
 <body>
+
+    <div class="float-chat-trigger">
+        <h3>ChatBot</h3>
+    </div>
+
+    <div class="overlay" style="display: none;"></div>
+    <div class="chat-bot-container"></div>
     <!-- Navigation -->
     <nav class="nav-fixed">
         <div class="nav-container">
@@ -89,82 +97,57 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <!-- Background Elements -->
-        <div class="hero-bg">
-            <div class="hero-bg-element hero-bg-1"></div>
-            <div class="hero-bg-element hero-bg-2"></div>
-            <div class="hero-bg-element hero-bg-3"></div>
-        </div>
+   <section class="hero">
+    <div class="hero-content">
+        <div class="hero-inner animate-slide-up">
 
-        <div class="hero-content">
-            <div class="hero-inner animate-slide-up">
-                <div class="hero-badge">
-                    <i data-lucide="zap"></i>
-                    <span>AI-Powered Business Intelligence</span>
+            <h1 class="hero-title">
+                Place where <span class="text-gradient">Startup Ideas Find</span><br>
+                <span class="text-gradient-warm">Best Research</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Leverage advanced AI to predict startup success, analyze competitors, understand market trends,
+                and build data-driven strategies that turn innovative ideas into thriving businesses.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-large">
+                    Start Research
+                    <i data-lucide="arrow-right"></i>
+                </button>
+                <button class="btn btn-secondary btn-large">Watch Demo</button>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i data-lucide="target"></i>
+                    </div>
+                    <h3>95% Accuracy</h3>
+                    <p>AI-powered predictions with industry-leading precision</p>
                 </div>
 
-                <h1 class="hero-title">
-                    <span class="text-gradient">Place where <span class="text-primary"
-                            style="color: black !important;">Startup Ideas Find</span></span><br>
-                    <span class="text-gradient-warm">Best Research</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    Leverage advanced AI to predict startup success, analyze competitors, understand market trends,
-                    and build data-driven strategies that turn innovative ideas into thriving businesses.
-                </p>
-
-                <div class="hero-buttons">
-                    <button class="btn btn-primary btn-large">
-                        Start Research
-                        <i data-lucide="arrow-right"></i>
-                    </button>
-                    <button class="btn btn-secondary btn-large">Watch Demo</button>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <h3>10x Faster</h3>
+                    <p>Complete market research in minutes, not months</p>
                 </div>
 
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i data-lucide="target"></i>
-                        </div>
-                        <h3>95% Accuracy</h3>
-                        <p>AI-powered predictions with industry-leading precision</p>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i data-lucide="lightbulb"></i>
                     </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i data-lucide="clock"></i>
-                        </div>
-                        <h3>10x Faster</h3>
-                        <p>Complete market research in minutes, not months</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i data-lucide="lightbulb"></i>
-                        </div>
-                        <h3>Action-Ready Insights</h3>
-                        <p>Get research you can actually use, not just read.</p>
-                    </div>
-
+                    <h3>Action-Ready Insights</h3>
+                    <p>Get research you can actually use, not just read.</p>
                 </div>
-            </div>
-        </div>
 
-        <!-- Floating Elements -->
-        <div class="hero-float hero-float-1">
-            <div class="float-card">
-                <i data-lucide="trending-up"></i>
             </div>
         </div>
-
-        <div class="hero-float hero-float-2">
-            <div class="float-card">
-                <i data-lucide="bar-chart-3"></i>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
     <!-- Features Section -->
     <section id="features" class="features animate-on-scroll">
@@ -417,7 +400,57 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <!-- js will add footer -->
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i data-lucide="sparkles"></i>
+                        </div>
+                        <span class="footer-title">StartIntel</span>
+                    </div>
+                    <p class="footer-description">
+                        AI-powered startup research platform helping entrepreneurs build successful businesses with
+                        data-driven
+                        insights.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="results.html">Demo</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Integrations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 StartIntel. All rights reserved. Built with AI for the future of entrepreneurship.</p>
+            </div>
+        </div>
     </footer>
 
     <div class="login-signup-container" id="login-signup-popup" style="display: none;">
@@ -560,9 +593,12 @@
         </div>
     </div>
 
+
+
     <!-- JavaScript -->
     <script src="scripts/index.js"></script>
     <script src="scripts/signup-login.js"></script>
+    <script src="scripts/askit.js"></script>
 </body>
 
 </html>
