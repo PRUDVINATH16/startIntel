@@ -64,7 +64,7 @@ p {
 
 /* Text Gradients */
 .text-gradient {
-  background: rgb(177, 90, 7);
+  background: #4d3627e4;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -315,7 +315,7 @@ p {
 }
 
 .hero-badge i {
-  color: var(--golden-beige);
+  color: var(--soft-brown);
 }
 
 .hero-badge span {
@@ -329,7 +329,7 @@ p {
   font-weight: 900;
   margin-bottom: 1.5rem;
   line-height: 1.1;
-  background: rgba(190, 117, 7, 0.92);
+  background: #7a5a48;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -1,7 +1,6 @@
-document.addEventListener("DOMContentLoaded",async () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    let data;
-    let reviews;
+    let data, reviews, mobile, idea;
 
     data = {
         "_id": "68bc63ce74eaee3eb1317efc",
@@ -13,568 +12,574 @@ document.addEventListener("DOMContentLoaded",async () => {
                     {
                         "company_name": "Uber Eats",
                         "established_year": "2014",
-                        "estimated_market_share": "30–35%",
+                        "estimated_market_share": "25-30%",
                         "founder": "Travis Kalanick, Garrett Camp",
-                        "funding_stage": "public",
-                        "his_techniques_for_success": "Leveraging an extensive logistics network, strategic partnerships with restaurants, and aggressive marketing strategies.",
+                        "funding_stage": "public (NYSE: UBER)",
+                        "his_techniques_for_success": "Aggressive marketing, partnerships with local restaurants, and incentive promotions for users.",
                         "industry_or_niche": "Food Delivery",
                         "location": "San Francisco, CA, USA",
                         "market_position": "leader",
-                        "monthly_traffic_or_users": "84 million",
+                        "monthly_traffic_or_users": "unknown",
                         "strengths": [
                             "Strong brand recognition",
-                            "Extensive logistics and delivery network",
-                            "Data-driven insights for restaurants and customers"
+                            "Extensive logistics network",
+                            "Innovative promotional strategies"
                         ],
                         "unique_selling_points": [
-                            "Wide restaurant selection",
-                            "Global brand presence",
-                            "Integrated with Uber's ridesharing service"
+                            "Wide restaurant network",
+                            "Fast delivery",
+                            "User-friendly interface"
                         ],
                         "weaknesses": [
-                            "High delivery fees in some areas",
-                            "High competition leading to profit challenges",
-                            "Quality inconsistency in deliveries"
+                            "High commission fees for restaurants",
+                            "Customer service challenges",
+                            "Market saturation in major cities"
                         ],
-                        "weaknesses_or_gaps": "Issues with delivery times and quality control present opportunities for niche players focusing on speed and customer satisfaction.",
+                        "weaknesses_or_gaps": "High fees could drive restaurants to seek alternatives; potential for improved delivery times.",
                         "website": "www.ubereats.com",
                         "who_is_top_in_that_field": "Uber Eats"
                     },
                     {
                         "company_name": "DoorDash",
                         "established_year": "2013",
-                        "estimated_market_share": "25%",
-                        "founder": "Tony Xu, Stanley Tang, Andy Fang, Evan Moore",
-                        "funding_stage": "public",
-                        "his_techniques_for_success": "A focus on brand loyalty programs and partnerships to keep customers engaged, along with a strong marketing budget.",
+                        "estimated_market_share": "20-25%",
+                        "founder": "Tony Xu, Andy Fang, Stanley Tang",
+                        "funding_stage": "public (NYSE: DASH)",
+                        "his_techniques_for_success": "Targeted promotions, expanding service areas rapidly, and leveraging technology for logistics.",
                         "industry_or_niche": "Food Delivery",
                         "location": "San Francisco, CA, USA",
                         "market_position": "challenger",
-                        "monthly_traffic_or_users": "32 million",
+                        "monthly_traffic_or_users": "unknown",
                         "strengths": [
-                            "User-friendly app interface",
-                            "Strong partnerships with local restaurants",
-                            "Aggressive marketing and promotional offers"
+                            "Strong user base growth",
+                            "Good relationship with restaurants",
+                            "Technology investment for efficiency"
                         ],
                         "unique_selling_points": [
-                            "DashPass subscription for reduced fees",
-                            "Strong focus on local businesses",
-                            "Versatile delivery options including grocery and convenience items"
+                            "DashPass subscription service",
+                            "Robust logistics technology",
+                            "Variety of restaurant options"
                         ],
                         "weaknesses": [
-                            "Higher delivery times compared to competitors",
-                            "Issues with driver retention",
-                            "Rising operational costs affecting profitability"
+                            "High churn rate among customers",
+                            "Profitability challenges",
+                            "Local competition in various markets"
                         ],
-                        "weaknesses_or_gaps": "Inconsistent delivery experiences can deter users; there's an opportunity to implement a loyalty program targeted at frequent customers.",
+                        "weaknesses_or_gaps": "Potential over-reliance on subscriptions; could diversify offerings.",
                         "website": "www.doordash.com",
                         "who_is_top_in_that_field": "Uber Eats"
                     },
                     {
-                        "company_name": "Grubhub",
-                        "established_year": "2004",
-                        "estimated_market_share": "15%",
-                        "founder": "Matt Maloney, Mike Ely",
-                        "funding_stage": "acquired (by Just Eat Takeaway)",
-                        "his_techniques_for_success": "Fostering deep integration and loyalty with local restaurant networks; leveraging user feedback for improvements.",
-                        "industry_or_niche": "Food Delivery",
-                        "location": "Chicago, IL, USA",
-                        "market_position": "challenger",
-                        "monthly_traffic_or_users": "23 million",
+                        "company_name": "Gopuff",
+                        "established_year": "2013",
+                        "estimated_market_share": "unknown",
+                        "founder": "Yakir Gola, Rafael Ilishayev",
+                        "funding_stage": "latest Series H ($1.5B, notable investors like SoftBank)",
+                        "his_techniques_for_success": "Focus on speed of delivery and product variety, leverage local warehousing for efficiency.",
+                        "industry_or_niche": "On-demand delivery",
+                        "location": "Philadelphia, PA, USA",
+                        "market_position": "newcomer",
+                        "monthly_traffic_or_users": "unknown",
                         "strengths": [
-                            "Thorough restaurant filtering and rating systems",
-                            "Good user engagement through rewards",
-                            "Partnerships with many restaurants"
+                            "Fast delivery service",
+                            "Focus on convenience",
+                            "Strong funding rounds"
                         ],
                         "unique_selling_points": [
-                            "Comprehensive restaurant reviews",
-                            "Loyalty rewards program",
-                            "Flexibility in food delivery and takeout"
+                            "Delivery in under 30 minutes",
+                            "Owns local warehousing for quick access",
+                            "Variety of products beyond food"
                         ],
                         "weaknesses": [
-                            "Higher fees for restaurants and consumers compared to rivals",
-                            "Lack of several key regions",
-                            "Delivery delays during peak times"
+                            "Limited geographic availability",
+                            "High operational costs",
+                            "Brand recognition compared to bigger players"
                         ],
-                        "weaknesses_or_gaps": "Their high commission rates deter some local restaurants from joining, which opens potential to attract those restaurants with lower fees.",
-                        "website": "www.grubhub.com",
+                        "weaknesses_or_gaps": "Scaling challenges in new markets; reliance on urban centers could limit growth.",
+                        "website": "www.gopuff.com",
                         "who_is_top_in_that_field": "Uber Eats"
                     }
                 ],
-                "insight": "To differentiate, the startup could focus on smaller, local, or underserved restaurants that may not currently have delivery options and provide lower fees for both consumers and businesses, along with superior service quality to address the common delivery complaints present in larger players."
+                "insight": "The startup can differentiate by focusing on underserved neighborhoods that existing players overlook, offering lower commission rates to attract restaurant partnerships, and leveraging community-based marketing to build local loyalty. Additionally, superior order tracking capabilities and customer service can enhance user experience and set the app apart from larger competitors."
             },
             "market": {
                 "future_projection": [
                     {
-                        "market_size": "USD 145B",
+                        "market_size": "USD 60B",
                         "year": 2026
                     }
                 ],
                 "historical_growth": [
                     {
-                        "market_size": "USD 68B",
+                        "market_size": "USD 25B",
                         "year": 2020
                     },
                     {
-                        "market_size": "USD 80B",
+                        "market_size": "USD 30B",
                         "year": 2021
                     },
                     {
-                        "market_size": "USD 98B",
+                        "market_size": "USD 35B",
                         "year": 2022
                     },
                     {
-                        "market_size": "USD 110B",
+                        "market_size": "USD 40B",
                         "year": 2023
                     },
                     {
-                        "market_size": "USD 125B",
+                        "market_size": "USD 45B",
                         "year": 2024
                     }
                 ],
                 "key_trends": [
-                    "Increasing reliance on mobile platforms for convenience and delivery services.",
-                    "Growing consumer focus on sustainability and healthy food options.",
-                    "Tightening regulations around food safety and labor practices impacting delivery services."
+                    "Increased adoption of contactless delivery services due to health awareness post-pandemic.",
+                    "Growing consumer preference for local and organic food options driving demand for diverse delivery choices.",
+                    "Regulations supporting gig economy workers are impacting labor costs and operational models for delivery services."
                 ],
                 "market_overview": {
                     "SAM": "USD 50B",
-                    "SOM": "USD 5B",
-                    "TAM": "USD 154B",
-                    "methodology_note": "TAM calculated based on total food service market, SAM based on delivery segment, and SOM reflecting targeted market share within a specific city.",
+                    "SOM": "USD 2B",
+                    "TAM": "USD 200B",
+                    "methodology_note": "TAM calculated based on global food delivery market size; SAM focused on the targeted urban population in the city; SOM estimated based on market share potential within the local food delivery segment.",
                     "stage": "growing"
                 },
-                "summary": "The food delivery app market presents a significant growth opportunity as urban consumers increasingly prefer convenience. Emerging trends in technology and consumer preferences, coupled with market expansion potential in various regions, create a favorable environment for new entrants.",
+                "summary": "The food delivery app market presents significant growth opportunities driven by evolving consumer preferences and technological advancements. With the market projected to reach USD 60B by 2026, entrepreneurs can leverage unmet demands within urban areas.",
                 "top_regions": [
                     {
                         "region": "North America",
-                        "why": "High consumer spending on convenience and technology adoption."
-                    },
-                    {
-                        "region": "Asia Pacific",
-                        "why": "Rapid urbanization and increase in demand for food delivery services."
+                        "why": "High urban density and consumer willingness to pay for convenience."
                     },
                     {
                         "region": "Europe",
-                        "why": "Strong market for restaurant partnerships and diverse culinary preferences."
+                        "why": "Strong demand for diverse cuisines and established infrastructure."
+                    },
+                    {
+                        "region": "Asia-Pacific",
+                        "why": "Rapid urbanization and increasing smartphone penetration among consumers."
                     },
                     {
                         "region": "Latin America",
-                        "why": "Emerging smartphone penetration and demand for delivery apps."
+                        "why": "Emerging middle class drives demand for food delivery services."
                     },
                     {
                         "region": "Middle East",
-                        "why": "Growing investment in tech ecosystems and food services."
+                        "why": "High disposable income and growing food delivery culture."
                     }
                 ]
             },
             "pricing": {
                 "competitor_pricing": [
                     {
-                        "cheapest_plan_usd": "0",
-                        "model": "Hybrid (Freemium with subscription)",
-                        "most_expensive_plan_usd": "unknown",
-                        "name": "DoorDash",
-                        "tiers": [
-                            {
-                                "features": [
-                                    "No delivery fee on orders over $12",
-                                    "Exclusive discounts"
-                                ],
-                                "plan": "DashPass",
-                                "price_usd": "9.99/mo",
-                                "target_customer": "Frequent users who order multiple times a week"
-                            },
-                            {
-                                "features": [
-                                    "Standard delivery"
-                                ],
-                                "plan": "Pay-per-use",
-                                "price_usd": "Delivery fees vary",
-                                "target_customer": "Occasional users who order infrequently"
-                            }
-                        ]
-                    },
-                    {
-                        "cheapest_plan_usd": "1.99",
-                        "model": "Hybrid (Freemium with subscription)",
-                        "most_expensive_plan_usd": "unknown",
-                        "name": "Grubhub",
-                        "tiers": [
-                            {
-                                "features": [
-                                    "Free delivery on orders over $12",
-                                    "Exclusive perks"
-                                ],
-                                "plan": "Grubhub+ (subscription)",
-                                "price_usd": "10.99/mo",
-                                "target_customer": "Regular diners and enthusiasts"
-                            },
-                            {
-                                "features": [
-                                    "Standard delivery fee"
-                                ],
-                                "plan": "Pay-per-order",
-                                "price_usd": "1.99-$9.99",
-                                "target_customer": "Customers wanting one-time service"
-                            }
-                        ]
-                    },
-                    {
-                        "cheapest_plan_usd": "1.49",
-                        "model": "Hybrid (Freemium with subscription)",
-                        "most_expensive_plan_usd": "unknown",
+                        "cheapest_plan_usd": "3.99",
+                        "model": "Freemium",
+                        "most_expensive_plan_usd": "9.99",
                         "name": "Uber Eats",
                         "tiers": [
                             {
                                 "features": [
-                                    "Reduced service fee",
-                                    "No delivery fee on orders over $15"
+                                    "Delivery within 30 minutes",
+                                    "Access to local restaurants"
                                 ],
-                                "plan": "Eats Pass",
-                                "price_usd": "9.99/mo",
-                                "target_customer": "Frequent orders by city dwellers"
+                                "plan": "Standard Delivery",
+                                "price_usd": "3.99–7.99",
+                                "target_customer": "Casual diners looking for convenience"
                             },
                             {
                                 "features": [
-                                    "Variable delivery fees based on restaurant"
+                                    "Free delivery on eligible orders",
+                                    "Exclusive promotions"
                                 ],
-                                "plan": "Pay-per-delivery",
-                                "price_usd": "1.49-$7.99",
-                                "target_customer": "Infrequent users or those trying new places"
+                                "plan": "Uber Eats Pass",
+                                "price_usd": "9.99/month",
+                                "target_customer": "Frequent users or families looking to save on delivery fees"
                             }
                         ]
                     },
                     {
-                        "cheapest_plan_usd": "2",
-                        "model": "Hybrid (Freemium with subscription)",
-                        "most_expensive_plan_usd": "unknown",
+                        "cheapest_plan_usd": "4.99",
+                        "model": "Subscription/Pay-Per-Use",
+                        "most_expensive_plan_usd": "9.99",
+                        "name": "DoorDash",
+                        "tiers": [
+                            {
+                                "features": [
+                                    "Order tracking",
+                                    "Access to wide range of restaurants"
+                                ],
+                                "plan": "Basic Delivery",
+                                "price_usd": "4.99–8.99",
+                                "target_customer": "Young professionals or college students"
+                            },
+                            {
+                                "features": [
+                                    "No delivery fees on eligible restaurants",
+                                    "Exclusive offers"
+                                ],
+                                "plan": "DashPass",
+                                "price_usd": "9.99/month",
+                                "target_customer": "Regular users or families who order frequently"
+                            }
+                        ]
+                    },
+                    {
+                        "cheapest_plan_usd": "2.99",
+                        "model": "Hybrid",
+                        "most_expensive_plan_usd": "10.99",
+                        "name": "Grubhub",
+                        "tiers": [
+                            {
+                                "features": [
+                                    "User-friendly app interface",
+                                    "Loyalty points"
+                                ],
+                                "plan": "Basic Delivery",
+                                "price_usd": "2.99–6.99",
+                                "target_customer": "Families and groups ordering meals"
+                            },
+                            {
+                                "features": [
+                                    "Free delivery on orders over $12",
+                                    "Exclusive meal deals"
+                                ],
+                                "plan": "Grubhub+",
+                                "price_usd": "10.99/month",
+                                "target_customer": "Frequent eaters and deals hunters"
+                            }
+                        ]
+                    },
+                    {
+                        "cheapest_plan_usd": "3.00",
+                        "model": "Freemium",
+                        "most_expensive_plan_usd": "9.99",
                         "name": "Postmates",
                         "tiers": [
                             {
                                 "features": [
-                                    "No delivery fee on orders over a set amount",
-                                    "Exclusive offers"
+                                    "Same hour delivery options",
+                                    "Wide food selection"
                                 ],
-                                "plan": "Postmates Unlimited",
-                                "price_usd": "9.99/mo",
-                                "target_customer": "Urban dwellers ordering frequently"
+                                "plan": "Standard Delivery",
+                                "price_usd": "3.00–6.00",
+                                "target_customer": "Busy urban dwellers"
                             },
                             {
                                 "features": [
-                                    "Standard delivery fees"
+                                    "Free delivery on orders over $12",
+                                    "Access to exclusive restaurants"
                                 ],
-                                "plan": "Pay-per-order",
-                                "price_usd": "2-$5.99",
-                                "target_customer": "Occasional users needing specific items"
+                                "plan": "Postmates Unlimited",
+                                "price_usd": "9.99/month",
+                                "target_customer": "Frequent users in urban areas"
                             }
                         ]
                     },
                     {
-                        "cheapest_plan_usd": "1.99",
-                        "model": "Freemium with subscription",
-                        "most_expensive_plan_usd": "unknown",
+                        "cheapest_plan_usd": "3.49",
+                        "model": "Freemium",
+                        "most_expensive_plan_usd": "9.99",
                         "name": "Seamless",
                         "tiers": [
                             {
                                 "features": [
-                                    "No delivery fees on orders above $10"
+                                    "Easy app navigation",
+                                    "Many restaurant options"
                                 ],
-                                "plan": "Seamless+ (subscription)",
-                                "price_usd": "9.99/mo",
-                                "target_customer": "Regular customers dining out more"
+                                "plan": "Basic Delivery",
+                                "price_usd": "3.49–7.49",
+                                "target_customer": "City residents looking for variety"
                             },
                             {
                                 "features": [
-                                    "Variable delivery fees"
+                                    "No delivery fees on orders over $15",
+                                    "Special discounts"
                                 ],
-                                "plan": "Standard delivery",
-                                "price_usd": "1.99-$8.99",
-                                "target_customer": "One-time diners or groups"
+                                "plan": "Seamless+ subscription",
+                                "price_usd": "9.99/month",
+                                "target_customer": "Regular diners and professionals"
                             }
                         ]
                     }
                 ],
-                "insight": "Leveraging a subscription model with unique offerings tailored to niche markets can establish a strong competitive advantage and create customer loyalty over time.",
-                "recommendation": "For your food delivery app, a hybrid pricing model that offers a low-cost subscription tier combined with pay-per-delivery options could attract both frequent and occasional users. Competitive subscription pricing, such as $9.99/month with benefits, alongside a transparent delivery fee structure will appeal to budget-conscious consumers while allowing flexibility. Additionally, consider integrating rewards or loyalty features to enhance retention."
+                "insight": "Focus on a unique niche market, such as health-conscious consumers, by offering a selection of healthy meal options alongside competitive pricing to differentiate from mainstream competitors.",
+                "recommendation": "For your food delivery app, consider adopting a freemium pricing model, offering free delivery for the first few orders and then a subscription tier around $9.99/month that includes benefits like waived delivery fees and access to exclusive restaurant promotions. This strategy can attract initial users and convert them into loyal subscribers."
             },
             "success": {
                 "go_no_go_guidance": [
-                    "Ensure at least 5 local restaurant partnerships are secured.",
-                    "Achieve a 10% sign-up conversion rate on the landing page.",
-                    "Obtain a customer satisfaction score of 4/5 or higher during the pilot."
+                    "Achieve at least 2000 pre-launch sign-ups within 3 weeks",
+                    "Secure partnerships with a minimum of 10 restaurants before launch",
+                    "Maintain a customer satisfaction score of 4.5 or higher during pilot testing"
                 ],
                 "mitigations": [
-                    "Differentiate with unique features",
-                    "Optimize marketing strategy for cost-effectiveness",
-                    "Leverage local courier networks",
-                    "Stay updated on regulations",
-                    "Implement strict quality controls",
-                    "Focus on niche markets to avoid saturation"
+                    "Differentiate through unique offerings or niche markets",
+                    "Invest in reliable logistics and delivery management systems",
+                    "Employ targeted marketing strategies to reduce acquisition costs",
+                    "Implement strict service quality protocols",
+                    "Ensure robust tech infrastructure with regular updates",
+                    "Consult legal experts for compliance on local regulations"
                 ],
                 "risks": [
-                    "High competition",
-                    "Customer acquisition costs",
-                    "Logistical challenges",
-                    "Regulatory compliance",
-                    "Consistent quality assurance",
-                    "Market saturation"
+                    "High competition among established players",
+                    "Logistical challenges in delivery operations",
+                    "Customer acquisition costs may exceed budget",
+                    "Quality control and maintaining service standards",
+                    "Technology issues impacting user experience",
+                    "Regulatory compliance and local laws"
                 ],
                 "success_assessment": {
-                    "justification": "The success probability for a food delivery app in your city is estimated at 65%. The market for food delivery is expanding, especially post-pandemic, indicating strong market readiness. User pain points such as convenience, time savings, and the desire for variety in dining are acute. However, the competitive landscape includes established players like DoorDash and Uber Eats, which increases pressure. Defensibility is limited as food delivery lacks robust network effects, though unique partnerships or localized offerings could help. Go-to-market feasibility is moderate, requiring strategic partnerships with local restaurants and effective marketing. Execution involves complexities like logistics and customer service, which are critical for success.",
-                    "success_probability": 65
+                    "justification": "The food delivery app market is growing, indicating market readiness; user pain points such as convenience and time-saving are significant. However, competitive pressure is high with several established players, requiring strong differentiation. Implementing a defensible business model, such as partnerships with local eateries or unique features, could mitigate competition. Go-to-market feasibility is favorable with the availability of digital marketing channels, but execution complexity arises from logistics and restaurant partnerships.",
+                    "success_probability": 70
                 },
                 "validation_plan": [
                     {
-                        "experiment": "Survey potential customers about delivery preferences",
-                        "metric": "Response rate",
-                        "target": "100+ responses",
+                        "experiment": "Conduct surveys to understand user appetite",
+                        "metric": "Number of responses",
+                        "target": "500",
                         "timeframe_weeks": 2
                     },
                     {
-                        "experiment": "Develop a landing page with sign-up for early access",
-                        "metric": "Conversion rate",
-                        "target": "10% sign-up",
+                        "experiment": "Create a landing page for pre-launch sign-ups",
+                        "metric": "Email sign-ups",
+                        "target": "2000",
                         "timeframe_weeks": 3
                     },
                     {
-                        "experiment": "Launch social media ads targeting local foodies",
-                        "metric": "Engagement rate",
-                        "target": "5% engagement",
+                        "experiment": "Run a small pilot delivery service",
+                        "metric": "Customer satisfaction score",
+                        "target": "4.5/5",
                         "timeframe_weeks": 4
                     },
                     {
-                        "experiment": "Partner with 5 local restaurants for a trial",
-                        "metric": "Number of partnerships",
-                        "target": "5 partnerships",
-                        "timeframe_weeks": 5
+                        "experiment": "Test delivery offers and discounts",
+                        "metric": "Usage rate of promo codes",
+                        "target": "20%",
+                        "timeframe_weeks": 3
                     },
                     {
-                        "experiment": "Conduct a pilot delivery service for a weekend",
-                        "metric": "Customer satisfaction score",
-                        "target": "4/5 or above",
+                        "experiment": "Collaborate with local restaurants for partnerships",
+                        "metric": "Number of signed restaurants",
+                        "target": "10",
                         "timeframe_weeks": 6
                     },
                     {
-                        "experiment": "Analyze competitor pricing models",
-                        "metric": "Comparison report",
-                        "target": "Complete analysis",
+                        "experiment": "Utilize social media ads for engagement",
+                        "metric": "Engagement rate",
+                        "target": "5%",
+                        "timeframe_weeks": 2
+                    },
+                    {
+                        "experiment": "Evaluate user preferences through A/B tests",
+                        "metric": "Click-through rate",
+                        "target": "10%",
                         "timeframe_weeks": 3
+                    },
+                    {
+                        "experiment": "Monitor competitor services and feedback",
+                        "metric": "Competitive analysis report",
+                        "target": "1 report",
+                        "timeframe_weeks": 4
                     }
                 ]
             },
             "audience": {
                 "channels": [
                     "Instagram",
-                    "Google Ads",
-                    "Local Food Blogs"
+                    "Facebook Ads",
+                    "Local SEO"
                 ],
                 "marketing_strategies": [
-                    "Launch a referral program offering discounts for both the referrer and the new user to encourage sign-ups.",
-                    "Create a partnership with local restaurants to offer exclusive deals or discounts for the first month.",
-                    "Utilize social media influencers in the food niche to promote your app through reviews and giveaways.",
-                    "Implement targeted promotions during peak meal times, focusing on delivering quick meals to attract busy professionals.",
-                    "Organize a launch event combined with food tastings from partner restaurants to create buzz and engage the community."
+                    "Offer first-time user discounts through social media promotions",
+                    "Collaborate with local restaurants to create exclusive meal deals only available through the app",
+                    "Implement a referral program incentivizing current users to bring friends on board",
+                    "Leverage influencer partnerships on Instagram to showcase unique meals and delivery experiences",
+                    "Host pop-up events in busy urban areas to sample local cuisine and promote app sign-ups"
                 ],
-                "primary_audience": "Young urban professionals aged 25-35 who value convenience and often order food due to busy work schedules and social lives.",
-                "secondary_audience": "Students from local universities who seek affordable dining options and often use mobile apps for food delivery."
+                "primary_audience": "Young professionals aged 25-35 who have demanding jobs and prefer the convenience of food delivery over cooking.",
+                "secondary_audience": "Families with children looking for convenient and quick meal solutions during busy weekdays."
             },
             "tech": {
                 "components": [
                     {
-                        "build_vs_buy": "Buy - Utilize frameworks like React Native for multi-platform support.",
-                        "key_tech_stack": [
-                            "React",
-                            "React Native",
-                            "Redux",
-                            "Tailwind CSS"
-                        ],
-                        "name": "Frontend Web & Mobile App",
-                        "purpose": "User interface for customers and restaurant partners to browse, order, and manage deliveries.",
-                        "risks": [
-                            "UI/UX may not meet user expectations",
-                            "Device compatibility issues"
-                        ]
-                    },
-                    {
-                        "build_vs_buy": "Build - Custom RESTful API using Node.js.",
+                        "build_vs_buy": "Build",
                         "key_tech_stack": [
                             "Node.js",
                             "Express",
-                            "GraphQL"
+                            "MongoDB"
                         ],
-                        "name": "Backend API",
-                        "purpose": "Serve as the communication layer between frontend and database, handling requests and responses.",
+                        "name": "User Management Service",
+                        "purpose": "Handles user registration, authentication, and profiles.",
                         "risks": [
-                            "Performance bottlenecks",
-                            "Security vulnerabilities"
+                            "Data security breaches",
+                            "Service scalability issues"
                         ]
                     },
                     {
-                        "build_vs_buy": "Buy - Use a managed database solution.",
+                        "build_vs_buy": "Build",
                         "key_tech_stack": [
-                            "PostgreSQL",
+                            "Python",
+                            "Flask",
+                            "PostgreSQL"
+                        ],
+                        "name": "Order Management Service",
+                        "purpose": "Processes orders, manages order status and history.",
+                        "risks": [
+                            "Data inconsistency",
+                            "Transaction failures"
+                        ]
+                    },
+                    {
+                        "build_vs_buy": "Buy",
+                        "key_tech_stack": [
+                            "Java",
+                            "Spring",
+                            "Stripe API"
+                        ],
+                        "name": "Payment Processing Service",
+                        "purpose": "Handles payment transactions and integrates with external payment gateways.",
+                        "risks": [
+                            "Payment security risks",
+                            "Compliance with regulations"
+                        ]
+                    },
+                    {
+                        "build_vs_buy": "Build",
+                        "key_tech_stack": [
+                            "Ruby",
+                            "Rails",
                             "Redis"
                         ],
-                        "name": "Database",
-                        "purpose": "Store user, delivery, and restaurant data in a structured manner.",
+                        "name": "Delivery Tracking Service",
+                        "purpose": "Provides real-time tracking of delivery status.",
                         "risks": [
-                            "Data loss",
-                            "Inadequate scaling under load"
+                            "Inaccurate location tracking",
+                            "Network connectivity issues"
                         ]
                     },
                     {
-                        "build_vs_buy": "Buy - Use cloud providers like AWS or GCP.",
+                        "build_vs_buy": "Buy",
                         "key_tech_stack": [
-                            "AWS EC2",
-                            "AWS RDS",
-                            "AWS S3"
-                        ],
-                        "name": "Cloud Hosting",
-                        "purpose": "Host applications, databases, and services in the cloud.",
-                        "risks": [
-                            "Vendor lock-in",
-                            "Unexpected costs"
-                        ]
-                    },
-                    {
-                        "build_vs_buy": "Buy - Integrate with existing payment processors.",
-                        "key_tech_stack": [
-                            "Stripe",
-                            "PayPal"
-                        ],
-                        "name": "Payment Gateway",
-                        "purpose": "Process payments securely from users for their orders.",
-                        "risks": [
-                            "Compliance issues",
-                            "Fraud"
-                        ]
-                    },
-                    {
-                        "build_vs_buy": "Build - Custom notification service or buy from suppliers.",
-                        "key_tech_stack": [
-                            "Firebase Cloud Messaging",
-                            "AWS SNS"
+                            "Python",
+                            "Celery",
+                            "Amazon SNS"
                         ],
                         "name": "Notification Service",
-                        "purpose": "Send real-time updates to users about their orders.",
+                        "purpose": "Sends notifications to users regarding order updates.",
                         "risks": [
-                            "Delivery failures",
-                            "High latency in notifications"
+                            "Delivery delays of notifications",
+                            "Message loss"
                         ]
                     }
                 ],
                 "cost_estimates": {
-                    "dev_env_usd_month": "3000",
-                    "prod_env_usd_month": "5000",
-                    "staging_env_usd_month": "1500"
+                    "dev_env_usd_month": "1500",
+                    "prod_env_usd_month": "3000",
+                    "staging_env_usd_month": "800"
                 },
                 "data_model_notes": {
-                    "retention_policy": "Retain user data for 2 years for insights, orders data for 5 years for analytics.",
+                    "retention_policy": "User data retained for 5 years, order history for 1 year, payment data for 3 years.",
                     "schema_highlights": [
-                        "Users (id, name, email, address)",
-                        "Orders (id, user_id, restaurant_id, status)",
-                        "Restaurants (id, name, menu)"
+                        "User (ID, Name, Email)",
+                        "Order (ID, UserID, Status, TotalAmount)",
+                        "Payment (ID, OrderID, Status, PaymentMethod)"
                     ],
                     "sources": [
-                        "User signups",
-                        "Order history",
-                        "Restaurant database"
+                        "User input",
+                        "Order data",
+                        "Payment transactions"
                     ]
                 },
                 "infra_plan": {
-                    "hosting": "AWS cloud with Elastic Beanstalk for deployment.",
+                    "hosting": "AWS with EC2 for web servers, RDS for databases, S3 for file storage.",
                     "observability": [
                         "AWS CloudWatch for monitoring",
-                        "Prometheus for metrics"
+                        "ELK stack for logging"
                     ],
-                    "scaling": "Auto-scaling groups for instances based on load.",
+                    "scaling": "Auto-scaling groups for dynamic resource allocation based on traffic.",
                     "security": [
-                        "SSL encryption for data in transit",
-                        "AWS IAM for access control"
+                        "HTTPS for secure communication",
+                        "IAM policies for access control"
                     ]
                 },
                 "integration_matrix": [
                     {
-                        "auth": "OAuth 2.0",
-                        "notes": "Ensure PCI compliance.",
-                        "rate_limit": "100 requests/min",
-                        "service": "Stripe"
+                        "auth": "API Key",
+                        "notes": "Requires secure storage of API keys.",
+                        "rate_limit": "1000 requests/min",
+                        "service": "Stripe Payment Gateway"
                     },
                     {
                         "auth": "API Key",
-                        "notes": "Monitor for spam regulations.",
-                        "rate_limit": "200 messages/min",
-                        "service": "Twilio (for SMS)"
+                        "notes": "Use caching for location data to minimize calls.",
+                        "rate_limit": "2500 requests/day",
+                        "service": "Google Maps API"
                     }
                 ],
-                "system_architecture": "A multi-tier architecture with separate presentation, business, and data layers, utilizing microservices for delivery management, user management, restaurant management, and order processing."
+                "system_architecture": "A microservices architecture to handle different components such as user management, order processing, payment processing, and delivery tracking, utilizing RESTful APIs and a mobile-first approach."
             },
             "time-budget": {
                 "acceleration_options": [
                     {
-                        "option": "Increase development team size",
-                        "trade_off": "Higher costs but faster delivery."
+                        "option": "Add more developers to the team during the development phase",
+                        "trade_off": "Higher payroll costs, but faster delivery of the MVP."
                     },
                     {
-                        "option": "Launch with limited features",
-                        "trade_off": "Faster to market, but may impact user satisfaction."
+                        "option": "Outsource app development to a third party",
+                        "trade_off": "Cost savings but potentially lower quality control."
                     },
                     {
-                        "option": "Outsource specific phases",
-                        "trade_off": "Cost savings, but less control over quality."
+                        "option": "Increase marketing budget for pre-launch activities",
+                        "trade_off": "Higher upfront costs, but increased user acquisition and potential revenue."
                     }
                 ],
                 "budget_estimate": {
                     "by_phase_usd": [
                         {
-                            "high": 8000,
+                            "high": 10000,
                             "low": 5000,
-                            "phase": "Market Research & Validation"
+                            "phase": "Market Research and Analysis"
                         },
                         {
-                            "high": 12000,
-                            "low": 8000,
-                            "phase": "App Design & Prototyping"
+                            "high": 25000,
+                            "low": 15000,
+                            "phase": "App Design and Prototyping"
                         },
                         {
-                            "high": 30000,
-                            "low": 20000,
-                            "phase": "Development & Testing"
+                            "high": 50000,
+                            "low": 30000,
+                            "phase": "Development Phase"
                         },
                         {
-                            "high": 15000,
+                            "high": 20000,
                             "low": 10000,
-                            "phase": "Launch & Marketing"
+                            "phase": "Marketing and Launch"
                         },
                         {
-                            "high": 5000,
-                            "low": 3000,
-                            "phase": "Post-Launch Support & Iteration"
+                            "high": 10000,
+                            "low": 5000,
+                            "phase": "Post-Launch Evaluation and Updates"
                         }
                     ],
                     "total_usd": {
-                        "high": 70000,
-                        "low": 46000
+                        "high": 115000,
+                        "low": 60000
                     }
                 },
                 "phases": [
                     {
                         "duration_weeks": 4,
                         "major_deliverables": [
-                            "Market Research Report",
-                            "User Interviews & Surveys",
-                            "Value Proposition Document"
+                            "Market Analysis Report",
+                            "Competitor Analysis",
+                            "Target Customer Identification"
                         ],
-                        "name": "Market Research & Validation",
+                        "name": "Market Research and Analysis",
                         "team_mix": [
                             {
-                                "FTE": 0.5,
-                                "role": "Market Analyst"
+                                "FTE": 1,
+                                "role": "Market Research Analyst"
                             },
                             {
-                                "FTE": 0.25,
-                                "role": "Project Manager"
+                                "FTE": 0.5,
+                                "role": "Business Analyst"
                             }
                         ]
                     },
@@ -582,10 +587,10 @@ document.addEventListener("DOMContentLoaded",async () => {
                         "duration_weeks": 6,
                         "major_deliverables": [
                             "Wireframes",
-                            "High-Fidelity Prototypes",
-                            "User Testing Feedback"
+                            "UI/UX Prototype",
+                            "User Flow Documentation"
                         ],
-                        "name": "App Design & Prototyping",
+                        "name": "App Design and Prototyping",
                         "team_mix": [
                             {
                                 "FTE": 1,
@@ -593,26 +598,26 @@ document.addEventListener("DOMContentLoaded",async () => {
                             },
                             {
                                 "FTE": 0.5,
-                                "role": "Front-End Developer"
+                                "role": "Product Manager"
                             }
                         ]
                     },
                     {
                         "duration_weeks": 12,
                         "major_deliverables": [
-                            "MVP Development",
-                            "Testing Reports",
-                            "Bug Fixes"
+                            "MVP Version of the App",
+                            "API Integration",
+                            "Testing Reports"
                         ],
-                        "name": "Development & Testing",
+                        "name": "Development Phase",
                         "team_mix": [
                             {
                                 "FTE": 1,
-                                "role": "Back-End Developer"
+                                "role": "Frontend Developer"
                             },
                             {
                                 "FTE": 1,
-                                "role": "Front-End Developer"
+                                "role": "Backend Developer"
                             },
                             {
                                 "FTE": 0.5,
@@ -621,13 +626,13 @@ document.addEventListener("DOMContentLoaded",async () => {
                         ]
                     },
                     {
-                        "duration_weeks": 8,
+                        "duration_weeks": 4,
                         "major_deliverables": [
-                            "Launch Campaign",
-                            "User Acquisition Metrics",
-                            "Feedback Collection"
+                            "Marketing Strategy Document",
+                            "Launch Plan",
+                            "Initial User Acquisition"
                         ],
-                        "name": "Launch & Marketing",
+                        "name": "Marketing and Launch",
                         "team_mix": [
                             {
                                 "FTE": 1,
@@ -635,7 +640,7 @@ document.addEventListener("DOMContentLoaded",async () => {
                             },
                             {
                                 "FTE": 0.5,
-                                "role": "Customer Support"
+                                "role": "Community Manager"
                             }
                         ]
                     },
@@ -643,13 +648,13 @@ document.addEventListener("DOMContentLoaded",async () => {
                         "duration_weeks": 4,
                         "major_deliverables": [
                             "User Feedback Report",
-                            "Product Iteration Plan"
+                            "App Updates Plan"
                         ],
-                        "name": "Post-Launch Support & Iteration",
+                        "name": "Post-Launch Evaluation and Updates",
                         "team_mix": [
                             {
-                                "FTE": 0.5,
-                                "role": "Product Manager"
+                                "FTE": 1,
+                                "role": "Data Analyst"
                             },
                             {
                                 "FTE": 0.5,
@@ -660,14 +665,14 @@ document.addEventListener("DOMContentLoaded",async () => {
                 ],
                 "resource_plan": [
                     {
-                        "FTE": 0.5,
-                        "role": "Market Analyst",
+                        "FTE": 1,
+                        "role": "Market Research Analyst",
                         "seniority": "Mid"
                     },
                     {
-                        "FTE": 0.25,
-                        "role": "Project Manager",
-                        "seniority": "Senior"
+                        "FTE": 0.5,
+                        "role": "Business Analyst",
+                        "seniority": "Mid"
                     },
                     {
                         "FTE": 1,
@@ -675,14 +680,19 @@ document.addEventListener("DOMContentLoaded",async () => {
                         "seniority": "Mid"
                     },
                     {
-                        "FTE": 1.5,
-                        "role": "Front-End Developer",
+                        "FTE": 0.5,
+                        "role": "Product Manager",
+                        "seniority": "Senior"
+                    },
+                    {
+                        "FTE": 1,
+                        "role": "Frontend Developer",
                         "seniority": "Mid"
                     },
                     {
                         "FTE": 1,
-                        "role": "Back-End Developer",
-                        "seniority": "Senior"
+                        "role": "Backend Developer",
+                        "seniority": "Mid"
                     },
                     {
                         "FTE": 0.5,
@@ -696,19 +706,25 @@ document.addEventListener("DOMContentLoaded",async () => {
                     },
                     {
                         "FTE": 0.5,
-                        "role": "Customer Support",
-                        "seniority": "Entry"
+                        "role": "Community Manager",
+                        "seniority": "Mid"
+                    },
+                    {
+                        "FTE": 1,
+                        "role": "Data Analyst",
+                        "seniority": "Mid"
                     },
                     {
                         "FTE": 0.5,
-                        "role": "Product Manager",
-                        "seniority": "Senior"
+                        "role": "Developer",
+                        "seniority": "Mid"
                     }
                 ],
                 "schedule_risks": [
-                    "Delays in market research could push back the design phase.",
-                    "Limited user feedback might lead to an MVP that doesn’t meet market needs.",
-                    "Technical challenges in app development may require additional time."
+                    "Delays in market research leading to extended timelines.",
+                    "Potential hiring or resource allocation issues.",
+                    "Technical challenges during app development phase.",
+                    "Underestimating marketing costs or efforts to acquire users post-launch."
                 ]
             },
             "team": {
@@ -718,44 +734,35 @@ document.addEventListener("DOMContentLoaded",async () => {
                         "role": "CEO",
                         "skills": [
                             "Leadership",
-                            "Vision",
-                            "Strategic planning"
+                            "Strategic Planning",
+                            "Business Development"
                         ]
                     },
                     {
                         "coverage_gaps": [],
                         "role": "CTO",
                         "skills": [
-                            "Technical expertise",
-                            "Software development",
-                            "Team management"
+                            "Software Development",
+                            "Team Management",
+                            "Tech Strategy"
                         ]
                     },
                     {
                         "coverage_gaps": [],
                         "role": "CMO",
                         "skills": [
-                            "Marketing strategy",
-                            "User acquisition",
-                            "Brand development"
+                            "Digital Marketing",
+                            "Brand Management",
+                            "Market Analysis"
                         ]
                     },
                     {
                         "coverage_gaps": [],
                         "role": "Lead Developer",
                         "skills": [
-                            "Full-stack development",
-                            "App architecture",
-                            "Coding proficiency"
-                        ]
-                    },
-                    {
-                        "coverage_gaps": [],
-                        "role": "Data Analyst",
-                        "skills": [
-                            "Data analysis",
-                            "Statistical tools",
-                            "Reporting"
+                            "Coding",
+                            "Project Management",
+                            "Problem Solving"
                         ]
                     },
                     {
@@ -763,97 +770,63 @@ document.addEventListener("DOMContentLoaded",async () => {
                         "role": "Operations Manager",
                         "skills": [
                             "Logistics",
-                            "Process optimization",
-                            "Team management"
-                        ]
-                    },
-                    {
-                        "coverage_gaps": [],
-                        "role": "Customer Support Lead",
-                        "skills": [
-                            "Customer service",
-                            "Problem solving",
-                            "Communication"
-                        ]
-                    },
-                    {
-                        "coverage_gaps": [],
-                        "role": "Sales Manager",
-                        "skills": [
-                            "Sales strategy",
-                            "Relationship building",
-                            "Negotiation"
+                            "Vendor Management",
+                            "Process Optimization"
                         ]
                     }
                 ],
                 "hiring_plan": [
                     {
                         "quarter": "Q1",
-                        "reason": "Visionary leader to steer the startup.",
-                        "role": "CEO",
-                        "seniority": "Founder"
-                    },
-                    {
-                        "quarter": "Q1",
-                        "reason": "Technical leadership for app development.",
+                        "reason": "To establish technical vision and oversee development.",
                         "role": "CTO",
-                        "seniority": "Co-Founder"
+                        "seniority": "Executive"
                     },
                     {
                         "quarter": "Q1",
-                        "reason": "Marketing strategies to acquire users.",
+                        "reason": "To lead marketing strategies and customer acquisition.",
                         "role": "CMO",
-                        "seniority": "Co-Founder"
+                        "seniority": "Executive"
                     },
                     {
                         "quarter": "Q2",
-                        "reason": "Building and iterating the app.",
+                        "reason": "To start building the app and manage the development team.",
                         "role": "Lead Developer",
                         "seniority": "Mid-level"
                     },
                     {
                         "quarter": "Q2",
-                        "reason": "Analyzing user data for insights.",
-                        "role": "Data Analyst",
-                        "seniority": "Junior"
-                    },
-                    {
-                        "quarter": "Q3",
-                        "reason": "Optimizing delivery logistics and operations.",
+                        "reason": "To manage delivery logistics and partnerships.",
                         "role": "Operations Manager",
                         "seniority": "Mid-level"
                     },
                     {
                         "quarter": "Q3",
-                        "reason": "Managing user inquiries and support.",
-                        "role": "Customer Support Lead",
-                        "seniority": "Mid-level"
+                        "reason": "To analyze user data for improving services and targeting.",
+                        "role": "Data Analyst",
+                        "seniority": "Entry-level"
+                    },
+                    {
+                        "quarter": "Q3",
+                        "reason": "To provide support and handle customer inquiries.",
+                        "role": "Customer Support Representative",
+                        "seniority": "Entry-level"
                     },
                     {
                         "quarter": "Q4",
-                        "reason": "Building partnerships with local restaurants.",
-                        "role": "Sales Manager",
-                        "seniority": "Junior"
+                        "reason": "To improve app design based on user feedback.",
+                        "role": "UI/UX Designer",
+                        "seniority": "Mid-level"
                     }
                 ],
                 "interview_rubrics": [
                     {
-                        "role": "CEO",
-                        "top_signals": [
-                            "Visionary thinking",
-                            "Strong leadership",
-                            "Industry knowledge",
-                            "Risk assessment",
-                            "Network connections"
-                        ]
-                    },
-                    {
                         "role": "CTO",
                         "top_signals": [
-                            "Technical proficiency",
-                            "Problem-solving skills",
-                            "Leadership experience",
-                            "Vision for technology",
+                            "Technical expertise",
+                            "Leadership capabilities",
+                            "Strategic thinking",
+                            "Problem solving",
                             "Adaptability"
                         ]
                     },
@@ -861,30 +834,60 @@ document.addEventListener("DOMContentLoaded",async () => {
                         "role": "CMO",
                         "top_signals": [
                             "Marketing experience",
-                            "User acquisition skills",
+                            "Analytical skills",
                             "Creativity",
-                            "Analytical thinking",
-                            "Networking ability"
+                            "Communication skills",
+                            "Results driven"
                         ]
                     },
                     {
                         "role": "Lead Developer",
                         "top_signals": [
-                            "Strong coding skills",
-                            "Project experience",
+                            "Coding proficiency",
                             "Team collaboration",
-                            "Problem-solving ability",
-                            "Code quality standards"
+                            "Software design knowledge",
+                            "Agile mindset",
+                            "Mentorship experience"
+                        ]
+                    },
+                    {
+                        "role": "Operations Manager",
+                        "top_signals": [
+                            "Process optimization skills",
+                            "Vendor negotiation experience",
+                            "Logistical mindset",
+                            "Time management",
+                            "Problem solving"
                         ]
                     },
                     {
                         "role": "Data Analyst",
                         "top_signals": [
                             "Analytical skills",
-                            "Data interpretation",
+                            "Data visualization expertise",
+                            "Attention to detail",
                             "Statistical knowledge",
+                            "Communication skills"
+                        ]
+                    },
+                    {
+                        "role": "Customer Support Representative",
+                        "top_signals": [
+                            "Empathy",
                             "Communication skills",
-                            "Software proficiency"
+                            "Problem-solving abilities",
+                            "Product knowledge",
+                            "Adaptability"
+                        ]
+                    },
+                    {
+                        "role": "UI/UX Designer",
+                        "top_signals": [
+                            "Design portfolio",
+                            "User-centered design understanding",
+                            "Prototyping skills",
+                            "Feedback incorporation",
+                            "Collaboration skills"
                         ]
                     }
                 ],
@@ -905,25 +908,21 @@ document.addEventListener("DOMContentLoaded",async () => {
                         },
                         {
                             "CMO": [
-                                "Sales Manager"
-                            ]
-                        },
-                        {
-                            "Operations Manager": [
-                                "Customer Support Lead"
+                                "Marketing Coordinator",
+                                "Customer Support Representative"
                             ]
                         }
                     ],
-                    "structure": "Flat organization to promote collaboration."
+                    "structure": "Flat structure with focus on collaboration."
                 },
                 "vendor_vs_inhouse": {
                     "what_to_keep_inhouse": [
-                        "Development team",
-                        "Customer support team"
+                        "Customer Support",
+                        "Operations Management"
                     ],
                     "what_to_outsource": [
-                        "Delivery logistics management",
-                        "Marketing campaigns"
+                        "App Development",
+                        "Digital Marketing"
                     ]
                 }
             },
@@ -932,19 +931,15 @@ document.addEventListener("DOMContentLoaded",async () => {
                     "critical_path": [
                         {
                             "sprint": 1,
-                            "task": "Define core features and user personas."
-                        },
-                        {
-                            "sprint": 2,
-                            "task": "Finalizing the Minimum Viable Product (MVP) design."
+                            "task": "Conduct market research and identify target audience."
                         },
                         {
                             "sprint": 6,
-                            "task": "Complete user testing & iterate on feedback."
+                            "task": "Integrate feedback and finalize app development."
                         },
                         {
-                            "sprint": 12,
-                            "task": "Launch the food delivery app to the public."
+                            "sprint": 11,
+                            "task": "Launch the food delivery app."
                         }
                     ],
                     "dependencies": [
@@ -957,8 +952,36 @@ document.addEventListener("DOMContentLoaded",async () => {
                             "to": "sprint 3"
                         },
                         {
+                            "from": "sprint 3",
+                            "to": "sprint 4"
+                        },
+                        {
+                            "from": "sprint 4",
+                            "to": "sprint 5"
+                        },
+                        {
+                            "from": "sprint 5",
+                            "to": "sprint 6"
+                        },
+                        {
                             "from": "sprint 6",
                             "to": "sprint 7"
+                        },
+                        {
+                            "from": "sprint 7",
+                            "to": "sprint 8"
+                        },
+                        {
+                            "from": "sprint 8",
+                            "to": "sprint 9"
+                        },
+                        {
+                            "from": "sprint 9",
+                            "to": "sprint 10"
+                        },
+                        {
+                            "from": "sprint 10",
+                            "to": "sprint 11"
                         },
                         {
                             "from": "sprint 11",
@@ -967,183 +990,165 @@ document.addEventListener("DOMContentLoaded",async () => {
                     ],
                     "launch_checklist": [
                         {
-                            "item": "Test critical functionalities like ordering and payment."
+                            "item": "App submitted to app stores"
                         },
                         {
-                            "item": "Ensure operational logistics are in place."
+                            "item": "All marketing materials prepared"
                         },
                         {
-                            "item": "Prepare marketing materials for launch."
-                        },
-                        {
-                            "item": "Define customer support processes."
+                            "item": "Customer support team trained"
                         }
                     ],
                     "post_launch_metrics": {
                         "guardrails": [
-                            "Customer retention rate after 30 days.",
-                            "Average order value (AOV).",
-                            "Delivery time efficiency.",
-                            "Monthly active users (MAU).",
-                            "User satisfaction score."
+                            "Maximum churn rate of 15%",
+                            "User satisfaction score above 80%"
                         ],
-                        "north_star": "Daily active users (DAU)."
+                        "north_star": "Achieve 10,000 active users within the first three months after launch."
                     },
                     "roadmap": [
                         {
                             "key_tasks": [
-                                "Conduct initial market research.",
-                                "Identify key features for the MVP.",
-                                "Create user personas.",
-                                "Define target market."
+                                "Survey potential users",
+                                "Analyze competitor apps",
+                                "Identify local food preferences"
                             ],
-                            "owner_role": "Product Manager",
+                            "owner_role": "Market Research Analyst",
                             "sprint": 1,
-                            "sprint_goal": "Establish product vision and user personas.",
-                            "success_metric": "Completion of product vision documentation.",
+                            "sprint_goal": "Conduct market research and identify target audience.",
+                            "success_metric": "Completion of surveys from at least 500 potential users",
                             "weeks": "1-2"
                         },
                         {
                             "key_tasks": [
-                                "Create wireframes for the app.",
-                                "Design user interface (UI) components.",
-                                "Gather feedback on wireframes.",
-                                "Define technical architecture."
+                                "List core app features",
+                                "Develop user personas",
+                                "Design initial wireframes"
                             ],
-                            "owner_role": "UI/UX Designer",
+                            "owner_role": "Product Manager",
                             "sprint": 2,
-                            "sprint_goal": "Finalize MVP scope and design.",
-                            "success_metric": "Approval of wireframes and UI design.",
+                            "sprint_goal": "Define app features and create wireframes.",
+                            "success_metric": "Approval of wireframes by stakeholders",
                             "weeks": "3-4"
                         },
                         {
                             "key_tasks": [
-                                "Set up development environments.",
-                                "Develop user registration & login features.",
-                                "Implement menu and ordering systems.",
-                                "Initiate payment processing integration."
+                                "Research technology options",
+                                "Estimate development costs",
+                                "Draft budget plan"
                             ],
-                            "owner_role": "Lead Developer",
+                            "owner_role": "Technical Lead",
                             "sprint": 3,
-                            "sprint_goal": "Begin development of core features.",
-                            "success_metric": "Prototype demonstration of core features.",
+                            "sprint_goal": "Finalize tech stack and initial budget.",
+                            "success_metric": "Completed technology specifications document",
                             "weeks": "5-6"
                         },
                         {
                             "key_tasks": [
-                                "Complete development of the delivery tracking feature.",
-                                "Implement customer feedback and rating system.",
-                                "Develop order history feature.",
-                                "Conduct code review sessions."
+                                "Set up development environment",
+                                "Assign development tasks",
+                                "Begin coding core features"
                             ],
-                            "owner_role": "Lead Developer",
+                            "owner_role": "Development Team Lead",
                             "sprint": 4,
-                            "sprint_goal": "Build out remaining features of the MVP.",
-                            "success_metric": "All MVP features implemented.",
+                            "sprint_goal": "Initiate development of the app MVP.",
+                            "success_metric": "Completion of first feature sprint in MVP",
                             "weeks": "7-8"
                         },
                         {
                             "key_tasks": [
-                                "Run functional tests on all app features.",
-                                "Fix identified bugs and issues.",
-                                "Conduct performance testing.",
-                                "Prepare for user testing phase."
+                                "Develop additional features",
+                                "Recruit initial user testers",
+                                "Conduct usability tests"
                             ],
-                            "owner_role": "QA Engineer",
+                            "owner_role": "UX/UI Designer",
                             "sprint": 5,
-                            "sprint_goal": "Conduct internal testing and quality assurance.",
-                            "success_metric": "Identification and resolution of critical bugs.",
+                            "sprint_goal": "Continue MVP development and start user testing.",
+                            "success_metric": "Collect feedback from at least 50 testers",
                             "weeks": "9-10"
                         },
                         {
                             "key_tasks": [
-                                "Select participants for user testing.",
-                                "Gather feedback through surveys and interviews.",
-                                "Analyze user feedback and determine necessary changes.",
-                                "Revise the app based on user suggestions."
+                                "Implement user feedback",
+                                "Conduct final QA testing",
+                                "Prepare marketing materials"
                             ],
-                            "owner_role": "Product Manager",
+                            "owner_role": "Quality Assurance Manager",
                             "sprint": 6,
-                            "sprint_goal": "Conduct user testing with target customers.",
-                            "success_metric": "At least a 75% satisfaction rate in user feedback.",
+                            "sprint_goal": "Integrate feedback and finalize app development.",
+                            "success_metric": "Achieve 90% bug resolution from testing",
                             "weeks": "11-12"
                         },
                         {
                             "key_tasks": [
-                                "Adjust UI/UX based on feedback.",
-                                "Fix any newly identified bugs.",
-                                "Re-test the app to ensure all changes work.",
-                                "Prepare for soft launch."
+                                "Develop social media strategy",
+                                "Create promotional content",
+                                "Set up partnerships with local restaurants"
                             ],
-                            "owner_role": "UI/UX Designer",
+                            "owner_role": "Marketing Manager",
                             "sprint": 7,
-                            "sprint_goal": "Implement changes from user testing feedback.",
-                            "success_metric": "Completion of all revisions and re-testing.",
+                            "sprint_goal": "Prepare for launch with marketing campaigns.",
+                            "success_metric": "Obtain commitment from 10+ restaurants for launch",
                             "weeks": "13-14"
                         },
                         {
                             "key_tasks": [
-                                "Create promotional materials.",
-                                "Develop a pre-launch marketing campaign.",
-                                "Set up social media marketing strategies.",
-                                "Establish partnerships with local restaurants."
+                                "Launch beta version",
+                                "Gather beta user data",
+                                "Monitor app performance"
                             ],
-                            "owner_role": "Marketing Manager",
+                            "owner_role": "Product Manager",
                             "sprint": 8,
-                            "sprint_goal": "Develop marketing strategies and launch plans.",
-                            "success_metric": "Creation of a complete marketing plan.",
+                            "sprint_goal": "Conduct beta testing with select users.",
+                            "success_metric": "Achieve a NPS (Net Promoter Score) of at least 50",
                             "weeks": "15-16"
                         },
                         {
                             "key_tasks": [
-                                "Implement delivery logistics and partnerships.",
-                                "Set up customer support processes.",
-                                "Train staff on using the app.",
-                                "Establish payment reconciliation processes."
+                                "Address reported bugs",
+                                "Enhance user experience",
+                                "Finalize app features"
                             ],
-                            "owner_role": "Operations Manager",
+                            "owner_role": "Development Team Lead",
                             "sprint": 9,
-                            "sprint_goal": "Finalize logistics for operations.",
-                            "success_metric": "Operational readiness confirmed.",
+                            "sprint_goal": "Make final adjustments based on beta feedback.",
+                            "success_metric": "Achieve less than 5 critical bugs before launch",
                             "weeks": "17-18"
                         },
                         {
                             "key_tasks": [
-                                "Launch app to a limited audience.",
-                                "Gather feedback from users on the soft launch.",
-                                "Monitor app performance closely.",
-                                "Adjust marketing based on initial reception."
+                                "Prepare app for submission to app stores",
+                                "Set up customer support systems",
+                                "Create launch plan"
                             ],
-                            "owner_role": "Product Manager",
+                            "owner_role": "Operations Manager",
                             "sprint": 10,
-                            "sprint_goal": "Conduct a soft launch to gather initial feedback.",
-                            "success_metric": "Feedback collected from at least 200 users.",
+                            "sprint_goal": "Finalize launch logistics and app store setup.",
+                            "success_metric": "App submission completed without issues",
                             "weeks": "19-20"
                         },
                         {
                             "key_tasks": [
-                                "Implement any final adjustments.",
-                                "Prepare final marketing push for launch.",
-                                "Create launch event strategies.",
-                                "Ensure all user support tools are in place."
+                                "Launch marketing campaign",
+                                "Monitor initial user adoption",
+                                "Collect user feedback post-launch"
                             ],
                             "owner_role": "Marketing Manager",
                             "sprint": 11,
-                            "sprint_goal": "Prepare for the full public launch.",
-                            "success_metric": "All metrics ready for public launch.",
+                            "sprint_goal": "Launch the food delivery app.",
+                            "success_metric": "Achieve 1,000 users in the first week",
                             "weeks": "21-22"
                         },
                         {
                             "key_tasks": [
-                                "Execute the full launch plan.",
-                                "Monitor app and customer feedback actively.",
-                                "Assess traffic and service metrics.",
-                                "Begin ongoing marketing efforts."
+                                "Analyze user retention data",
+                                "Gather user satisfaction surveys",
+                                "Plan next features and updates"
                             ],
                             "owner_role": "Product Manager",
                             "sprint": 12,
-                            "sprint_goal": "Launch the food delivery app to the public.",
-                            "success_metric": "Achieve 1,000 downloads within the first week.",
+                            "sprint_goal": "Evaluate launch performance and user metrics.",
+                            "success_metric": "Establish a baseline for user retention rate",
                             "weeks": "23-24"
                         }
                     ]
@@ -1176,7 +1181,7 @@ document.addEventListener("DOMContentLoaded",async () => {
         return null;
     }
 
-    let idea = getIdeaFromURL();
+    idea = getIdeaFromURL();
 
     async function fetchResearchData(idea) {
         let user = localStorage.getItem("user");
@@ -1597,11 +1602,11 @@ document.addEventListener("DOMContentLoaded",async () => {
             return;
         }
         console.log(data)
-        if(data.message == 'No'){
+        if (data.message == 'No') {
             container.innerHTML = `<p>No customer reviews available at this time.</p>`;
             return;
         }
-         else{
+        else {
             const reviewsHTML = data.data.map(review => `
             <div class="card review-card">
                 <div class="review-header">
@@ -1633,13 +1638,15 @@ document.addEventListener("DOMContentLoaded",async () => {
             </div>
         `).join('');
 
-        container.innerHTML = `<div class="content-grid-two-col">${reviewsHTML}</div>`;
+            container.innerHTML = `<div class="content-grid-two-col">${reviewsHTML}</div>`;
         }
 
-        
+
     }
 
-    reviews = await getCustomerReviews();
+    if (mobile && idea) {
+        reviews = await getCustomerReviews();
+    }
 
     // --- INITIALIZE DASHBOARD ---
     function initializeDashboard(data, reviews) {
@@ -1665,10 +1672,10 @@ document.addEventListener("DOMContentLoaded",async () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ mobile, idea:idea.idea })
+            body: JSON.stringify({ mobile, idea: idea.idea })
         });
         console.log(realcusrev)
-        
+
         if (!realcusrev) return null;
         return await realcusrev.json();
     }

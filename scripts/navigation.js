@@ -1,8 +1,3 @@
-$(document).ready(function () {
-   $(".chat-bot-container").load("askit.html");
-});
-
-// Mobile Menu Functionality
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
