@@ -1360,7 +1360,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         ${comp.tiers.map(tier => `
                             <div class="tier-card">
                                 <h4>${tier.plan}</h4>
-                            <div class="price">${tier.price_usd.includes("per") ? tier.price_usd.split(" ")[0] : tier.price_usd}</div>
+                            <div class="price">$${tier.price_usd.includes("per") ? tier.price_usd.split(" ")[0] : tier.price_usd}</div>
                             <div class="price-note">${tier.price_usd.includes("per") ? "per " + tier.price_usd.split(" ").slice(1).join(" ") : (tier.price_usd === "Varies" ? "Based on usage" : "One-time or varied fee")}</div>
                                 <ul>${tier.features.map(f => `<li>${f}</li>`).join('')}</ul>
                                 <div class="target"><strong>Best for:</strong> ${tier.target_customer}</div>

@@ -21,4 +21,9 @@
 
   --sidebar-width: 280px;
   --sidebar-collapsed-width: 60px;
+
+  --space-xs: 8px;   /* 8px */
+    --space-sm: 16px;  /* 16px */
+    --space-md: 24px;  /* 24px */
+    --space-lg: 32px;
 }  

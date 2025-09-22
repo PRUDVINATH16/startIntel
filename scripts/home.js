@@ -1,4 +1,8 @@
 // Initialize everything when DOM is loaded
+const signoutPopupOverlay = document.getElementById('signout-popup-overlay');
+const showPopupBtn = document.getElementById('show-popup-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+const confirmSignoutBtn = document.getElementById('confirm-signout-btn');
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Lucide icons
     lucide.createIcons();
@@ -382,7 +386,7 @@ async function sendForm(idea) {
     const encryptedIdea = encodeURIComponent(encryptData(idea));
     const encryptedMobile = encodeURIComponent(encryptData(mobile));
     console.log(idea, mobile);
-    if(mobile){
+    if (mobile) {
         let req = await fetch('http://localhost:3000/api/form/send', {
             method: 'POST',
             headers: {
@@ -506,17 +510,16 @@ function hideLoadingOverlay() {
 }
 
 function handleSignOut() {
-    if (confirm('Are you sure you want to sign out?')) {
-        showNotification('Signing out...', 'info');
-        // Clear user data from localStorage
+    signoutPopupOverlay.style.display = 'flex';
+    confirmSignoutBtn.addEventListener('click', () => {
         localStorage.removeItem('user');
-
-        // Simulate sign out
         setTimeout(() => {
-            // Redirect to login page
             window.location.href = 'http://localhost:5500';
         }, 500);
-    }
+    })
+    cancelBtn.addEventListener('click', () => {
+        signoutPopupOverlay.style.display = 'none';
+    })
 }
 
 // Notification System
