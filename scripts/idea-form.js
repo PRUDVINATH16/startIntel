@@ -1,46 +1,43 @@
 const surveyForm = document.getElementById('survey-form');
 const contentWrapper = document.querySelector('.content-wrapper'); // parent to show message
 
-console.log('Survey form script loaded');
 let idea = '';
 let mobile = '';
 
-surveyForm.addEventListener('submit', async function (event) {
-  event.preventDefault();
-
-  const SECRET_KEY = "mySuperSecretKey123";
+ const SECRET_KEY = "mySuperSecretKey123";
 
   function decryptData(ciphertext) {
     const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
-    console.log("Decrypted bytes:", bytes);
     const plain = bytes.toString(CryptoJS.enc.Utf8);
-    console.log("Decrypted raw string:", plain);
     return JSON.parse(plain);
   }
 
 
   function getDataFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams);
     const encryptedData = urlParams.get("idea");
     const encryptedMobile = urlParams.get("mobile");
-    console.log(encryptedData, encryptedMobile);
     if (encryptedData && encryptedMobile) {
       idea = decryptData(encryptedData);
       mobile = decryptData(encryptedMobile);
-      console.log(idea, mobile);
+      console.log(idea, mobile)
+      document.querySelector('.question').innerHTML=idea;
       return { idea, mobile };
     }
     return null;
   }
+
+  getDataFromURL();
+
+surveyForm.addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+ 
   const urlData = getDataFromURL();
-  console.log(urlData);
   if (urlData) {
-    console.log(urlData);
     idea = urlData.idea;
     mobile = urlData.mobile;
   }
-  console.log(idea, mobile);
 
   if (!idea || !mobile) {
     alert('Missing idea or mobile number in URL parameters.');
@@ -60,6 +57,7 @@ surveyForm.addEventListener('submit', async function (event) {
     return;
   } else {
     try {
+      console.log(idea, mobile)
       const req = await fetch('http://localhost:3000/api/form/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

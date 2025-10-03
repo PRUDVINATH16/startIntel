@@ -392,7 +392,7 @@ async function sendForm(idea) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ idea: encryptedIdea, mobile: encryptedMobile })
+            body: JSON.stringify({ idea, mobile, encryptedIdea, encryptedMobile })
         });
         let res = await req.json();
         console.log('send');

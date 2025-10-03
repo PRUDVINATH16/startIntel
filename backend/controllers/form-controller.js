@@ -3,7 +3,7 @@ const SurveyResult = require('../models/surveyResults');
 
 exports.sendSurvey = async (req, res) => {
   try {
-    const { idea, mobile } = req.body;
+    const { idea, mobile, encryptedIdea, encryptedMobile } = req.body;
 
     if (!idea || !mobile) {
       return res.status(400).json({ message: 'Idea and mobile are required' });
@@ -34,7 +34,7 @@ exports.sendSurvey = async (req, res) => {
         <h2>New Idea Submitted</h2>
         <p><strong>Idea:</strong> ${idea}</p>
         <p><strong>Mobile:</strong> ${mobile}</p>
-        <a href="http://localhost:5500/idea-form.html?idea=${idea}&mobile=${mobile}">Link to Fill Form</a>
+        <a href="http://localhost:5500/idea-form.html?idea=${encryptedIdea}&mobile=${encryptedMobile}">Link to Fill Form</a>
       `
     };
 
