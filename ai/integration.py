@@ -30,6 +30,7 @@ llm = LLM(
     model=MODEL_ID,
     base_url=BASE_URL,
     api_key=API_KEY,
+    provider="openai",
     stream=False,
 )
 

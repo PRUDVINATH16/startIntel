@@ -1,4 +1,5 @@
+litellm>=1.35.0
+crewai>=0.65.0
 Flask
 waitress
-crewai
 python-dotenv
