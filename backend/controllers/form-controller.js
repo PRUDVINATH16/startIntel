@@ -34,7 +34,7 @@ exports.sendSurvey = async (req, res) => {
         <h2>New Idea Submitted</h2>
         <p><strong>Idea:</strong> ${idea}</p>
         <p><strong>Mobile:</strong> ${mobile}</p>
-        <a href="http://localhost:5500/idea-form.html?idea=${encryptedIdea}&mobile=${encryptedMobile}">Link to Fill Form</a>
+        <a href="https://prudvinath16.github.io/startIntel/idea-form.html?idea=${encryptedIdea}&mobile=${encryptedMobile}">Link to Fill Form</a>
       `
     };
 

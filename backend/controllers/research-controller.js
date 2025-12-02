@@ -1,5 +1,5 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const PYTHON_API = "http://localhost:5000"; // Flask AI backend
+const PYTHON_API = "https://startintel-ai.onrender.com"; // Flask AI backend
 
 // Helper function
 async function callPython(path, body) {
