@@ -514,7 +514,7 @@ function handleSignOut() {
     confirmSignoutBtn.addEventListener('click', () => {
         localStorage.removeItem('user');
         setTimeout(() => {
-            window.location.href = 'https://startintel.onrender.com';
+            window.location.href = 'https://prudvinath16.github.io/startIntel/';
         }, 500);
     })
     cancelBtn.addEventListener('click', () => {
