@@ -6,7 +6,7 @@ async function getRecentChats() {
   let mobile = user.mobile;
   
 
-  const response = await fetch('http://localhost:3000/api/report/reports', {
+  const response = await fetch('https://startintel.onrender.com/api/report/reports', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ mobile })

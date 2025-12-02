@@ -1188,7 +1188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         user = JSON.parse(user);
         mobile = user.mobile;
         idea = idea.idea;
-        let request = await fetch(`http://localhost:3000/api/report/report1`, {
+        let request = await fetch(`https://startintel.onrender.com/api/report/report1`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -1667,7 +1667,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     async function getCustomerReviews() {
-        let realcusrev = await fetch("http://localhost:3000/api/form/getu", {
+        let realcusrev = await fetch("https://startintel.onrender.com/api/form/getu", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

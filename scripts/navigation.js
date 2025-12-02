@@ -55,5 +55,5 @@ function initMobileMenu() {
 
 let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
 if(user){
-    location.href='http://localhost:5500/home.html';
+    location.href='https://startintel.onrender.com/home.html';
 }

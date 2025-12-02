@@ -353,7 +353,7 @@ async function sendMessage() {
                 const result = researchData;
 
 
-                await fetch("http://localhost:3000/api/report/save-report", {
+                await fetch("https://startintel.onrender.com/api/report/save-report", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ mobile, idea, result }),
@@ -387,7 +387,7 @@ async function sendForm(idea) {
     const encryptedMobile = encodeURIComponent(encryptData(mobile));
     console.log(idea, mobile);
     if (mobile) {
-        let req = await fetch('http://localhost:3000/api/form/send', {
+        let req = await fetch('https://startintel.onrender.com/api/form/send', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -403,7 +403,7 @@ async function checkIdea(idea) {
     let user = localStorage.getItem('user');
     user = JSON.parse(user);
     const mobile = user.mobile;
-    let response = await fetch('http://localhost:3000/api/report/check', {
+    let response = await fetch('https://startintel.onrender.com/api/report/check', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -416,7 +416,7 @@ async function checkIdea(idea) {
 }
 
 async function analyzeIdea(idea) {
-    let response = await fetch('http://localhost:3000/api/research/analyze', {
+    let response = await fetch('https://startintel.onrender.com/api/research/analyze', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -443,7 +443,7 @@ async function sendData(idea) {
 
     // Map endpoints to fetch promises
     const requests = endpoints.map(async (endpoint) => {
-        const res = await fetch(`http://localhost:3000/api/research/${endpoint}`, {
+        const res = await fetch(`https://startintel.onrender.com/api/research/${endpoint}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ idea }),
@@ -514,7 +514,7 @@ function handleSignOut() {
     confirmSignoutBtn.addEventListener('click', () => {
         localStorage.removeItem('user');
         setTimeout(() => {
-            window.location.href = 'http://localhost:5500';
+            window.location.href = 'https://startintel.onrender.com';
         }, 500);
     })
     cancelBtn.addEventListener('click', () => {
@@ -667,7 +667,7 @@ async function updateProfileInitials() {
         return;
     }
     user = JSON.parse(user);
-    let profile_data_request = await fetch('http://localhost:3000/api/profile/', {
+    let profile_data_request = await fetch('https://startintel.onrender.com/api/profile/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -731,7 +731,7 @@ async function updateUserName(name) {
     // Save back
     localStorage.setItem('user', JSON.stringify(userData));
 
-    let response = await fetch('http://localhost:3000/api/users/update-username', {
+    let response = await fetch('https://startintel.onrender.com/api/users/update-username', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

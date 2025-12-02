@@ -58,7 +58,7 @@ surveyForm.addEventListener('submit', async function (event) {
   } else {
     try {
       console.log(idea, mobile)
-      const req = await fetch('http://localhost:3000/api/form/send-result', {
+      const req = await fetch('https://startintel.onrender.com/api/form/send-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, age, mobile, idea, q1, q2, q3, q4, q5 })

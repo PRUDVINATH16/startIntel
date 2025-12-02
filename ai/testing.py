@@ -53,7 +53,7 @@ if __name__ == "__main__":
     # run("🔥 COMPETITOR ANALYSIS", idea, COMPETITOR_PROMPT)
     run("Analyze idea: ", idea, ANALYZE_PROMPT)
 """     run("📈 MARKET TRENDS", idea, MARKET_PROMPT)
-    run("💰 PR      ICING STRATEGY", idea, PRICING_PROMPT)
+    run("💰 PRICING STRATEGY", idea, PRICING_PROMPT)
     run("✅ IDEA SUCCESS PREDICTION", idea, SUCCESS_PROMPT)
     run("🎯 TARGETED AUDIENCE", idea, AUDIENCE_PROMPT)
     run("🧩 TECHNICAL REQUIREMENTS", idea, TECH_REQS_PROMPT)
