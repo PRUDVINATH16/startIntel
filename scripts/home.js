@@ -1,3 +1,15 @@
+const API_BASE_URL = window.API_BASE_URL || '';
+
+function escapeHTML(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Initialize everything when DOM is loaded
 const signoutPopupOverlay = document.getElementById('signout-popup-overlay');
 const showPopupBtn = document.getElementById('show-popup-btn');
@@ -353,7 +365,7 @@ async function sendMessage() {
                 const result = researchData;
 
 
-                await fetch("https://startintel.onrender.com/api/report/save-report", {
+                await fetch(`${API_BASE_URL}/api/report/save-report`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ mobile, idea, result }),
@@ -387,7 +399,7 @@ async function sendForm(idea) {
     const encryptedMobile = encodeURIComponent(encryptData(mobile));
     console.log(idea, mobile);
     if (mobile) {
-        let req = await fetch('https://startintel.onrender.com/api/form/send', {
+        let req = await fetch(`${API_BASE_URL}/api/form/send`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -403,7 +415,7 @@ async function checkIdea(idea) {
     let user = localStorage.getItem('user');
     user = JSON.parse(user);
     const mobile = user.mobile;
-    let response = await fetch('https://startintel.onrender.com/api/report/check', {
+    let response = await fetch(`${API_BASE_URL}/api/report/check`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -416,7 +428,7 @@ async function checkIdea(idea) {
 }
 
 async function analyzeIdea(idea) {
-    let response = await fetch('https://startintel.onrender.com/api/research/analyze', {
+    let response = await fetch(`${API_BASE_URL}/api/research/analyze`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -443,7 +455,7 @@ async function sendData(idea) {
 
     // Map endpoints to fetch promises
     const requests = endpoints.map(async (endpoint) => {
-        const res = await fetch(`https://startintel.onrender.com/api/research/${endpoint}`, {
+        const res = await fetch(`${API_BASE_URL}/api/research/${endpoint}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ idea }),
@@ -548,7 +560,7 @@ function showNotification(message, type = 'info') {
     notification.innerHTML = `
         <div class="notification-content">
             <i data-lucide="${icon}" class="notification-icon"></i>
-            <span class="notification-text">${message}</span>
+            <span class="notification-text">${escapeHTML(message)}</span>
         </div>
         <button class="notification-close">
             <i data-lucide="x"></i>
@@ -667,7 +679,7 @@ async function updateProfileInitials() {
         return;
     }
     user = JSON.parse(user);
-    let profile_data_request = await fetch('https://startintel.onrender.com/api/profile/', {
+    let profile_data_request = await fetch(`${API_BASE_URL}/api/profile/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -731,7 +743,7 @@ async function updateUserName(name) {
     // Save back
     localStorage.setItem('user', JSON.stringify(userData));
 
-    let response = await fetch('https://startintel.onrender.com/api/users/update-username', {
+    let response = await fetch(`${API_BASE_URL}/api/users/update-username`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -1,3 +1,5 @@
+const API_BASE_URL = window.API_BASE_URL || '';
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize Lucide icons
@@ -181,7 +183,7 @@ function validateField(input) {
                 break;
 
             case 'mobile':
-                if (!/^[6-9]\d{9}$/.test(value)) {
+                if (!/^\d{10}$/.test(value)) {
                     isValid = false;
                     errorMessage = 'Please enter a valid mobile number';
                 }
@@ -295,7 +297,7 @@ async function handleLogin(e) {
         console.log('Login data:', loginData);
 
 
-        const response = await fetch('https://startintel.onrender.com/api/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -311,7 +313,7 @@ async function handleLogin(e) {
         }
         else if (result.success == false && result.message == 'password incorrect') {
             msg = document.querySelector('#login-message'),
-                msg.innerHTML = 'please enter correct password';
+                msg.textContent = 'please enter correct password';
             document.querySelector('.login-msg').style.display = 'flex';
             setTimeout(() => {
                 document.querySelector('.login-msg').style.display = 'none';
@@ -319,7 +321,7 @@ async function handleLogin(e) {
         }
         else if (result.message == 'some error occoured') {
             msg = document.querySelector('#login-message')
-            msg.innerHTML = 'internal server error please try again after sometime';
+            msg.textContent = 'internal server error please try again after sometime';
             document.querySelector('.login-msg').style.display = 'flex';
             setTimeout(() => {
                 document.querySelector('.login-msg').style.display = 'none';
@@ -328,7 +330,7 @@ async function handleLogin(e) {
         }
         else if (result.message == `Account doesn't exsist`) {
             msg = document.querySelector('#login-message')
-            msg.innerHTML = 'Account not found';
+            msg.textContent = 'Account not found';
             document.querySelector('.login-msg').style.display = 'flex';
             setTimeout(() => {
                 document.querySelector('.login-msg').style.display = 'none';
@@ -371,7 +373,7 @@ async function handleSignup(e) {
         console.log('Signup data:', signupData);
 
 
-        const response = await fetch('https://startintel.onrender.com/api/auth/register', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -391,7 +393,7 @@ async function handleSignup(e) {
         else if (result.success == false && result.message == 'user already exist') {
             msg = document.querySelector('#message')
 
-            msg.innerHTML = 'Account already exist with this mobile number';
+            msg.textContent = 'Account already exist with this mobile number';
 
             document.querySelector('.msg').style.display = 'flex';
             setTimeout(() => {
@@ -401,7 +403,7 @@ async function handleSignup(e) {
         }
         else {
             msg = document.querySelector('#message')
-            msg.innerHTML = 'internal server error please try again after sometime';
+            msg.textContent = 'internal server error please try again after sometime';
             document.querySelector('.msg').style.display = 'flex';
             setTimeout(() => {
                 document.querySelector('.msg').style.display = 'none';

@@ -1,3 +1,5 @@
+const API_BASE_URL = window.API_BASE_URL || '';
+
 async function getRecentChats() {
   let user = JSON.parse(localStorage.getItem('user'));
   if(!user){
@@ -6,7 +8,7 @@ async function getRecentChats() {
   let mobile = user.mobile;
   
 
-  const response = await fetch('https://startintel.onrender.com/api/report/reports', {
+  const response = await fetch(`${API_BASE_URL}/api/report/reports`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ mobile })
@@ -29,10 +31,13 @@ async function displayRecentChats() {
     chatItem.classList.add("chat-item");
     chatItem.setAttribute("data-idea", idea);
 
-    chatItem.innerHTML = `
-      <i data-lucide="message-circle"></i>
-      <span class="chat-title">${idea}</span>
-    `;
+    const icon = document.createElement("i");
+    icon.setAttribute("data-lucide", "message-circle");
+    const span = document.createElement("span");
+    span.className = "chat-title";
+    span.textContent = idea;
+    chatItem.appendChild(icon);
+    chatItem.appendChild(span);
 
     // Tooltip element
     const tooltip = document.createElement("div");
