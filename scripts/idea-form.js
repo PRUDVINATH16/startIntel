@@ -21,7 +21,7 @@ let mobile = '';
       idea = decryptData(encryptedData);
       mobile = decryptData(encryptedMobile);
       console.log(idea, mobile)
-      document.querySelector('.question').innerHTML=idea;
+      document.querySelector('.question').textContent=idea;
       return { idea, mobile };
     }
     return null;

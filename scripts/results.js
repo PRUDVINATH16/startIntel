@@ -1,5 +1,15 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
+    function escapeHTML(str) {
+        if (!str) return "";
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
     let data, reviews, mobile, idea;
 
     data = {
@@ -1213,7 +1223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const competitorGrid = document.getElementById("competitor-grid");
         if (!insightContainer || !competitorGrid) { console.error("Competitor containers not found!"); return; }
         insightContainer.innerHTML = ''; competitorGrid.innerHTML = '';
-        if (data.insight) { insightContainer.innerHTML = `<h3>Key Strategic Insight</h3><p>${data.insight}</p>`; }
+        if (data.insight) { insightContainer.innerHTML = `<h3>Key Strategic Insight</h3><p>${escapeHTML(data.insight)}</p>`; }
         if (data.competitors && data.competitors.length > 0) {
             data.competitors.forEach(comp => {
                 const cardWrapper = document.createElement('div');
@@ -1221,31 +1231,31 @@ document.addEventListener("DOMContentLoaded", async () => {
                 cardWrapper.innerHTML = `
                     <div class="card competitor-card">
                         <div class="competitor-header">
-                            <div><h2>${comp.company_name}</h2><p class="industry-niche">${comp.industry_or_niche}</p></div>
-                            <span class="market-position ${comp.market_position}">${comp.market_position}</span>
+                            <div><h2>${escapeHTML(comp.company_name)}</h2><p class="industry-niche">${escapeHTML(comp.industry_or_niche)}</p></div>
+                            <span class="market-position ${escapeHTML(comp.market_position)}">${escapeHTML(comp.market_position)}</span>
                         </div>
                         <div class="competitor-body">
                             <div class="main-details">
-                                <div class="data-section"><h3>Techniques for Success</h3><p class="techniques-text">${comp.his_techniques_for_success}</p></div>
+                                <div class="data-section"><h3>Techniques for Success</h3><p class="techniques-text">${escapeHTML(comp.his_techniques_for_success)}</p></div>
                                 <div class="sw-container">
-                                    <div class="data-section strengths"><h3>Strengths</h3><ul>${comp.strengths.map(item => `<li>${item}</li>`).join('')}</ul></div>
-                                    <div class="data-section weaknesses"><h3>Weaknesses</h3><ul>${comp.weaknesses.map(item => `<li>${item}</li>`).join('')}</ul></div>
+                                    <div class="data-section strengths"><h3>Strengths</h3><ul>${comp.strengths.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div>
+                                    <div class="data-section weaknesses"><h3>Weaknesses</h3><ul>${comp.weaknesses.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div>
                                 </div>
-                                <div class="data-section"><h3>Unique Selling Points</h3><ul>${comp.unique_selling_points.map(item => `<li>${item}</li>`).join('')}</ul></div>
+                                <div class="data-section"><h3>Unique Selling Points</h3><ul>${comp.unique_selling_points.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div>
                             </div>
                             <div class="key-metrics">
                                 <h3>Key Metrics</h3>
                                 <div class="key-metrics-grid">
-                                    <div class="metric-item"><strong>Market Share</strong><span>${comp.estimated_market_share}</span></div>
-                                    <div class="metric-item"><strong>Monthly Traffic</strong><span>${comp.monthly_traffic_or_users}</span></div>
-                                    <div class="metric-item"><strong>Established</strong><span>${comp.established_year}</span></div>
-                                    <div class="metric-item"><strong>Location</strong><span>${comp.location}</span></div>
-                                    <div class="metric-item"><strong>Founder(s)</strong><span>${comp.founder}</span></div>
-                                    <div class="metric-item"><strong>Funding</strong><span>${comp.funding_stage}</span></div>
+                                    <div class="metric-item"><strong>Market Share</strong><span>${escapeHTML(comp.estimated_market_share)}</span></div>
+                                    <div class="metric-item"><strong>Monthly Traffic</strong><span>${escapeHTML(comp.monthly_traffic_or_users)}</span></div>
+                                    <div class="metric-item"><strong>Established</strong><span>${escapeHTML(comp.established_year)}</span></div>
+                                    <div class="metric-item"><strong>Location</strong><span>${escapeHTML(comp.location)}</span></div>
+                                    <div class="metric-item"><strong>Founder(s)</strong><span>${escapeHTML(comp.founder)}</span></div>
+                                    <div class="metric-item"><strong>Funding</strong><span>${escapeHTML(comp.funding_stage)}</span></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="competitor-footer"><p><strong>Identified Gap:</strong> ${comp.weaknesses_or_gaps}</p><a href="https://${comp.website}" target="_blank" class="website-link">Visit Website →</a></div>
+                        <div class="competitor-footer"><p><strong>Identified Gap:</strong> ${escapeHTML(comp.weaknesses_or_gaps)}</p><a href="https://${escapeHTML(comp.website)}" target="_blank" class="website-link">Visit Website →</a></div>
                     </div>`;
                 competitorGrid.appendChild(cardWrapper);
             });
@@ -1273,7 +1283,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <div class="timeline-node ${item.sprint ? 'is-critical' : ''}">
                         <div class="node-icon"></div>
                         <div class="node-content">
-                            <strong>Sprint ${item.sprint || 'N/A'}</strong>: ${item.task || 'N/A'}
+                            <strong>Sprint ${escapeHTML(item.sprint || 'N/A')}</strong>: ${escapeHTML(item.task || 'N/A')}
                         </div>
                     </div>
                 `).join('')}
@@ -1285,14 +1295,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             ${sprints.map(sprint => `
                 <div class="sprint-item">
                     <div class="sprint-header">
-                        <h4>Sprint ${sprint.sprint || 'N/A'}: ${sprint.sprint_goal || 'N/A'}</h4>
+                        <h4>Sprint ${escapeHTML(sprint.sprint || 'N/A')}: ${escapeHTML(sprint.sprint_goal || 'N/A')}</h4>
                     </div>
                     <div class="sprint-content">
-                        <p><strong>Owner:</strong> ${sprint.owner_role || 'N/A'}</p>
-                        <p><strong>Weeks:</strong> ${sprint.weeks || 'N/A'}</p>
-                        <p><strong>Success Metric:</strong> ${sprint.success_metric || 'N/A'}</p>
+                        <p><strong>Owner:</strong> ${escapeHTML(sprint.owner_role || 'N/A')}</p>
+                        <p><strong>Weeks:</strong> ${escapeHTML(sprint.weeks || 'N/A')}</p>
+                        <p><strong>Success Metric:</strong> ${escapeHTML(sprint.success_metric || 'N/A')}</p>
                         <strong>Key Tasks:</strong>
-                        <ul>${(sprint.key_tasks || []).map(task => `<li>${task}</li>`).join('')}</ul>
+                        <ul>${(sprint.key_tasks || []).map(task => `<li>${escapeHTML(task)}</li>`).join('')}</ul>
                     </div>
                 </div>
             `).join('')}
@@ -1302,7 +1312,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <div class="card launch-checklist">
         <h3>Launch Checklist</h3>
         <ul>
-            ${launchChecklist.map(item => `<li>${item.item || 'N/A'}</li>`).join('')}
+            ${launchChecklist.map(item => `<li>${escapeHTML(item.item || 'N/A')}</li>`).join('')}
         </ul>
     </div>
 
@@ -1310,9 +1320,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         <h3>Post-Launch Metrics</h3>
         <div class="data-section">
             <h4>Guardrails</h4>
-            <ul>${(postLaunchMetrics.guardrails || []).map(m => `<li>${m}</li>`).join('')}</ul>
+            <ul>${(postLaunchMetrics.guardrails || []).map(m => `<li>${escapeHTML(m)}</li>`).join('')}</ul>
             <h4>North Star</h4>
-            <p>${postLaunchMetrics.north_star || 'N/A'}</p>
+            <p>${escapeHTML(postLaunchMetrics.north_star || 'N/A')}</p>
         </div>
     </div>
     `;
@@ -1333,20 +1343,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         const historical = data.historical_growth;
         const future = data.future_projection[0];
         container.innerHTML = `
-            <section id="market-summary-card" class="card"><h3>Market Summary</h3><p>${data.summary}</p></section>
+            <section id="market-summary-card" class="card"><h3>Market Summary</h3><p>${escapeHTML(data.summary)}</p></section>
             <div class="market-overview-grid">
-                <div class="overview-card"><h4>TAM</h4><div class="value">${overview.TAM}</div></div>
-                <div class="overview-card"><h4>SAM</h4><div class="value">${overview.SAM}</div></div>
-                <div class="overview-card"><h4>SOM</h4><div class="value">${overview.SOM}</div><div class="stage">${overview.stage}</div></div>
-                <p class="methodology-note">${overview.methodology_note}</p>
+                <div class="overview-card"><h4>TAM</h4><div class="value">${escapeHTML(overview.TAM)}</div></div>
+                <div class="overview-card"><h4>SAM</h4><div class="value">${escapeHTML(overview.SAM)}</div></div>
+                <div class="overview-card"><h4>SOM</h4><div class="value">${escapeHTML(overview.SOM)}</div><div class="stage">${escapeHTML(overview.stage)}</div></div>
+                <p class="methodology-note">${escapeHTML(overview.methodology_note)}</p>
             </div>
             <div class="market-grid">
                 <div class="card timeline-card"><div class="data-section"><h3>Market Growth</h3><div class="timeline">
-                    ${historical.map(h => `<div class="timeline-item"><span class="year">${h.year}</span><span class="size">${h.market_size}</span></div>`).join('')}
-                    <div class="timeline-item"><span class="year">${future.year} (Projected)</span><span class="size">${future.market_size}</span></div>
+                    ${historical.map(h => `<div class="timeline-item"><span class="year">${escapeHTML(h.year)}</span><span class="size">${escapeHTML(h.market_size)}</span></div>`).join('')}
+                    <div class="timeline-item"><span class="year">${escapeHTML(future.year)} (Projected)</span><span class="size">${escapeHTML(future.market_size)}</span></div>
                 </div></div></div>
-                <div class="card"><div class="data-section"><h3>Key Trends</h3><ul>${data.key_trends.map(item => `<li>${item}</li>`).join('')}</ul></div></div>
-                <div class="card"><div class="data-section"><h3>Top Regions for Growth</h3><ul>${data.top_regions.map(item => `<li><strong>${item.region}:</strong> ${item.why}</li>`).join('')}</ul></div></div>
+                <div class="card"><div class="data-section"><h3>Key Trends</h3><ul>${data.key_trends.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div></div>
+                <div class="card"><div class="data-section"><h3>Top Regions for Growth</h3><ul>${data.top_regions.map(item => `<li><strong>${escapeHTML(item.region)}:</strong> ${escapeHTML(item.why)}</li>`).join('')}</ul></div></div>
             </div>`;
     }
 
@@ -1355,22 +1365,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!container || !data) return;
         let competitorPricingHTML = data.competitor_pricing.map(comp => `
                 <div class="card">
-                    <div class="pricing-header"><h2>${comp.name}</h2><span class="model">${comp.model}</span></div>
+                    <div class="pricing-header"><h2>${escapeHTML(comp.name)}</h2><span class="model">${escapeHTML(comp.model)}</span></div>
                     <div class="tier-grid">
                         ${comp.tiers.map(tier => `
                             <div class="tier-card">
-                                <h4>${tier.plan}</h4>
-                            <div class="price">$${tier.price_usd.includes("per") ? tier.price_usd.split(" ")[0] : tier.price_usd}</div>
-                            <div class="price-note">${tier.price_usd.includes("per") ? "per " + tier.price_usd.split(" ").slice(1).join(" ") : (tier.price_usd === "Varies" ? "Based on usage" : "One-time or varied fee")}</div>
-                                <ul>${tier.features.map(f => `<li>${f}</li>`).join('')}</ul>
-                                <div class="target"><strong>Best for:</strong> ${tier.target_customer}</div>
+                                <h4>${escapeHTML(tier.plan)}</h4>
+                            <div class="price">$${escapeHTML(tier.price_usd.includes("per") ? tier.price_usd.split(" ")[0] : tier.price_usd)}</div>
+                            <div class="price-note">${escapeHTML(tier.price_usd.includes("per") ? "per " + tier.price_usd.split(" ").slice(1).join(" ") : (tier.price_usd === "Varies" ? "Based on usage" : "One-time or varied fee"))}</div>
+                                <ul>${tier.features.map(f => `<li>${escapeHTML(f)}</li>`).join('')}</ul>
+                                <div class="target"><strong>Best for:</strong> ${escapeHTML(tier.target_customer)}</div>
                             </div>`).join('')}
                     </div>
             </div>`).join('');
         container.innerHTML = `
             <div class="recommendation-grid">
-                <div class="card recommendation-card"><h3>Strategic Insight</h3><p>${data.insight}</p></div>
-                <div class="card recommendation-card"><h3>Recommendation</h3><p>${data.recommendation}</p></div>
+                <div class="card recommendation-card"><h3>Strategic Insight</h3><p>${escapeHTML(data.insight)}</p></div>
+                <div class="card recommendation-card"><h3>Recommendation</h3><p>${escapeHTML(data.recommendation)}</p></div>
         </div>
             <div class="pricing-grid">${competitorPricingHTML}</div>`;
     }
@@ -1380,12 +1390,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!container || !data) return;
         container.innerHTML = `
             <div class="audience-personas">
-                <div class="persona-card"><h3>Primary Audience</h3><p>${data.primary_audience}</p></div>
-                <div class="persona-card"><h3>Secondary Audience</h3><p>${data.secondary_audience}</p></div>
+                <div class="persona-card"><h3>Primary Audience</h3><p>${escapeHTML(data.primary_audience)}</p></div>
+                <div class="persona-card"><h3>Secondary Audience</h3><p>${escapeHTML(data.secondary_audience)}</p></div>
             </div>
             <div class="audience-grid">
-                <div class="card"><div class="data-section"><h3>Effective Channels</h3><ul>${data.channels.map(item => `<li>${item}</li>`).join('')}</ul></div></div>
-                <div class="card"><div class="data-section"><h3>Marketing Strategies</h3><ul>${data.marketing_strategies.map(item => `<li>${item}</li>`).join('')}</ul></div></div>
+                <div class="card"><div class="data-section"><h3>Effective Channels</h3><ul>${data.channels.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div></div>
+                <div class="card"><div class="data-section"><h3>Marketing Strategies</h3><ul>${data.marketing_strategies.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul></div></div>
             </div>`;
     }
 
@@ -1397,25 +1407,25 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div>
                     <div class="data-section">
                         <h3>Success Assessment</h3>
-                        <p class="techniques-text success-data">${data.success_assessment.justification}</p>
+                        <p class="techniques-text success-data">${escapeHTML(data.success_assessment.justification)}</p>
                     </div>
                 </div>
                 <div class="probability-score">
                     <h4>Probability of Success</h4>
-                    <div class="probability-circle" data-score="${data.success_assessment.success_probability}" style="--p:${data.success_assessment.success_probability}%"></div>
+                    <div class="probability-circle" data-score="${escapeHTML(data.success_assessment.success_probability)}" style="--p:${escapeHTML(data.success_assessment.success_probability)}%"></div>
                 </div>
             </div>
             <div class="content-grid-two-col">
                 <div class="card">
                     <div class="data-section">
                         <h3>Key Risks</h3>
-                        <ul class="risk-list">${data.risks.map(item => `<li>${item}</li>`).join('')}</ul>
+                        <ul class="risk-list">${data.risks.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
                     </div>
                 </div>
                  <div class="card">
                     <div class="data-section">
                         <h3>Risk Mitigations</h3>
-                        <ul>${data.mitigations.map(item => `<li>${item}</li>`).join('')}</ul>
+                        <ul>${data.mitigations.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
                     </div>
                 </div>
             </div>
@@ -1423,7 +1433,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="data-section">
                     <h3>Go/No-Go Guidance</h3>
                     <p class="techniques-text">Proceed if the following criteria are met:</p>
-                    <ul>${data.go_no_go_guidance.map(item => `<li>${item}</li>`).join('')}</ul>
+                    <ul>${data.go_no_go_guidance.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
                 </div>
             </div>
             <div class="card">
@@ -1432,15 +1442,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <div class="content-grid-three-col">
                         ${data.validation_plan.map(item => `
                             <div class="validation-card">
-                                <h4>${item.experiment}</h4>
+                                <h4>${escapeHTML(item.experiment)}</h4>
                                 <div class="validation-item">
-                                    <strong>Metric:</strong> <span>${item.metric}</span>
+                                    <strong>Metric:</strong> <span>${escapeHTML(item.metric)}</span>
                                 </div>
                                 <div class="validation-item">
-                                    <strong>Target:</strong> <span>${item.target}</span>
+                                    <strong>Target:</strong> <span>${escapeHTML(item.target)}</span>
                                 </div>
                                 <div class="validation-item">
-                                    <strong>Timeframe:</strong> <span>${item.timeframe_weeks} weeks</span>
+                                    <strong>Timeframe:</strong> <span>${escapeHTML(item.timeframe_weeks)} weeks</span>
                                 </div>
                             </div>
                         `).join('')}
@@ -1454,17 +1464,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         const container = document.getElementById('tech-stack-content');
         if (!container || !data) return;
         container.innerHTML = `
-            <div class="card system-arch-card"><div class="data-section"><h3>System Architecture</h3><p class="techniques-text success-data">${data.system_architecture}</p></div></div>
+            <div class="card system-arch-card"><div class="data-section"><h3>System Architecture</h3><p class="techniques-text success-data">${escapeHTML(data.system_architecture)}</p></div></div>
             <div class="card"><div class="data-section"><h3>Components</h3>
                 <div class="content-grid-three-col">
                     ${data.components.map(c => `
                         <div class="tier-card">
                             <div class="pricing-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 12px;">
-                                <h4>${c.name}</h4><span class="build-buy-tag ${c.build_vs_buy.toLowerCase()}">${c.build_vs_buy}</span>
+                                <h4>${escapeHTML(c.name)}</h4><span class="build-buy-tag ${escapeHTML(c.build_vs_buy.toLowerCase())}">${escapeHTML(c.build_vs_buy)}</span>
                             </div>
-                            <p class="target" style="font-style: normal; margin-bottom: 12px;">${c.purpose}</p>
-                            <strong>Key Stack:</strong><ul>${c.key_tech_stack.map(t => `<li>${t}</li>`).join('')}</ul>
-                            <strong>Risks:</strong><ul class="risk-list">${c.risks.map(r => `<li>${r}</li>`).join('')}</ul>
+                            <p class="target" style="font-style: normal; margin-bottom: 12px;">${escapeHTML(c.purpose)}</p>
+                            <strong>Key Stack:</strong><ul>${c.key_tech_stack.map(t => `<li>${escapeHTML(t)}</li>`).join('')}</ul>
+                            <strong>Risks:</strong><ul class="risk-list">${c.risks.map(r => `<li>${escapeHTML(r)}</li>`).join('')}</ul>
                         </div>
                     `).join('')}
                 </div>
@@ -1472,24 +1482,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="content-grid-two-col">
                 <div class="card"><div class="data-section"><h3>Infrastructure Plan</h3>
                     <div class="key-metrics-grid">
-                        <div class="metric-item"><strong>Hosting</strong><span>${data.infra_plan.hosting}</span></div>
-                        <div class="metric-item"><strong>Scaling</strong><span>${data.infra_plan.scaling}</span></div>
-                        <div class="metric-item"><strong>Security</strong><span>${data.infra_plan.security.join(', ')}</span></div>
-                        <div class="metric-item"><strong>Observability</strong><span>${data.infra_plan.observability.join(', ')}</span></div>
+                        <div class="metric-item"><strong>Hosting</strong><span>${escapeHTML(data.infra_plan.hosting)}</span></div>
+                        <div class="metric-item"><strong>Scaling</strong><span>${escapeHTML(data.infra_plan.scaling)}</span></div>
+                        <div class="metric-item"><strong>Security</strong><span>${data.infra_plan.security.map(s => escapeHTML(s)).join(', ')}</span></div>
+                        <div class="metric-item"><strong>Observability</strong><span>${data.infra_plan.observability.map(o => escapeHTML(o)).join(', ')}</span></div>
                     </div>
                 </div></div>
                 <div class="card"><div class="data-section"><h3>Data Model Notes</h3>
                     <div class="key-metrics-grid">
-                        <div class="metric-item"><strong>Sources</strong><span>${data.data_model_notes.sources.join(', ')}</span></div>
-                        <div class="metric-item"><strong>Schema Highlights</strong><span>${data.data_model_notes.schema_highlights.join(', ')}</span></div>
-                        <div class="metric-item"><strong>Retention Policy</strong><span>${data.data_model_notes.retention_policy}</span></div>
+                        <div class="metric-item"><strong>Sources</strong><span>${data.data_model_notes.sources.map(s => escapeHTML(s)).join(', ')}</span></div>
+                        <div class="metric-item"><strong>Schema Highlights</strong><span>${data.data_model_notes.schema_highlights.map(s => escapeHTML(s)).join(', ')}</span></div>
+                        <div class="metric-item"><strong>Retention Policy</strong><span>${escapeHTML(data.data_model_notes.retention_policy)}</span></div>
                     </div>
                 </div></div>
             </div>
             <div class="card data-table-wrapper"><div class="data-section"><h3>Integration Matrix</h3>
                 <div class="table-wrapper"><table class="data-table">
                     <thead><tr><th>Service</th><th>Auth</th><th>Rate Limit</th><th>Notes</th></tr></thead>
-                    <tbody>${data.integration_matrix.map(i => `<tr><td>${i.service}</td><td>${i.auth}</td><td>${i.rate_limit}</td><td>${i.notes}</td></tr>`).join('')}</tbody>
+                    <tbody>${data.integration_matrix.map(i => `<tr><td>${escapeHTML(i.service)}</td><td>${escapeHTML(i.auth)}</td><td>${escapeHTML(i.rate_limit)}</td><td>${escapeHTML(i.notes)}</td></tr>`).join('')}</tbody>
                 </table></div>
             </div></div>
              <div class="card"><div class="data-section"><h3>Monthly Cost Estimates</h3>
@@ -1511,29 +1521,29 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="price-range">$${data.budget_estimate.total_usd.low.toLocaleString()} - $${data.budget_estimate.total_usd.high.toLocaleString()}</div>
                 <div class="table-wrapper"><table class="data-table">
                     <thead><tr><th>Phase</th><th>Low Estimate</th><th>High Estimate</th></tr></thead>
-                    <tbody>${data.budget_estimate.by_phase_usd.map(p => `<tr><td class="budget-td">${p.phase}</td><td class="budget-td">$${p.low.toLocaleString()}</td><td class="budget-td">$${p.high.toLocaleString()}</td></tr>`).join('')}</tbody>
+                    <tbody>${data.budget_estimate.by_phase_usd.map(p => `<tr><td class="budget-td">${escapeHTML(p.phase)}</td><td class="budget-td">$${p.low.toLocaleString()}</td><td class="budget-td">$${p.high.toLocaleString()}</td></tr>`).join('')}</tbody>
                 </table></div>
             </div>
             <div class="card"><div class="data-section"><h3>Project Phases</h3>
                 <div class="content-grid-two-col">
                     ${data.phases.map(p => `
                         <div class="phase-card">
-                            <h4>${p.name} <span class="phase-duration">(~${p.duration_weeks} weeks)</span></h4>
-                            <strong>Deliverables:</strong><ul>${p.major_deliverables.map(d => `<li>${d}</li>`).join('')}</ul>
-                            <strong>Team Mix:</strong><ul>${p.team_mix.map(t => `<li>${t.role} (${t.FTE} FTE)</li>`).join('')}</ul>
+                            <h4>${escapeHTML(p.name)} <span class="phase-duration">(~${escapeHTML(p.duration_weeks)} weeks)</span></h4>
+                            <strong>Deliverables:</strong><ul>${p.major_deliverables.map(d => `<li>${escapeHTML(d)}</li>`).join('')}</ul>
+                            <strong>Team Mix:</strong><ul>${p.team_mix.map(t => `<li>${escapeHTML(t.role)} (${escapeHTML(t.FTE)} FTE)</li>`).join('')}</ul>
                         </div>
                     `).join('')}
                 </div>
             </div></div>
              <div class="content-grid-two-col">
-                <div class="card"><div class="data-section"><h3>Schedule Risks</h3><ul class="risk-list">${data.schedule_risks.map(r => `<li>${r}</li>`).join('')}</ul></div></div>
-                <div class="card"><div class="data-section"><h3>Acceleration Options</h3><ul>${data.acceleration_options.map(o => `<li><strong>${o.option}:</strong> ${o.trade_off}</li>`).join('')}</ul></div></div>
+                <div class="card"><div class="data-section"><h3>Schedule Risks</h3><ul class="risk-list">${data.schedule_risks.map(r => `<li>${escapeHTML(r)}</li>`).join('')}</ul></div></div>
+                <div class="card"><div class="data-section"><h3>Acceleration Options</h3><ul>${data.acceleration_options.map(o => `<li><strong>${escapeHTML(o.option)}:</strong> ${escapeHTML(o.trade_off)}</li>`).join('')}</ul></div></div>
             </div>
             <div class="card data-table-wrapper">
                 <div class="data-section"><h3>Resource Plan</h3>
                 <div class="table-wrapper"><table class="data-table">
                     <thead><tr><th>Role</th><th>FTE</th><th>Seniority</th></tr></thead>
-                    <tbody>${data.resource_plan.map(r => `<tr><td>${r.role}</td><td>${r.FTE}</td><td>${r.seniority}</td></tr>`).join('')}</tbody>
+                    <tbody>${data.resource_plan.map(r => `<tr><td>${escapeHTML(r.role)}</td><td>${escapeHTML(r.FTE)}</td><td>${escapeHTML(r.seniority)}</td></tr>`).join('')}</tbody>
                 </table></div>
             </div></div>
         `;
@@ -1547,19 +1557,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="card">
                     <div class="data-section">
                         <h3>Organizational Design</h3>
-                        <div class="metric-item"><strong>Structure</strong><span>${data.org_design.structure}</span></div>
+                        <div class="metric-item"><strong>Structure</strong><span>${escapeHTML(data.org_design.structure)}</span></div>
                         <div class="metric-item"><strong>Reporting Lines</strong><ul>${data.org_design.reporting_lines.map(line => {
             const manager = Object.keys(line)[0];
             const reports = line[manager].join(', ');
-            return `<li><strong>${manager}</strong> → ${reports}</li>`;
+            return `<li><strong>${escapeHTML(manager)}</strong> → ${escapeHTML(reports)}</li>`;
         }).join('')}</ul></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="data-section">
                         <h3>Sourcing Strategy</h3>
-                        <strong>To Keep In-House:</strong><ul>${data.vendor_vs_inhouse.what_to_keep_inhouse.map(item => `<li>${item}</li>`).join('')}</ul>
-                        <strong>To Outsource:</strong><ul class="risk-list">${data.vendor_vs_inhouse.what_to_outsource.map(item => `<li>${item}</li>`).join('')}</ul>
+                        <strong>To Keep In-House:</strong><ul>${data.vendor_vs_inhouse.what_to_keep_inhouse.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
+                        <strong>To Outsource:</strong><ul class="risk-list">${data.vendor_vs_inhouse.what_to_outsource.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
                     </div>
                 </div>
             </div>
@@ -1567,8 +1577,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="data-section"><h3>Core Team Profile</h3>
                     <div class="content-grid-three-col">${data.core_team_profile.map(profile => `
                         <div class="role-card">
-                            <h4>${profile.role}</h4>
-                            <ul>${profile.skills.map(skill => `<li>${skill}</li>`).join('')}</ul>
+                            <h4>${escapeHTML(profile.role)}</h4>
+                            <ul>${profile.skills.map(skill => `<li>${escapeHTML(skill)}</li>`).join('')}</ul>
                         </div>
                     `).join('')}</div>
                 </div>
@@ -1577,7 +1587,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="data-section"><h3>Hiring Plan</h3>
                     <div class="table-wrapper"><table class="data-table">
                         <thead><tr><th>Role</th><th>Quarter</th><th>Seniority</th><th>Reason</th></tr></thead>
-                        <tbody>${data.hiring_plan.map(p => `<tr><td>${p.role}</td><td>${p.quarter}</td><td>${p.seniority}</td><td style="white-space: normal;">${p.reason}</td></tr>`).join('')}</tbody>
+                        <tbody>${data.hiring_plan.map(p => `<tr><td>${escapeHTML(p.role)}</td><td>${escapeHTML(p.quarter)}</td><td>${escapeHTML(p.seniority)}</td><td style="white-space: normal;">${escapeHTML(p.reason)}</td></tr>`).join('')}</tbody>
                     </table></div>
                 </div>
             </div>
@@ -1585,9 +1595,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="data-section"><h3>Interview Rubrics</h3>
                     <div class="content-grid-three-col">${data.interview_rubrics.map(rubric => `
                         <div class="role-card">
-                            <h4>${rubric.role}</h4>
+                            <h4>${escapeHTML(rubric.role)}</h4>
                             <strong>Top Signals to Look For:</strong>
-                            <ul>${rubric.top_signals.map(signal => `<li>${signal}</li>`).join('')}</ul>
+                            <ul>${rubric.top_signals.map(signal => `<li>${escapeHTML(signal)}</li>`).join('')}</ul>
                         </div>
                     `).join('')}</div>
                 </div>
@@ -1610,29 +1620,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             const reviewsHTML = data.data.map(review => `
             <div class="card review-card">
                 <div class="review-header">
-                    <h3 class="review-name">${review.name}</h3>
-                    <span class="review-age">Age: ${review.age}</span>
+                    <h3 class="review-name">${escapeHTML(review.name)}</h3>
+                    <span class="review-age">Age: ${escapeHTML(review.age)}</span>
                 </div>
                 <div class="review-body">
                     <div class="review-qa">
                         <strong>What are your biggest frustrations with current food delivery apps?</strong>
-                        <p>${review.q1}</p>
+                        <p>${escapeHTML(review.q1)}</p>
                     </div>
                     <div class="review-qa">
                         <strong>What features would make you switch to a new delivery app?</strong>
-                        <p>${review.q2}</p>
+                        <p>${escapeHTML(review.q2)}</p>
                     </div>
                     <div class="review-qa">
                         <strong>How much are you willing to pay for a monthly subscription for free delivery?</strong>
-                        <p>${review.q3}</p>
+                        <p>${escapeHTML(review.q3)}</p>
                     </div>
                     <div class="review-qa">
                         <strong>What kind of loyalty rewards would you find most appealing?</strong>
-                        <p>${review.q4}</p>
+                        <p>${escapeHTML(review.q4)}</p>
                     </div>
                     <div class="review-qa">
                         <strong>How important is supporting local restaurants to you?</strong>
-                        <p>${review.q5}</p>
+                        <p>${escapeHTML(review.q5)}</p>
                     </div>
                 </div>
             </div>

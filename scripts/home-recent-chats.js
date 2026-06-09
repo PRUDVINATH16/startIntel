@@ -31,8 +31,9 @@ async function displayRecentChats() {
 
     chatItem.innerHTML = `
       <i data-lucide="message-circle"></i>
-      <span class="chat-title">${idea}</span>
+      <span class="chat-title"></span>
     `;
+    chatItem.querySelector('.chat-title').textContent = idea;
 
     // Tooltip element
     const tooltip = document.createElement("div");
