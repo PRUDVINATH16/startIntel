@@ -1,3 +1,5 @@
+const API_BASE_URL = window.API_BASE_URL || '';
+
 const surveyForm = document.getElementById('survey-form');
 const contentWrapper = document.querySelector('.content-wrapper'); // parent to show message
 
@@ -21,7 +23,7 @@ let mobile = '';
       idea = decryptData(encryptedData);
       mobile = decryptData(encryptedMobile);
       console.log(idea, mobile)
-      document.querySelector('.question').innerHTML=idea;
+      document.querySelector('.question').textContent=idea;
       return { idea, mobile };
     }
     return null;
@@ -58,7 +60,7 @@ surveyForm.addEventListener('submit', async function (event) {
   } else {
     try {
       console.log(idea, mobile)
-      const req = await fetch('https://startintel.onrender.com/api/form/send-result', {
+      const req = await fetch(`${API_BASE_URL}/api/form/send-result`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, age, mobile, idea, q1, q2, q3, q4, q5 })

@@ -139,5 +139,6 @@ def roadmap():
 
 if __name__ == "__main__":
     # Tip: set OPENROUTER_API_KEY in your .env first
-    print("Starting server on https://startintel-ai.onrender.com")
-    serve(app, host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Starting server on http://localhost:{port}")
+    serve(app, host="0.0.0.0", port=port)
