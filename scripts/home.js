@@ -548,12 +548,13 @@ function showNotification(message, type = 'info') {
     notification.innerHTML = `
         <div class="notification-content">
             <i data-lucide="${icon}" class="notification-icon"></i>
-            <span class="notification-text">${message}</span>
+            <span class="notification-text"></span>
         </div>
         <button class="notification-close">
             <i data-lucide="x"></i>
         </button>
     `;
+    notification.querySelector('.notification-text').textContent = message;
 
     // --- REVAMPED STYLES ---
     notification.style.cssText = `
